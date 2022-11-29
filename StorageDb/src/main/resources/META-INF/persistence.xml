@@ -9,6 +9,8 @@
         <class>src.Entity.Users</class>
         <class>src.Entity.Agent</class>
         <class>src.Entity.Admin</class>
+        <class>src.Entity.UserManager.Storage</class>
+        <class>src.Entity.Storage</class>
         <properties>
             <property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5455/postgres"/>
             <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>

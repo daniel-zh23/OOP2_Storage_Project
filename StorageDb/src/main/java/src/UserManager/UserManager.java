@@ -1,8 +1,5 @@
-package src.Entity.UserManager;
-import src.Entity.Agent;
-import src.Entity.Users;
-import src.Entity.Admin;
-import src.Entity.Owner;
+package src.UserManager;
+import src.Entity.*;
 import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
 
@@ -23,25 +20,21 @@ public class UserManager
             throw new ExceptionInInitializerError(ex);
         }
         UserManager mu = new UserManager();
-       // Integer user1= mu.addOwner("Mitko","Mitkov");
+      // Integer user1= mu.addOwner("Mitko","Mitkov");
+      // System.out.println(mu.fetchByUserName("owner6"));
+
        // Integer user2 = mu.addAgent("Agent", "Agentov");
         //System.out.println(user1);
         //System.out.println(user2);
             //mu.addAdmin();
-        Users user1 = mu.getUser(1);
-        Users user2 = mu.getUser(2);
-        Users user3 = mu.getUser(3);
-        System.out.println(user1.toString());
-        System.out.println(user2.toString());
-        System.out.println(user3.toString());
+        //Users user1 = mu.getUser(1);
+       // Users user2 = mu.getUser(2);
+        //Users user3 = mu.getUser(3);
+       // System.out.println(user1.toString());
+        //System.out.println(user2.toString());
+        //System.out.println(user3.toString());
         //System.out.println(mu.fetchByUserName("useragent").toString());
 
-
-
-
-       // Owner owner1=(Owner) mu.getUser();
-      //  System.out.print(owner1.toString());
-        //System.out.println(user1);
     }
     public Users fetchByUserName(String username)
     {
@@ -72,7 +65,8 @@ public class UserManager
         try
         {
             tx= session.beginTransaction();
-            Owner owner = new Owner(fname, lname,"user1","email@email","089696969");
+            Owner owner = new Owner(fname, lname,"owner6","email@email","089696969");
+            owner.addStorage(new Storage(2.2,3.8,2.1,"Randomadaress",0,owner));
             id=(Integer) session.save(owner);
             tx.commit();
         }catch (HibernateException e)

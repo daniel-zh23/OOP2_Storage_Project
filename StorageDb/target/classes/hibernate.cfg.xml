@@ -15,6 +15,10 @@
       <mapping class="src.Entity.Owner"/>
       <mapping class="src.Entity.Agent"/>
       <mapping class="src.Entity.Admin"/>
+      <mapping class="src.Entity.Storage"/>
+      <mapping class="src.Entity.Notification"/>
+      <mapping class="src.Entity.Sales"/>
+      <mapping class="src.Entity.Renter"/>
 
   </session-factory>
 </hibernate-configuration>

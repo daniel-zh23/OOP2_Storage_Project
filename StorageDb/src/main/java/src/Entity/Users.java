@@ -1,11 +1,16 @@
 package src.Entity;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
 @Table(name="users")
 public class Users {
+    @Id
+    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
     @Basic
     @Column(name = "username", nullable = false, length = 20)
     private String username;
@@ -21,10 +26,11 @@ public class Users {
     @Basic
     @Column(name = "phone", nullable = true, length = 20)
     private String phone;
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    @Column(name = "id", nullable = false)
-    private int id;
+    @OneToMany(mappedBy = "user")
+    private Set<Notification> notificaitons;
+
+
+
 
     public String getUsername() {
         return username;

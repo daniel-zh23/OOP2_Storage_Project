@@ -11,7 +11,25 @@ public class Agent extends Users {
     private Double salary;
     @Column(name="company")
     private String company;
+    @Column (name="rating")
+    private Double rating; // score 0-5
 
+    public Double getRating() {
+        return rating;
+    }
+
+    @Override
+    public String toString() {
+        return "Agent{" +
+                "salary=" + salary +
+                ", company='" + company + '\'' +
+                ", rating=" + rating +
+                "} " + super.toString();
+    }
+
+    public void setRating(Double rating) {
+        this.rating = rating;
+    }
 
     public Double getSalary() {
         return salary;
@@ -41,12 +59,4 @@ public class Agent extends Users {
         this.company = company;
     }
 
-    @Override
-    public String toString() {
-        return "Agent{" +
-
-                "salary=" + salary +
-                ", company='" + company + '\'' +
-                "} " + super.toString();
-    }
 }
