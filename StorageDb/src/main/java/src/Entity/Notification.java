@@ -8,9 +8,9 @@ public class Notification {
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id", nullable = false)
-    private Users user;
+    private User user;
     @Column(name="isread")
     private boolean isRead;
     @Column(name="value")
@@ -37,13 +37,13 @@ public class Notification {
     public String toString() {
         return "Notification{" +
                 "id=" + id +
-                ", user=" + user +
                 ", isRead=" + isRead +
                 ", value='" + value + '\'' +
+                ", user=" + user +
                 '}';
     }
 
-    public Notification(Users user, String value) {
+    public Notification(User user, String value) {
         this.user = user;
         this.value = value;
         this.isRead=false;

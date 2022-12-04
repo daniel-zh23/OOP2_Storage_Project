@@ -5,7 +5,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "agent")
 @PrimaryKeyJoinColumn(name="id")
-public class Agent extends Users {
+public class Agent extends User {
 
     @Column(name="salary")
     private Double salary;

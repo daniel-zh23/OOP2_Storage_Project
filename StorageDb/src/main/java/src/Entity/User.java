@@ -1,18 +1,20 @@
 package src.Entity;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
 @Table(name="users")
-public class Users {
+public class User {
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     @Basic
-    @Column(name = "username", nullable = false, length = 20)
+    @Column(name = "username", nullable = false, length = 20,unique = true)
     private String username;
     @Basic
     @Column(name = "FirstName", nullable = true, length = 20)
@@ -26,8 +28,9 @@ public class Users {
     @Basic
     @Column(name = "phone", nullable = true, length = 20)
     private String phone;
-    @OneToMany(mappedBy = "user")
-    private Set<Notification> notificaitons;
+    @Basic
+    @Column(name="password",nullable = true)
+    private String password;
 
 
 
@@ -76,63 +79,48 @@ public class Users {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-    public Users()
+    public User()
     {
         this.firstName=null;
         this.lastName=null;
         this.username=null;
         this.email=null;
         this.phone=null;
-
+        this.password=null;
     }
-    public Users(String fname, String lname, String username, String email, String phone)
+    public User(String fname, String lname, String username, String email, String phone)
     {
         this.firstName=fname;
         this.lastName=lname;
         this.username=username;
         this.email=email;
         this.phone=phone;
-
-    }
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Users user = (Users) o;
-
-        if (id != user.id) return false;
-        if (username != null ? !username.equals(user.username) : user.username != null) return false;
-        if (firstName != null ? !firstName.equals(user.firstName) : user.firstName != null) return false;
-        if (lastName != null ? !lastName.equals(user.lastName) : user.lastName != null) return false;
-        if (email != null ? !email.equals(user.email) : user.email != null) return false;
-        if (phone != null ? !phone.equals(user.phone) : user.phone != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = username != null ? username.hashCode() : 0;
-        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
-        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
-        result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (phone != null ? phone.hashCode() : 0);
-        result = 31 * result + id;
-        return result;
+        this.password=null;
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "username='" + username + '\'' +
+                "id=" + id +
+                ", username='" + username + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
+                ", password='" + password + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id) && Objects.equals(username, user.username) && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(email, user.email) && Objects.equals(phone, user.phone) && Objects.equals(password, user.password);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, username, firstName, lastName, email, phone, password);
     }
 }

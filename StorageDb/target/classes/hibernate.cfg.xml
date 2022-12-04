@@ -11,7 +11,7 @@
 
     <!-- DB schema will be updated if needed -->
     <property name="hibernate.hbm2ddl.auto">update</property>
-      <mapping class="src.Entity.Users"/>
+      <mapping class="src.Entity.User"/>
       <mapping class="src.Entity.Owner"/>
       <mapping class="src.Entity.Agent"/>
       <mapping class="src.Entity.Admin"/>
