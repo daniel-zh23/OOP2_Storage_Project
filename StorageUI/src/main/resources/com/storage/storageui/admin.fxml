@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="566.0" prefWidth="802.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.storage.storageui.AdminController">
+   <children>
+      <HBox alignment="CENTER_RIGHT" prefHeight="64.0" prefWidth="802.0" spacing="10.0" style="-fx-background-color: gray; -fx-padding: 10;">
+         <children>
+            <Button fx:id="lAgentsBtn" mnemonicParsing="false" onAction="#onloadAgents" text="Load agents" />
+            <Button fx:id="lOwnersBtn" mnemonicParsing="false" onAction="#onloadOwners" text="Load owners" />
+            <Button mnemonicParsing="false" text="Create owner" />
+            <Button mnemonicParsing="false" text="Create agent" />
+            <Button fx:id="logoutBtn" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onLogout" text="Logout" />
+         </children>
+      </HBox>
+      <HBox fx:id="horizontalBox" alignment="TOP_RIGHT" prefHeight="277.0" prefWidth="706.0">
+         <children>
+            <TableView fx:id="tableBox" prefHeight="277.0" prefWidth="682.0" />
+            <VBox alignment="CENTER" prefHeight="277.0" prefWidth="134.0" spacing="20.0" style="-fx-background-color: white; -fx-border-color: grey;">
+               <children>
+                  <Button mnemonicParsing="false" text="Edit" />
+                  <Button mnemonicParsing="false" text="Delete" />
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </VBox>
+         </children>
+      </HBox>
+      <Label text="You are logged in!" textAlignment="CENTER" />
+   </children>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+</VBox>
