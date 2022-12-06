@@ -23,7 +23,7 @@ public class LoginController {
     @FXML
     protected void onLoginButtonClick() throws Exception{
         if (username.getText().equals("admin") && password.getText().equals("123456")){
-            FXMLLoader fxmlLoader = new FXMLLoader(StorageApplication.class.getResource("logged-in.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(StorageApplication.class.getResource("admin.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
            Stage window = (Stage) loginBtn.getScene().getWindow();
            window.setScene(scene);
