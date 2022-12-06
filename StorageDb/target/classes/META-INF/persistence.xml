@@ -5,14 +5,14 @@
              version="2.2">
     <persistence-unit name="default">
 
-        <class>src.Entity.Owner</class>
-        <class>src.Entity.User</class>
-        <class>src.Entity.Agent</class>
-        <class>src.Entity.Admin</class>
-        <class>src.Entity.Storage</class>
-        <class> src.Entity.Notification</class>
-        <class>src.Entity.Renter</class>
-        <class>src.Entity.Sales</class>
+        <class>com.storage.storagedb.Entity.Owner</class>
+        <class>com.storage.storagedb.Entity.User</class>
+        <class>com.storage.storagedb.Entity.Agent</class>
+        <class>com.storage.storagedb.Entity.Admin</class>
+        <class>com.storage.storagedb.Entity.Storage</class>
+        <class>com.storage.storagedb.Entity.Notification</class>
+        <class>com.storage.storagedb.Entity.Renter</class>
+        <class>com.storage.storagedb.Entity.Sales</class>
         <properties>
             <property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5455/postgres"/>
             <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>

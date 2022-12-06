@@ -10,14 +10,14 @@ public class Employee {
 
     private SimpleStringProperty lastName;
 
-    private SimpleDoubleProperty salary;
+    private SimpleStringProperty salary;
 
     public Employee(){}
 
-    public Employee(String firstName, String lastName, double salary){
+    public Employee(String firstName, String lastName, String salary){
         this.firstName = new SimpleStringProperty(firstName);
         this.lastName = new SimpleStringProperty(lastName);
-        this.salary = new SimpleDoubleProperty(salary);
+        this.salary = new SimpleStringProperty(salary);
     }
 
     public Long getId() {
@@ -40,7 +40,9 @@ public class Employee {
         return lastName;
     }
 
-    public SimpleDoubleProperty getSalary() {
+    public SimpleStringProperty salaryProperty() {
         return salary;
     }
+
+    public String getSalary() { return salary.get(); }
 }

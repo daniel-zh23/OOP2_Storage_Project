@@ -4,21 +4,21 @@
     "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
   <session-factory>
-    <property name="connection.url">jdbc:postgresql://localhost:5455/postgres</property>
+    <property name="connection.url">jdbc:postgresql://localhost:5432/postgres</property>
     <property name="connection.driver_class">org.postgresql.Driver</property>
      <property name="connection.username">kris</property>
    <property name="connection.password">1234</property>
 
     <!-- DB schema will be updated if needed -->
     <property name="hibernate.hbm2ddl.auto">update</property>
-      <mapping class="src.Entity.User"/>
-      <mapping class="src.Entity.Owner"/>
-      <mapping class="src.Entity.Agent"/>
-      <mapping class="src.Entity.Admin"/>
-      <mapping class="src.Entity.Storage"/>
-      <mapping class="src.Entity.Notification"/>
-      <mapping class="src.Entity.Sales"/>
-      <mapping class="src.Entity.Renter"/>
+      <mapping class="com.storage.storagedb.Entity.User"/>
+      <mapping class="com.storage.storagedb.Entity.Owner"/>
+      <mapping class="com.storage.storagedb.Entity.Agent"/>
+      <mapping class="com.storage.storagedb.Entity.Admin"/>
+      <mapping class="com.storage.storagedb.Entity.Storage"/>
+      <mapping class="com.storage.storagedb.Entity.Notification"/>
+      <mapping class="com.storage.storagedb.Entity.Sales"/>
+      <mapping class="com.storage.storagedb.Entity.Renter"/>
 
   </session-factory>
 </hibernate-configuration>

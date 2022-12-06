@@ -15,6 +15,6 @@
    <TextField fx:id="username" prefHeight="26.0" prefWidth="177.0" />
    <Label text="Password" />
    <PasswordField fx:id="password" />
-    <Button fx:id="loginBtn" onAction="#onLoginButtonClick" text="Login" />
+    <Button fx:id="loginBtn" onAction="#onLoginButtonClick" onKeyPressed="#onLoginButtonClick" text="Login" />
    <Label fx:id="errorMsg" />
 </VBox>

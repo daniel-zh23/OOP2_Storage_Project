@@ -1,10 +1,8 @@
-package src.DAO;
+package com.storage.storagedb.DAO;
 
 import org.hibernate.query.Query;
-import src.Entity.Notification;
-import src.Entity.Owner;
-import src.Entity.Storage;
-import src.Entity.User;
+import com.storage.storagedb.Entity.Owner;
+import com.storage.storagedb.Entity.Storage;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;

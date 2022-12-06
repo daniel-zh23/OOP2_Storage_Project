@@ -1,5 +1,6 @@
 package com.storage.storageui;
 
+import com.storage.storageBusiness.UserManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,8 +23,8 @@ public class AdminController {
 
     );
     private final ObservableList<Employee> employees = FXCollections.observableArrayList(
-            new Employee("Jhonny", "Sins2", 250.0),
-            new Employee("Daniel", "Zhekov2", 350.0)
+            new Employee("Jhonny", "Sins2", "250.0"),
+            new Employee("Daniel", "Zhekov2", "350.0")
 
     );
 
@@ -53,10 +54,12 @@ public class AdminController {
         tableBox.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         TableColumn<Employee, String> fName = new TableColumn<>("FirstName");
         fName.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
+
         TableColumn<Employee, String> lName = new TableColumn<>("LastName");
         lName.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
-        TableColumn<Employee, Double> salary = new TableColumn<>("Salary");
-        lName.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
+
+        TableColumn<Employee, String> salary = new TableColumn<>("Salary");
+        salary.setCellValueFactory(cellData -> cellData.getValue().salaryProperty());
 
         tableBox.setItems(employees);
         tableBox.getColumns().setAll(fName, lName, salary);

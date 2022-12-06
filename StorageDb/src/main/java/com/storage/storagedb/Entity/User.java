@@ -1,9 +1,7 @@
-package src.Entity;
+package com.storage.storagedb.Entity;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
@@ -74,6 +72,8 @@ public class User {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
+    public String getPassword() { return password; }
 
     public int getId() {
         return id;

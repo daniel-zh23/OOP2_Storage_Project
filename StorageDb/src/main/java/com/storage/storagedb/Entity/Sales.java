@@ -1,4 +1,4 @@
-package src.Entity;
+package com.storage.storagedb.Entity;
 
 import javax.persistence.*;
 import java.util.Date;

@@ -1,8 +1,6 @@
-package src.Entity;
+package com.storage.storagedb.Entity;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @PrimaryKeyJoinColumn(name="id")

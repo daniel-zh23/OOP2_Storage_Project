@@ -1,12 +1,8 @@
-package src.DAO;
+package com.storage.storagedb.DAO;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+import com.storage.storagedb.Entity.Notification;
+import com.storage.storagedb.Entity.User;
 import org.hibernate.query.Query;
-import src.Entity.Notification;
-import src.Entity.Storage;
-import src.Entity.User;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;

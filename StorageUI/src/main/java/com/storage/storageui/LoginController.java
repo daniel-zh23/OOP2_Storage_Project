@@ -1,5 +1,6 @@
 package com.storage.storageui;
 
+import com.storage.storageBusiness.UserManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -22,11 +23,21 @@ public class LoginController {
 
     @FXML
     protected void onLoginButtonClick() throws Exception{
-        if (username.getText().equals("admin") && password.getText().equals("123456")){
-            FXMLLoader fxmlLoader = new FXMLLoader(StorageApplication.class.getResource("admin.fxml"));
+        UserManager userManager = new UserManager();
+        String userRole = userManager.login(username.getText(), password.getText());
+
+        if (!(userRole == null)){
+            String view = switch (userRole) {
+                case "Admin" -> "admin.fxml";
+                case "Agent" -> "agent.fxml";
+                default -> null;
+            };
+
+            assert view != null;
+            FXMLLoader fxmlLoader = new FXMLLoader(StorageApplication.class.getResource(view));
             Scene scene = new Scene(fxmlLoader.load());
-           Stage window = (Stage) loginBtn.getScene().getWindow();
-           window.setScene(scene);
+            Stage window = (Stage) loginBtn.getScene().getWindow();
+            window.setScene(scene);
         }else{
             errorMsg.setText("Invalid Login");
         }

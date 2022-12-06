@@ -1,4 +1,4 @@
-package src.DAO;
+package com.storage.storagedb.DAO;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
