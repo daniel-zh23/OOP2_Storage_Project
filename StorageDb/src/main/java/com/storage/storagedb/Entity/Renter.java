@@ -6,7 +6,7 @@ import javax.persistence.*;
 public class Renter {
     @Id
     @Column(name = "id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     @Column(name="firstName")
     private String firstName;

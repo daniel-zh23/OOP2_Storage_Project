@@ -1,8 +1,8 @@
 package com.storage.storagedb.DAO;
 
 import com.storage.storagedb.Entity.Notification;
-import com.storage.storagedb.Entity.User;
 import org.hibernate.query.Query;
+import com.storage.storagedb.Entity.User;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
