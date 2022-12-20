@@ -45,6 +45,5 @@ public class LoginController {
         }else{
             errorMsg.setText("Invalid Login");
         }
-
     }
 }
