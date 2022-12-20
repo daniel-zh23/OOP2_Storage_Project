@@ -17,7 +17,7 @@ public abstract class DAO<T> implements AutoCloseable{
     public abstract void delete(T t);
     DAO()
     {
-        SessionFactory factory=new Configuration().configure().buildSessionFactory();
+        SessionFactory factory=new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
         session = factory.openSession();
     }
     protected void executeInsideTransaction(Consumer<Session> action) {

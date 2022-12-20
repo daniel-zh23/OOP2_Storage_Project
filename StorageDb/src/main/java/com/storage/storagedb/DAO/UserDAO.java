@@ -2,11 +2,7 @@ package com.storage.storagedb.DAO;
 import java.util.*;
 
 import com.storage.storagedb.Entity.User;
-import org.hibernate.query.Query;
-
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
+import org.hibernate.*;
 
 public class UserDAO extends DAO<User>
 {
@@ -16,26 +12,14 @@ public class UserDAO extends DAO<User>
     }
     public User getByUsername(String username)
     {
-    //Query query  = session.createQuery("Select u from User u where u.username like :usr" );
-    //query.setParameter("usr",username);
-        CriteriaBuilder cb = session.getCriteriaBuilder();
-        CriteriaQuery<User> cq = cb.createQuery(User.class);
-        Root<User> root = cq.from(User.class);
-        cq.select(root).where(cb.equal(root.get("username"), username));
-        Query<User> query = session.createQuery(cq);
-    return (User)query.getSingleResult();
+    Query query  = session.createQuery("Select u from User u where u.username like :usr" );
+    query.setParameter("usr",username);
+    try {
+        return (User)query.getSingleResult();
+    } catch (Exception e){
+        return null;
     }
-
-    public boolean exists(String username){
-        CriteriaBuilder cb = session.getCriteriaBuilder();
-        CriteriaQuery<Long> cq = cb.createQuery(Long.class);
-        Root<User> root = cq.from(User.class);
-        cq.select(cb.count(root)).where(cb.equal(root.get("username"), username));
-        Query<Long> query = session.createQuery(cq);
-
-        return query.getSingleResult() != 0;
     }
-
     @Override
     public List<User> getAll() {
 

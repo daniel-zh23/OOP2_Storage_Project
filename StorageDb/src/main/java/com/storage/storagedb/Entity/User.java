@@ -73,7 +73,11 @@ public class User {
         this.phone = phone;
     }
 
-    public String getPassword() { return password; }
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) { this.password = password; }
 
     public int getId() {
         return id;
@@ -88,14 +92,14 @@ public class User {
         this.phone=null;
         this.password=null;
     }
-    public User(String fname, String lname, String username, String email, String phone)
+    public User(String fname, String lname, String username, String email, String phone, String password)
     {
         this.firstName=fname;
         this.lastName=lname;
         this.username=username;
         this.email=email;
         this.phone=phone;
-        this.password=null;
+        this.password=password;
     }
 
     @Override

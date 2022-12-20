@@ -6,9 +6,9 @@ import javax.persistence.*;
 @PrimaryKeyJoinColumn(name="id")
 @Table(name="owner")
 public class Owner extends User {
-    public Owner(String fname,String lname,String username,String email,String phone)
+    public Owner(String fname,String lname,String username,String email,String phone, String password)
     {
-        super(fname,lname,username,email,phone);
+        super(fname,lname,username,email,phone, password);
     }
     public Owner()
     {

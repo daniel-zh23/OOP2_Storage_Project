@@ -4,8 +4,11 @@
     "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
   <session-factory>
-    <property name="connection.url">jdbc:postgresql://localhost:5432/postgres</property>
+    <property name="connection.url">jdbc:postgresql://localhost:5432/postgres?createDatabaseIfNotExist=true</property>
     <property name="connection.driver_class">org.postgresql.Driver</property>
+      <property name = "hibernate.dialect">
+          org.hibernate.dialect.PostgreSQLDialect
+      </property>
      <property name="connection.username">kris</property>
    <property name="connection.password">1234</property>
 

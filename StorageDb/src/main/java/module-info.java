@@ -6,6 +6,6 @@ module com.storage.storagedb {
     requires java.naming;
     requires java.sql;
 
-    exports com.storage.storagedb.Entity to com.storage.storageBusiness;
-    exports com.storage.storagedb.DAO to com.storage.storageBusiness;
+    exports com.storage.storagedb.DAO;
+    exports com.storage.storagedb.Entity;
 }

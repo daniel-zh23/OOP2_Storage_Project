@@ -1,6 +1,6 @@
 package com.storage.storageui;
 
-import com.storage.storageBusiness.UserManager;
+import com.storage.storageBusiness.Services.UserService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -23,7 +23,7 @@ public class LoginController {
 
     @FXML
     protected void onLoginButtonClick() throws Exception{
-        UserManager userManager = new UserManager();
+        UserService userManager = new UserService();
         String userRole = userManager.login(username.getText(), password.getText());
 
         if (!(userRole == null)){
@@ -41,5 +41,6 @@ public class LoginController {
         }else{
             errorMsg.setText("Invalid Login");
         }
+
     }
 }

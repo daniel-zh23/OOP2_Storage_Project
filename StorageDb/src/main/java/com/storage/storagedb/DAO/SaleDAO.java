@@ -1,8 +1,8 @@
 package com.storage.storagedb.DAO;
 
-import org.hibernate.query.Query;
 import com.storage.storagedb.Entity.Agent;
 import com.storage.storagedb.Entity.Sales;
+import org.hibernate.query.Query;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
