@@ -1,6 +1,7 @@
 package com.storage.storageui;
 
-import com.storage.storageBusiness.UserManager;
+import com.storage.storageBusiness.Models.AgentViewModel;
+import com.storage.storageBusiness.Services.UserService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,14 +18,17 @@ import java.util.Arrays;
 import java.util.List;
 
 public class AdminController {
-    private final ObservableList<Customer> customers = FXCollections.observableArrayList(
-        new Customer("Jhonny", "Sins"),
-            new Customer("Daniel", "Zhekov")
+    private UserService _userService;
 
-    );
+    public void setUserService(UserService service){
+        if (_userService == null){
+            _userService = service;
+        }
+    }
+
     private final ObservableList<Employee> employees = FXCollections.observableArrayList(
-            new Employee("Jhonny", "Sins2", "250.0"),
-            new Employee("Daniel", "Zhekov2", "350.0")
+            new Employee("Jhonny", "Sins2", 250.0),
+            new Employee("Daniel", "Zhekov2", 350.0)
 
     );
 
@@ -38,14 +42,22 @@ public class AdminController {
     @FXML
     protected void onloadAgents(){
 
-        tableBox.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-        TableColumn<Customer, String> fName = new TableColumn<>("FirstName");
-        fName.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
-        TableColumn<Customer, String> lName = new TableColumn<>("LastName");
-        lName.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
+        var agents = _userService.getAgents();
 
-        tableBox.setItems(customers);
-        tableBox.getColumns().setAll(fName, lName);
+        tableBox.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        TableColumn<AgentViewModel, String> fName = new TableColumn<>("FirstName");
+        fName.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
+        TableColumn<AgentViewModel, String> lName = new TableColumn<>("LastName");
+        lName.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
+        TableColumn<AgentViewModel, String> phone = new TableColumn<>("Phone");
+        phone.setCellValueFactory(cellData -> cellData.getValue().phoneProperty());
+        TableColumn<AgentViewModel, String> company = new TableColumn<>("Company");
+        company.setCellValueFactory(cellData -> cellData.getValue().companyProperty());
+        TableColumn<AgentViewModel, Double> salary = new TableColumn<>("Salary");
+        salary.setCellValueFactory(cellData -> cellData.getValue().salaryProperty().asObject());
+
+        tableBox.setItems(FXCollections.observableArrayList(agents));
+        tableBox.getColumns().setAll(fName, lName, phone, company, salary);
     }
 
     @FXML
@@ -54,12 +66,10 @@ public class AdminController {
         tableBox.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         TableColumn<Employee, String> fName = new TableColumn<>("FirstName");
         fName.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
-
         TableColumn<Employee, String> lName = new TableColumn<>("LastName");
         lName.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
-
-        TableColumn<Employee, String> salary = new TableColumn<>("Salary");
-        salary.setCellValueFactory(cellData -> cellData.getValue().salaryProperty());
+        TableColumn<Employee, Double> salary = new TableColumn<>("Salary");
+        lName.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
 
         tableBox.setItems(employees);
         tableBox.getColumns().setAll(fName, lName, salary);

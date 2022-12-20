@@ -3,6 +3,7 @@ package com.storage.storageui;
 import com.storage.storageBusiness.Services.UserService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -35,7 +36,10 @@ public class LoginController {
 
             assert view != null;
             FXMLLoader fxmlLoader = new FXMLLoader(StorageApplication.class.getResource(view));
-            Scene scene = new Scene(fxmlLoader.load());
+            Parent object = fxmlLoader.load();
+            var controller = fxmlLoader.<AdminController>getController();
+            controller.setUserService(userManager);
+            Scene scene = new Scene(object);
             Stage window = (Stage) loginBtn.getScene().getWindow();
             window.setScene(scene);
         }else{
