@@ -1,7 +1,9 @@
-package com.storage.storageui;
+package com.storage.storageui.Controllers;
 
 import com.storage.storageBusiness.Models.AgentViewModel;
 import com.storage.storageBusiness.Services.UserService;
+import com.storage.storageui.Employee;
+import com.storage.storageui.StorageApplication;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -9,13 +11,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class AdminController {
     private UserService _userService;

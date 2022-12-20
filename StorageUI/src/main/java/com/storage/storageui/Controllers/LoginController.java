@@ -1,6 +1,8 @@
-package com.storage.storageui;
+package com.storage.storageui.Controllers;
 
 import com.storage.storageBusiness.Services.UserService;
+import com.storage.storageui.Controllers.AdminController;
+import com.storage.storageui.StorageApplication;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
