@@ -1,5 +1,7 @@
 package com.storage.storageui.Controllers;
 
+import com.storage.storageBusiness.Services.AgentService;
+import com.storage.storageBusiness.Services.OwnerService;
 import com.storage.storageBusiness.Services.UserService;
 import com.storage.storageui.Controllers.AdminController;
 import com.storage.storageui.StorageApplication;
@@ -40,7 +42,9 @@ public class LoginController {
             FXMLLoader fxmlLoader = new FXMLLoader(StorageApplication.class.getResource(view));
             Parent object = fxmlLoader.load();
             var controller = fxmlLoader.<AdminController>getController();
-            controller.setUserService(userManager);
+            AgentService as = new AgentService();
+            OwnerService os = new OwnerService();
+            controller.setServices(as, os);
             Scene scene = new Scene(object);
             Stage window = (Stage) loginBtn.getScene().getWindow();
             window.setScene(scene);
