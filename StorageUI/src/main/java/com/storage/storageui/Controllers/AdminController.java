@@ -5,13 +5,11 @@ import com.storage.storageBusiness.Models.OwnerViewModel;
 import com.storage.storageBusiness.Services.AgentService;
 import com.storage.storageBusiness.Services.OwnerService;
 import com.storage.storageBusiness.Services.UserService;
-import com.storage.storageui.Employee;
 import com.storage.storageui.StorageApplication;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
@@ -20,21 +18,19 @@ import javafx.stage.Stage;
 public class AdminController {
     private AgentService _agentService;
     private OwnerService _ownerService;
+    private UserService _userService;
 
-    public void setServices(AgentService agentService, OwnerService ownerService){
+    public void setServices(AgentService agentService, OwnerService ownerService, UserService userService){
         if (_agentService == null){
             _agentService = agentService;
         }
         if(_ownerService == null){
           _ownerService = ownerService;
-        };
+        }
+        if(_userService == null){
+            _userService = userService;
+        }
     }
-
-    private final ObservableList<Employee> employees = FXCollections.observableArrayList(
-            new Employee("Jhonny", "Sins2", 250.0),
-            new Employee("Daniel", "Zhekov2", 350.0)
-
-    );
 
     @FXML
     private HBox horizontalBox;
@@ -44,7 +40,7 @@ public class AdminController {
     private Button logoutBtn;
 
     @FXML
-    protected void onloadAgents(){
+    protected void onLoadAgents(){
 
         var agents = _agentService.getAgents();
 
@@ -65,7 +61,7 @@ public class AdminController {
     }
 
     @FXML
-    protected void onloadOwners(){
+    protected void onLoadOwners(){
 
         var owners = _ownerService.getOwners();
 
@@ -85,8 +81,28 @@ public class AdminController {
 
     @FXML
     public void onLogout() throws Exception{
-        FXMLLoader fxmlLoader = new FXMLLoader(StorageApplication.class.getResource("login-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(StorageApplication.class.getResource("login.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
+        Stage window = (Stage) logoutBtn.getScene().getWindow();
+        window.setScene(scene);
+    }
+
+    public void onCreateOwner() throws Exception{
+        FXMLLoader fxmlLoader = new FXMLLoader(StorageApplication.class.getResource("create_owner.fxml"));
+        Parent object = fxmlLoader.load();
+        var controller = fxmlLoader.<CreateOwnerController>getController();
+        controller.setServices(logoutBtn.getScene(), _ownerService, _userService);
+        Scene scene = new Scene(object);
+        Stage window = (Stage) logoutBtn.getScene().getWindow();
+        window.setScene(scene);
+    }
+
+    public void onCreateAgent() throws Exception{
+        FXMLLoader fxmlLoader = new FXMLLoader(StorageApplication.class.getResource("create_agent.fxml"));
+        Parent object = fxmlLoader.load();
+        var controller = fxmlLoader.<CreateAgentController>getController();
+        controller.setServices(logoutBtn.getScene(), _agentService, _userService);
+        Scene scene = new Scene(object);
         Stage window = (Stage) logoutBtn.getScene().getWindow();
         window.setScene(scene);
     }

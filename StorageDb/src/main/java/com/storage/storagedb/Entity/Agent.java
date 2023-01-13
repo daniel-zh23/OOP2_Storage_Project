@@ -53,8 +53,8 @@ public class Agent extends User {
         this.company = "";
     }
 
-    public Agent(String fname, String lname, String username, String email, String phone, Double salary, String company, String password) {
-        super(fname, lname, username, email, phone, password);
+    public Agent(String fname, String lname, String username, String email, String phone, Double salary, String company, String pass) {
+        super(fname, lname, username, email, phone, pass);
         this.salary = salary;
         this.company = company;
     }

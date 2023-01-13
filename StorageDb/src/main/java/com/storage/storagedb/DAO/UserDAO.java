@@ -1,15 +1,23 @@
 package com.storage.storagedb.DAO;
 import java.util.*;
+import java.util.stream.Stream;
 
+import com.storage.storagedb.Entity.Sales;
 import com.storage.storagedb.Entity.User;
 import org.hibernate.*;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
 public class UserDAO extends DAO<User>
 {
-    @Override
-    public User get(Integer id) {
-        return session.find(User.class, id);
+    public UserDAO()
+    {
+        super();
     }
+
+
     public User getByUsername(String username)
     {
     Query query  = session.createQuery("Select u from User u where u.username like :usr" );
@@ -20,6 +28,21 @@ public class UserDAO extends DAO<User>
         return null;
     }
     }
+
+    public Stream<User> getUsernames(){
+        Stream<User> usernames = session.createQuery("Select u from User u", User.class).stream();
+        try {
+            return usernames;
+        } catch (Exception e){
+            return null;
+        }
+    }
+
+    @Override
+    public User get(Integer id) {
+        return session.find(User.class, id);
+    }
+
     @Override
     public List<User> getAll() {
 
@@ -45,14 +68,10 @@ public class UserDAO extends DAO<User>
     {
         executeInsideTransaction(session -> session.remove(user));
     }
+
     @Override
     public void update(User user)
     {
         executeInsideTransaction(session -> session.merge(user));
-    }
-
-    public UserDAO()
-    {
-      super();
     }
 }

@@ -30,8 +30,18 @@ public class User {
     @Column(name="password",nullable = true)
     private String password;
 
+    @Basic
+    @Column(name="isFirstLogin",nullable = false)
+    private boolean isFirstLogin = true;
 
 
+    public boolean isFirstLogin() {
+        return isFirstLogin;
+    }
+
+    public void setFirstLogin(boolean firstLogin) {
+        isFirstLogin = firstLogin;
+    }
 
     public String getUsername() {
         return username;
@@ -102,6 +112,15 @@ public class User {
         this.email=email;
         this.phone=phone;
         this.password=password;
+    }
+
+    public User(String fname, String lname, String username, String email, String phone)
+    {
+        this.firstName=fname;
+        this.lastName=lname;
+        this.username=username;
+        this.email=email;
+        this.phone=phone;
     }
 
     @Override

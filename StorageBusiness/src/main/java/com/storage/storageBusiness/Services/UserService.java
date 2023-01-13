@@ -3,6 +3,7 @@ package com.storage.storageBusiness.Services;
 
 import com.google.common.hash.Hashing;
 import com.storage.storageBusiness.Models.AgentViewModel;
+import com.storage.storageBusiness.Models.ResultLoginModel;
 import com.storage.storagedb.DAO.UserDAO;
 import com.storage.storagedb.Entity.Agent;
 import com.storage.storagedb.Entity.User;
@@ -17,7 +18,7 @@ public class UserService {
         _userDao = new UserDAO();
     }
 
-    public String login(String username, String password){
+    public ResultLoginModel login(String username, String password){
         User user = _userDao.getByUsername(username);
         if (user == null){
             return null;
@@ -29,13 +30,10 @@ public class UserService {
             return null;
         }
 
-        return user.getClass().getSimpleName();
+        return new ResultLoginModel(user.getClass().getSimpleName(), user.isFirstLogin());
     }
 
-    public List<AgentViewModel> getAgents(){
-        var users = _userDao.getAll();
-        return users.stream().filter(u -> u instanceof Agent)
-                .map(u -> new AgentViewModel(u.getFirstName(), u.getLastName(), u.getPhone(), ((Agent) u).getCompany(), ((Agent) u).getSalary()))
-                .toList();
+    public boolean checkUsername(String username){
+        return _userDao.getUsernames().anyMatch(u -> u.getUsername().equals(username));
     }
 }

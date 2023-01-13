@@ -20,4 +20,7 @@ public class OwnerService {
                 .map(u -> new OwnerViewModel(u.getFirstName(), u.getLastName(), u.getPhone(), u.getEmail()))
                 .toList();
     }
+
+    public void createOwner(String text, String text1, String text2, String text3, String text4, String text5, Double parsedSalary) {
+    }
 }
