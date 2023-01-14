@@ -4,6 +4,7 @@ import com.storage.storageBusiness.Models.ResultLoginModel;
 import com.storage.storageBusiness.Services.AgentService;
 import com.storage.storageBusiness.Services.OwnerService;
 import com.storage.storageBusiness.Services.UserService;
+import com.storage.storageui.Controllers.Contracts.UserController;
 import com.storage.storageui.StorageApplication;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -39,10 +40,13 @@ public class LoginController {
                 FXMLLoader fxmlLoader = new FXMLLoader(StorageApplication.class.getResource("change_password.fxml"));
                 Parent object = fxmlLoader.load();
                 var controller = fxmlLoader.<ChangePasswordController>getController();
-                //controller.setServices(loginBtn.getScene(), userManager);
+                controller.setServices(loginBtn.getScene(), userManager, username.getText());
                 Scene scene = new Scene(object);
                 Stage window = (Stage) loginBtn.getScene().getWindow();
                 window.setScene(scene);
+                loginBtn.setOpacity(1);
+                loginBtn.setDisable(false);
+                return;
             }
 
             String view = switch (userResult.getType()) {
@@ -54,14 +58,14 @@ public class LoginController {
             assert view != null;
             FXMLLoader fxmlLoader = new FXMLLoader(StorageApplication.class.getResource(view));
             Parent object = fxmlLoader.load();
-            var controller = fxmlLoader.<AdminController>getController();
+            var controller = fxmlLoader.<UserController>getController();
             AgentService as = new AgentService();
             OwnerService os = new OwnerService();
             controller.setServices(as, os, userManager);
             Scene scene = new Scene(object);
             Stage window = (Stage) loginBtn.getScene().getWindow();
             window.setScene(scene);
-        }else{
+        } else {
             errorMsg.setText("Invalid Login");
             loginBtn.setOpacity(1);
             loginBtn.setDisable(false);

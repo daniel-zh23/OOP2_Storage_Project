@@ -2,14 +2,11 @@ package com.storage.storageBusiness.Services;
 
 
 import com.google.common.hash.Hashing;
-import com.storage.storageBusiness.Models.AgentViewModel;
 import com.storage.storageBusiness.Models.ResultLoginModel;
 import com.storage.storagedb.DAO.UserDAO;
-import com.storage.storagedb.Entity.Agent;
 import com.storage.storagedb.Entity.User;
 
 import java.nio.charset.StandardCharsets;
-import java.util.List;
 
 public class UserService {
     private final UserDAO _userDao;
@@ -17,6 +14,7 @@ public class UserService {
     public UserService(){
         _userDao = new UserDAO();
     }
+
 
     public ResultLoginModel login(String username, String password){
         User user = _userDao.getByUsername(username);
@@ -35,5 +33,17 @@ public class UserService {
 
     public boolean checkUsername(String username){
         return _userDao.getUsernames().anyMatch(u -> u.getUsername().equals(username));
+    }
+
+    public boolean changePassword(String username, String password){
+        var user = _userDao.getByUsername(username);
+        String hashedPass = Hashing.sha256()
+                .hashString(password, StandardCharsets.UTF_8)
+                .toString();
+        user.setPassword(hashedPass);
+        user.setFirstLogin(false);
+
+        _userDao.update(user);
+        return true;
     }
 }

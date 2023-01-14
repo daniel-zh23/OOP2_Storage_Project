@@ -9,4 +9,6 @@ module com.storage.storageui {
     exports com.storage.storageui;
     exports com.storage.storageui.Controllers;
     opens com.storage.storageui.Controllers to javafx.fxml;
+    exports com.storage.storageui.Controllers.Contracts;
+    opens com.storage.storageui.Controllers.Contracts to javafx.fxml;
 }

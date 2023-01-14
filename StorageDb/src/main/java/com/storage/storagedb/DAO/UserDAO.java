@@ -30,12 +30,7 @@ public class UserDAO extends DAO<User>
     }
 
     public Stream<User> getUsernames(){
-        Stream<User> usernames = session.createQuery("Select u from User u", User.class).stream();
-        try {
-            return usernames;
-        } catch (Exception e){
-            return null;
-        }
+        return session.createQuery("Select u from User u", User.class).stream();
     }
 
     @Override

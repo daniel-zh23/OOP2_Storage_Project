@@ -5,6 +5,7 @@ import com.storage.storageBusiness.Models.OwnerViewModel;
 import com.storage.storageBusiness.Services.AgentService;
 import com.storage.storageBusiness.Services.OwnerService;
 import com.storage.storageBusiness.Services.UserService;
+import com.storage.storageui.Controllers.Contracts.UserController;
 import com.storage.storageui.StorageApplication;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -15,11 +16,12 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-public class AdminController {
+public class AdminController extends UserController {
     private AgentService _agentService;
     private OwnerService _ownerService;
     private UserService _userService;
 
+    @Override
     public void setServices(AgentService agentService, OwnerService ownerService, UserService userService){
         if (_agentService == null){
             _agentService = agentService;
