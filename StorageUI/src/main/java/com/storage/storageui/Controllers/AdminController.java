@@ -108,4 +108,6 @@ public class AdminController extends UserController {
         Stage window = (Stage) logoutBtn.getScene().getWindow();
         window.setScene(scene);
     }
+    @Override
+    public void initialize(){}
 }

@@ -34,7 +34,6 @@ public class ChangePasswordController {
                 Stage window = (Stage) password.getScene().getWindow();
                 window.setScene(_scene);
             }
-
             return;
         }
         errorMessage.setText(ErrorMessages.PasswordChangeErrorMessage);

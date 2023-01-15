@@ -9,12 +9,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 
 public class AgentController extends UserController {
 
     @FXML
     private Button logoutBtn;
+    @FXML
+    private ComboBox<String> notisCombo;
 
     @FXML
     public void onLogout() throws Exception{
@@ -23,7 +26,12 @@ public class AgentController extends UserController {
         Stage window = (Stage) logoutBtn.getScene().getWindow();
         window.setScene(scene);
     }
+    @Override
+    public void initialize()
+    {
+        System.out.println("Agent screen init");
 
+    }
     @Override
     public void setServices(AgentService agentService, OwnerService ownerService, UserService userService) {
 

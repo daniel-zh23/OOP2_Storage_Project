@@ -6,11 +6,17 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="287.0" prefWidth="396.0" spacing="20.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.storage.storageui.Controllers.LoginController">
+<VBox alignment="CENTER" prefHeight="61.0" prefWidth="246.0" spacing="20.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.storage.storageui.Controllers.LoginController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
+   <Label text="Storage">
+      <font>
+         <Font size="35.0" />
+      </font>
+   </Label>
    <Label text="Username" />
    <TextField fx:id="username" prefHeight="26.0" prefWidth="177.0" />
    <Label text="Password" />

@@ -41,8 +41,9 @@ public class UserService {
                 .hashString(password, StandardCharsets.UTF_8)
                 .toString();
         user.setPassword(hashedPass);
-        user.setFirstLogin(false);
-
+        if(user.isFirstLogin()) {
+            user.setFirstLogin(false);
+        }
         _userDao.update(user);
         return true;
     }
