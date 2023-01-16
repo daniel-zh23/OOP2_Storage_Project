@@ -81,13 +81,6 @@ public class AdminController extends UserController {
         tableBox.getColumns().setAll(fName, lName, phone, email);
     }
 
-    @FXML
-    public void onLogout() throws Exception{
-        FXMLLoader fxmlLoader = new FXMLLoader(StorageApplication.class.getResource("login.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        Stage window = (Stage) logoutBtn.getScene().getWindow();
-        window.setScene(scene);
-    }
 
     public void onCreateOwner() throws Exception{
         FXMLLoader fxmlLoader = new FXMLLoader(StorageApplication.class.getResource("create_owner.fxml"));

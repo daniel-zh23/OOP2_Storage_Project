@@ -1,10 +1,13 @@
 package com.storage.storageBusiness.Services;
 
+import com.google.common.hash.Hashing;
 import com.storage.storageBusiness.Models.AgentViewModel;
 import com.storage.storageBusiness.Models.OwnerViewModel;
 import com.storage.storagedb.DAO.UserDAO;
+import com.storage.storagedb.Entity.Agent;
 import com.storage.storagedb.Entity.Owner;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 public class OwnerService {
@@ -21,6 +24,10 @@ public class OwnerService {
                 .toList();
     }
 
-    public void createOwner(String text, String text1, String text2, String text3, String text4, String text5, Double parsedSalary) {
+    public void createOwner(String fName, String lName, String username, String phone, String email) {
+        String hashedPass = Hashing.sha256()
+                .hashString(fName + phone, StandardCharsets.UTF_8)
+                .toString();
+        _userDao.save(new Owner(fName, lName, username, email, phone, hashedPass));
     }
 }
