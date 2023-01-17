@@ -5,20 +5,20 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
-import java.util.*;
 import java.util.function.Consumer;
+import java.util.stream.Stream;
 
 public abstract class DAO<T> implements AutoCloseable{
     protected Session session;
+    private SessionFactory factory;
     public abstract T get (Integer id);
-    public abstract List<T> getAll();
+    public abstract Stream<T> getAll();
     public abstract boolean save(T t);
     public abstract void update(T t);
     public abstract void delete(T t);
     DAO()
     {
-        SessionFactory factory=new Configuration().configure().buildSessionFactory();
-        session = factory.openSession();
+        this.factory = new Configuration().configure().buildSessionFactory();
     }
     protected void executeInsideTransaction(Consumer<Session> action) {
         Transaction tx = session.getTransaction();
@@ -32,6 +32,11 @@ public abstract class DAO<T> implements AutoCloseable{
             throw e;
         }
     }
+
+    public void openSession(){
+        session = factory.openSession();
+    }
+
     @Override
     public void close()
     {

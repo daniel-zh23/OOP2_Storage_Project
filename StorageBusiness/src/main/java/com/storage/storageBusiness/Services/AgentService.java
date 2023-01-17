@@ -16,16 +16,22 @@ public class AgentService {
     }
 
     public List<AgentViewModel> getAgents(){
-        var users = _userDao.getAll();
-        return users.stream().filter(u -> u instanceof Agent)
-                .map(u -> new AgentViewModel(u.getFirstName(), u.getLastName(), u.getPhone(), ((Agent) u).getCompany(), ((Agent) u).getSalary()))
+        _userDao.openSession();
+        var users = _userDao.getAll()
+                .filter(u -> u instanceof Agent)
+                .filter(u -> u.isActive())
+                .map(u -> new AgentViewModel(u.getId(), u.getFirstName(), u.getLastName(), u.getPhone(), ((Agent) u).getCompany(), ((Agent) u).getSalary()))
                 .toList();
+        _userDao.close();
+        return users;
     }
 
     public void createAgent(String fName, String lName, String username, String phone, String email, String company, double salary){
+        _userDao.openSession();
         String hashedPass = Hashing.sha256()
                 .hashString(fName + phone, StandardCharsets.UTF_8)
                 .toString();
         _userDao.save(new Agent(fName, lName, username, email, phone, salary, company, hashedPass));
+        _userDao.close();
     }
 }

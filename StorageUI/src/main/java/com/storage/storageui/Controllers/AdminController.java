@@ -1,6 +1,7 @@
 package com.storage.storageui.Controllers;
 
 import com.storage.storageBusiness.Models.AgentViewModel;
+import com.storage.storageBusiness.Models.Contracts.UserViewModel;
 import com.storage.storageBusiness.Models.OwnerViewModel;
 import com.storage.storageBusiness.Services.AgentService;
 import com.storage.storageBusiness.Services.OwnerService;
@@ -13,7 +14,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class AdminController extends UserController {
@@ -34,8 +34,6 @@ public class AdminController extends UserController {
         }
     }
 
-    @FXML
-    private HBox horizontalBox;
     @FXML
     private TableView tableBox;
     @FXML
@@ -81,7 +79,7 @@ public class AdminController extends UserController {
         tableBox.getColumns().setAll(fName, lName, phone, email);
     }
 
-
+    @FXML
     public void onCreateOwner() throws Exception{
         FXMLLoader fxmlLoader = new FXMLLoader(StorageApplication.class.getResource("create_owner.fxml"));
         Parent object = fxmlLoader.load();
@@ -92,6 +90,7 @@ public class AdminController extends UserController {
         window.setScene(scene);
     }
 
+    @FXML
     public void onCreateAgent() throws Exception{
         FXMLLoader fxmlLoader = new FXMLLoader(StorageApplication.class.getResource("create_agent.fxml"));
         Parent object = fxmlLoader.load();
@@ -100,5 +99,14 @@ public class AdminController extends UserController {
         Scene scene = new Scene(object);
         Stage window = (Stage) logoutBtn.getScene().getWindow();
         window.setScene(scene);
+    }
+
+    @FXML
+    public void onDelete(){
+        var data = (UserViewModel) tableBox.getSelectionModel().getSelectedItem();
+        System.out.println(data.getId());
+        if (_userService.checkId(data.getId())){
+            _userService.deleteById(data.getId());
+        }
     }
 }
