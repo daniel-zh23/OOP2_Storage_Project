@@ -104,9 +104,13 @@ public class AdminController extends UserController {
     @FXML
     public void onDelete(){
         var data = (UserViewModel) tableBox.getSelectionModel().getSelectedItem();
-        System.out.println(data.getId());
         if (_userService.checkId(data.getId())){
             _userService.deleteById(data.getId());
         }
+    }
+
+    @FXML
+    public void onEdit(){
+
     }
 }

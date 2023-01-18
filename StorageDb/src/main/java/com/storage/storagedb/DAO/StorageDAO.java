@@ -19,13 +19,7 @@ public Storage get(Integer id)
 @Override
 public Stream<Storage> getAll()
 {
-    //TODO: getAll StorageDAO
-//    CriteriaBuilder cb = session.getCriteriaBuilder();
-//    CriteriaQuery<Storage> cq =cb.createQuery(Storage.class);
-//    Root<Storage> root = cq.from(Storage.class);
-//    cq.select(root);
-//    Query<Storage> query = session.createQuery(cq);
-//    return query.getResultList();
+    var storages = session.createQuery("select s from Storage s", Storage.class).stream();
     return null;
 }
     public List<Storage> getByOwner(Owner owner)

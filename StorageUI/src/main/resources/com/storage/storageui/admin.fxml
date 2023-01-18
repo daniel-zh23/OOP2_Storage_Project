@@ -21,7 +21,7 @@
                   </Text>
                </children>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="44.0" prefWidth="454.0" spacing="10.0">
+            <HBox alignment="CENTER_RIGHT" prefHeight="44.0" prefWidth="454.0" spacing="10.0">
                <children>
                   <Button fx:id="lAgentsBtn" mnemonicParsing="false" onAction="#onLoadAgents" text="Load agents" />
                   <Button fx:id="lOwnersBtn" mnemonicParsing="false" onAction="#onLoadOwners" text="Load owners" />
@@ -37,7 +37,7 @@
             <TableView fx:id="tableBox" prefHeight="198.0" prefWidth="675.0" />
             <VBox alignment="CENTER" prefHeight="277.0" prefWidth="134.0" spacing="20.0" style="-fx-background-color: white; -fx-border-color: grey;">
                <children>
-                  <Button mnemonicParsing="false" text="Edit" />
+                  <Button mnemonicParsing="false" onAction="#onEdit" text="Edit" />
                   <Button mnemonicParsing="false" onAction="#onDelete" text="Delete" />
                </children>
                <opaqueInsets>

@@ -9,6 +9,7 @@ public class Main {
     public static void main(String[] args)
     {
         UserDAO user = new UserDAO();
+        user.openSession();
 
         //admin1234
         var passAdmin = "ac9689e2272427085e35b9d3e3e8bed88cb3434828b43b86fc0596cad4c6e270";
