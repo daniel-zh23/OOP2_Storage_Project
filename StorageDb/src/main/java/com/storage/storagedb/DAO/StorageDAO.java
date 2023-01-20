@@ -22,14 +22,11 @@ public Stream<Storage> getAll()
     var storages = session.createQuery("select s from Storage s", Storage.class).stream();
     return null;
 }
-    public List<Storage> getByOwner(Owner owner)
+    public Stream<Storage> getByOwner(Owner owner)
     {
-        CriteriaBuilder cb = session.getCriteriaBuilder();
-        CriteriaQuery<Storage> cq = cb.createQuery(Storage.class);
-        Root<Storage> root = cq.from(Storage.class);
-        cq.select(root).where(cb.equal(root.get("owner"),owner));
-        Query<Storage>  query = session.createQuery(cq);
-        return (List<Storage>) query.getResultList();
+        var storages = session.createQuery("select s from Storage s", Storage.class).stream()
+                .filter(s -> s.getOwner().getId() == owner.getId());
+        return storages;
     }
     @Override
     public boolean save(Storage s)

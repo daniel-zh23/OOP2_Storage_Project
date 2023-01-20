@@ -29,7 +29,7 @@ public class UserService {
             return null;
         }
         _userDao.close();
-        return new ResultLoginModel(user.getClass().getSimpleName(), user.isFirstLogin());
+        return new ResultLoginModel(user.getId(), user.getClass().getSimpleName(), user.isFirstLogin());
     }
 
     public boolean checkUsername(String username){
