@@ -1,10 +1,11 @@
 package com.storage.storageBusiness.Services;
 
-import com.storage.storageBusiness.Models.AgentViewModel;
+import com.google.common.hash.Hashing;
 import com.storage.storageBusiness.Models.OwnerViewModel;
 import com.storage.storagedb.DAO.UserDAO;
 import com.storage.storagedb.Entity.Owner;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 public class OwnerService {
@@ -15,12 +16,20 @@ public class OwnerService {
     }
 
     public List<OwnerViewModel> getOwners(){
-        var users = _userDao.getAll();
-        return users.stream().filter(u -> u instanceof Owner)
-                .map(u -> new OwnerViewModel(u.getFirstName(), u.getLastName(), u.getPhone(), u.getEmail()))
+        _userDao.openSession();
+        var owners =  _userDao.getAll().filter(o -> o instanceof Owner && o.isActive())
+                .map(o -> new OwnerViewModel(o.getId(), o.getFirstName(), o.getLastName(), o.getPhone(), o.getEmail()))
                 .toList();
+        _userDao.close();
+        return owners;
     }
 
-    public void createOwner(String text, String text1, String text2, String text3, String text4, String text5, Double parsedSalary) {
+    public void createOwner(String fName, String lName, String username, String phone, String email) {
+        _userDao.openSession();
+        String hashedPass = Hashing.sha256()
+                .hashString(fName + phone, StandardCharsets.UTF_8)
+                .toString();
+        _userDao.save(new Owner(fName, lName, username, email, phone, hashedPass));
+        _userDao.close();
     }
 }

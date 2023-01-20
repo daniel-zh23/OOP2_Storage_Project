@@ -88,8 +88,7 @@ public class CreateOwnerController {
         }
 
         if (isValid){
-            //TODO: Owner service createOwner method
-            //_ownerService.createOwner(fName.getText(), lName.getText(), username.getText(), phone.getText(), email.getText());
+            _ownerService.createOwner(fName.getText(), lName.getText(), username.getText(), phone.getText(), email.getText());
             onBack();
         }
     }

@@ -1,12 +1,10 @@
 package com.storage.storageBusiness.Models;
 
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
+import com.storage.storageBusiness.Models.Contracts.UserViewModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class OwnerViewModel {
-    private Long id;
+public class OwnerViewModel extends UserViewModel {
     private StringProperty firstName;
 
     private StringProperty lastName;
@@ -15,18 +13,15 @@ public class OwnerViewModel {
 
     private StringProperty email;
 
-    public OwnerViewModel(){}
 
-    public OwnerViewModel(String firstName, String lastName, String phone, String email){
+    public OwnerViewModel(int id, String firstName, String lastName, String phone, String email){
+        super(id);
         this.firstName = new SimpleStringProperty(firstName);
         this.lastName = new SimpleStringProperty(lastName);
         this.phone = new SimpleStringProperty(phone);
         this.email = new SimpleStringProperty(email);
     }
 
-    public Long getId() {
-        return id;
-    }
     public String getFirstName() {
         return firstName.get();
     }

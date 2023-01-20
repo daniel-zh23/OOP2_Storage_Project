@@ -52,6 +52,7 @@ public class LoginController {
             String view = switch (userResult.getType()) {
                 case "Admin" -> "admin.fxml";
                 case "Agent" -> "agent.fxml";
+                case "Owner" -> "owner.fxml";
                 default -> null;
             };
 

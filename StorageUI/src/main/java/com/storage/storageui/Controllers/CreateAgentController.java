@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 import java.util.regex.Pattern;
 
 public class CreateAgentController {
-    private static final String NamePattern = "[A-Z][a-z]+$";
+    private static final String NamePattern = "[A-Z][a-zA-Z]+$";
     private static final String PhonePattern = "\\+[0-9 ?]{4,}$";
     private static final String EmailPattern = "[A-Za-z.0-9]+@[A-Za-z]+.[A-Za-z]+";
 

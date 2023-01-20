@@ -8,6 +8,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
+import java.util.stream.Stream;
 
 
 public class NotificationDAO extends DAO<Notification>
@@ -18,16 +19,18 @@ public class NotificationDAO extends DAO<Notification>
         return session.get(Notification.class,id);
     }
     @Override
-    public List<Notification>getAll()
+    public Stream<Notification> getAll()
     {
-        //Query query = session.createQuery("Select n from Notification n");
-        //return (List<Notification>) query.getResultList();
-        CriteriaBuilder cb = session.getCriteriaBuilder();
-        CriteriaQuery<Notification> cq =cb.createQuery(Notification.class);
-        Root<Notification> root = cq.from(Notification.class);
-        cq.select(root);
-        Query<Notification> query = session.createQuery(cq);
-        return query.getResultList();
+        //TODO: getAll notificationDAO
+//        //Query query = session.createQuery("Select n from Notification n");
+//        //return (List<Notification>) query.getResultList();
+//        CriteriaBuilder cb = session.getCriteriaBuilder();
+//        CriteriaQuery<Notification> cq =cb.createQuery(Notification.class);
+//        Root<Notification> root = cq.from(Notification.class);
+//        cq.select(root);
+//        Query<Notification> query = session.createQuery(cq);
+//        return query.getResultList();
+        return null;
     }
     public List<Notification> getByUser(User user)
     {

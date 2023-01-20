@@ -17,6 +17,7 @@ public class UserService {
 
 
     public ResultLoginModel login(String username, String password){
+        _userDao.openSession();
         User user = _userDao.getByUsername(username);
         if (user == null){
             return null;
@@ -27,15 +28,19 @@ public class UserService {
         if (!user.getPassword().equals(hashedPass)){
             return null;
         }
-
-        return new ResultLoginModel(user.getClass().getSimpleName(), user.isFirstLogin());
+        _userDao.close();
+        return new ResultLoginModel(user.getId(), user.getClass().getSimpleName(), user.isFirstLogin());
     }
 
     public boolean checkUsername(String username){
-        return _userDao.getUsernames().anyMatch(u -> u.getUsername().equals(username));
+        _userDao.openSession();
+        var result = _userDao.getUsernames().anyMatch(u -> u.getUsername().equals(username));
+        _userDao.close();
+        return result;
     }
 
     public boolean changePassword(String username, String password){
+        _userDao.openSession();
         var user = _userDao.getByUsername(username);
         String hashedPass = Hashing.sha256()
                 .hashString(password, StandardCharsets.UTF_8)
@@ -45,6 +50,22 @@ public class UserService {
             user.setFirstLogin(false);
         }
         _userDao.update(user);
+        _userDao.close();
         return true;
+    }
+
+    public boolean checkId(int id){
+        _userDao.openSession();
+        var result = _userDao.getAll().anyMatch(u -> u.getId() == id);
+        _userDao.close();
+        return result;
+    }
+
+    public void deleteById(int id){
+        _userDao.openSession();
+        var user = _userDao.getAll().filter(u -> u.getId() == id).findFirst().get();
+        user.setActive(false);
+        _userDao.save(user);
+        _userDao.close();
     }
 }

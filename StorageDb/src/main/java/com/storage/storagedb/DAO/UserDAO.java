@@ -1,15 +1,8 @@
 package com.storage.storagedb.DAO;
-import java.util.*;
 import java.util.stream.Stream;
 
-import com.storage.storagedb.Entity.Sales;
 import com.storage.storagedb.Entity.User;
 import org.hibernate.*;
-
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-
 public class UserDAO extends DAO<User>
 {
     public UserDAO()
@@ -20,17 +13,23 @@ public class UserDAO extends DAO<User>
 
     public User getByUsername(String username)
     {
-    Query query  = session.createQuery("Select u from User u where u.username like :usr" );
-    query.setParameter("usr",username);
     try {
-        return (User)query.getSingleResult();
+        var user =  session.createQuery("Select u from User u", User.class).stream()
+                .filter(u -> u.getUsername().equals(username))
+                .findFirst()
+                .get();
+        return user;
     } catch (Exception e){
         return null;
     }
     }
 
     public Stream<User> getUsernames(){
-        return session.createQuery("Select u from User u", User.class).stream();
+        try {
+            return session.createQuery("Select u from User u", User.class).stream();
+        } catch(Exception e) {
+            return null;
+        }
     }
 
     @Override
@@ -39,10 +38,8 @@ public class UserDAO extends DAO<User>
     }
 
     @Override
-    public List<User> getAll() {
-
-        Query query = session.createQuery("Select u from User u");
-        return query.getResultList();
+    public Stream<User> getAll() {
+        return session.createQuery("Select u from User u").stream();
     }
 
     @Override

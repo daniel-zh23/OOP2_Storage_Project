@@ -6,4 +6,5 @@ module com.storage.storageBusiness {
 
     exports com.storage.storageBusiness.Services;
     exports com.storage.storageBusiness.Models;
+    exports com.storage.storageBusiness.Models.Contracts;
 }

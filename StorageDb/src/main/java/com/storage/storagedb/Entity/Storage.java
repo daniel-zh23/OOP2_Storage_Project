@@ -20,7 +20,6 @@ public class Storage {
     @Column (name="status") // Free / Leased / For Lease 0/1/2
     private Integer status;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="owner_id", nullable = false)
     private Owner owner;
 
     public Storage( Double width, Double length, Double height, String address, Integer status,Owner owner) {
@@ -46,6 +45,14 @@ public class Storage {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Owner getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Owner owner) {
+        this.owner = owner;
     }
 
     @Override

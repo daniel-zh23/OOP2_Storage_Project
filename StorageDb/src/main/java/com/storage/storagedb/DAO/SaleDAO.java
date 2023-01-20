@@ -8,6 +8,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class SaleDAO extends DAO<Sales> {
     @Override
@@ -16,14 +17,16 @@ public class SaleDAO extends DAO<Sales> {
         return session.get(Sales.class,id);
     }
     @Override
-    public List<Sales> getAll()
+    public Stream<Sales> getAll()
     {
-        CriteriaBuilder cb = session.getCriteriaBuilder();
-        CriteriaQuery<Sales> cq =cb.createQuery(Sales.class);
-        Root<Sales> root = cq.from(Sales.class);
-        cq.select(root);
-        Query<Sales> query = session.createQuery(cq);
-        return query.getResultList();
+        //TODO: getAll SalesDAO
+//        CriteriaBuilder cb = session.getCriteriaBuilder();
+//        CriteriaQuery<Sales> cq =cb.createQuery(Sales.class);
+//        Root<Sales> root = cq.from(Sales.class);
+//        cq.select(root);
+//        Query<Sales> query = session.createQuery(cq);
+//        return query.getResultList();
+        return null;
     }
     public List<Sales>getByAgent(Agent agent)
     {

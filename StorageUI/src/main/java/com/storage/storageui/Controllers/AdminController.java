@@ -1,6 +1,7 @@
 package com.storage.storageui.Controllers;
 
 import com.storage.storageBusiness.Models.AgentViewModel;
+import com.storage.storageBusiness.Models.Contracts.UserViewModel;
 import com.storage.storageBusiness.Models.OwnerViewModel;
 import com.storage.storageBusiness.Services.AgentService;
 import com.storage.storageBusiness.Services.OwnerService;
@@ -108,6 +109,17 @@ public class AdminController extends UserController {
         Stage window = (Stage) logoutBtn.getScene().getWindow();
         window.setScene(scene);
     }
-    @Override
-    public void initialize(){}
+
+    @FXML
+    public void onDelete(){
+        var data = (UserViewModel) tableBox.getSelectionModel().getSelectedItem();
+        if (_userService.checkId(data.getId())){
+            _userService.deleteById(data.getId());
+        }
+    }
+
+    @FXML
+    public void onEdit(){
+
+    }
 }

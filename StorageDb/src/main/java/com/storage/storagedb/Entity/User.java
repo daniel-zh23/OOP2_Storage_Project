@@ -31,9 +31,21 @@ public class User {
     private String password;
 
     @Basic
-    @Column(name="isFirstLogin",nullable = false)
+    @Column(name="is_first_login",nullable = false)
     private boolean isFirstLogin = true;
 
+    @Basic
+    @Column(name="is_active",nullable = false)
+    private boolean isActive = true;
+
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
 
     public boolean isFirstLogin() {
         return isFirstLogin;

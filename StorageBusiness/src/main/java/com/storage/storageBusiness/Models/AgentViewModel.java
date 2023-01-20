@@ -1,12 +1,9 @@
 package com.storage.storageBusiness.Models;
 
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import com.storage.storageBusiness.Models.Contracts.UserViewModel;
+import javafx.beans.property.*;
 
-public class AgentViewModel {
-    private Long id;
+public class AgentViewModel extends UserViewModel {
     private StringProperty firstName;
 
     private StringProperty lastName;
@@ -17,18 +14,14 @@ public class AgentViewModel {
 
     private DoubleProperty salary;
 
-    public AgentViewModel(){}
 
-    public AgentViewModel(String firstName, String lastName, String phone, String company, Double salary){
+    public AgentViewModel(int id, String firstName, String lastName, String phone, String company, Double salary){
+        super(id);
         this.firstName = new SimpleStringProperty(firstName);
         this.lastName = new SimpleStringProperty(lastName);
         this.phone = new SimpleStringProperty(phone);
         this.company = new SimpleStringProperty(company);
         this.salary = new SimpleDoubleProperty(salary);
-    }
-
-    public Long getId() {
-        return id;
     }
 
     public String getFirstName() {
