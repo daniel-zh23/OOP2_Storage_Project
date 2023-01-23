@@ -13,9 +13,18 @@ public abstract class DAO<T> implements AutoCloseable{
     private SessionFactory factory;
     public abstract T get (Integer id);
     public abstract Stream<T> getAll();
-    public abstract boolean save(T t);
-    public abstract void update(T t);
-    public abstract void delete(T t);
+    public void delete(T t){
+        executeInsideTransaction(session->session.remove(t));
+    }
+
+    public boolean save(T t){
+        executeInsideTransaction(session->session.persist(t));
+        return true;
+    }
+    public void update(T t){
+        executeInsideTransaction(session->session.merge(t));
+    }
+
     DAO()
     {
         this.factory = new Configuration().configure().buildSessionFactory();

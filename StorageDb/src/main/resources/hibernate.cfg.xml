@@ -4,7 +4,7 @@
     "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
   <session-factory>
-    <property name="connection.url">jdbc:postgresql://localhost:5455/postgres</property>
+    <property name="connection.url">jdbc:postgresql://localhost:5432/postgres</property>
     <property name="connection.driver_class">org.postgresql.Driver</property>
       <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
       <property name="connection.username">kris</property>
@@ -21,6 +21,7 @@
       <mapping class="com.storage.storagedb.Entity.Notification"/>
       <mapping class="com.storage.storagedb.Entity.Sales"/>
       <mapping class="com.storage.storagedb.Entity.Renter"/>
+      <mapping class="com.storage.storagedb.Entity.Status"/>
 
   </session-factory>
 </hibernate-configuration>

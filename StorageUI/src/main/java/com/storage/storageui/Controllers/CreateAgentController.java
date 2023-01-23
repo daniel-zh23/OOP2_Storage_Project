@@ -3,6 +3,7 @@ package com.storage.storageui.Controllers;
 import com.storage.storageBusiness.Services.AgentService;
 import com.storage.storageBusiness.Services.UserService;
 import com.storage.storageui.Common.ErrorMessages;
+import com.storage.storageui.Controllers.Contracts.CreateController;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -10,9 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.util.regex.Pattern;
-
-public class CreateAgentController {
+public class CreateAgentController extends CreateController {
     private static final String NamePattern = "[A-Z][a-zA-Z]+$";
     private static final String PhonePattern = "\\+[0-9 ?]{4,}$";
     private static final String EmailPattern = "[A-Za-z.0-9]+@[A-Za-z]+.[A-Za-z]+";
@@ -80,29 +79,23 @@ public class CreateAgentController {
 
     public void onCreate() {
         boolean isValid = true;
-        Double parsedSalary;
 
-        try {
-            parsedSalary = Double.parseDouble(salary.getText());
-        } catch (Exception e){
-            parsedSalary = null;
-        }
-
-        isValid = validateInput(fName, fNameError, NamePattern, ErrorMessages.FirstNameErrorMessage, isValid);
-        isValid = validateInput(lName, lNameError, NamePattern, ErrorMessages.LastNameErrorMessage, isValid);
-        isValid = validateInput(phone, phoneError, PhonePattern, ErrorMessages.PhoneErrorMessage, isValid);
-        isValid = validateInput(company, companyError, NamePattern, ErrorMessages.CompanyErrorMessage, isValid);
-        isValid = validateInput(email, emailError, EmailPattern, ErrorMessages.EmailErrorMessage, isValid);
+        isValid = validateInput(fName, fNameError, NamePattern, ErrorMessages.FirstName, isValid);
+        isValid = validateInput(lName, lNameError, NamePattern, ErrorMessages.LastName, isValid);
+        isValid = validateInput(phone, phoneError, PhonePattern, ErrorMessages.Phone, isValid);
+        isValid = validateInput(company, companyError, NamePattern, ErrorMessages.Company, isValid);
+        isValid = validateInput(email, emailError, EmailPattern, ErrorMessages.Email, isValid);
+        var parsedSalary = tryParseDouble(salary.getText());
 
         if (_userService.checkUsername(username.getText())){
             isValid = false;
-            usernameError.setText(ErrorMessages.UsernameErrorMessage);
+            usernameError.setText(ErrorMessages.Username);
         } else {
             usernameError.setText("");
         }
         if (parsedSalary == null){
             isValid = false;
-            salaryError.setText(ErrorMessages.SalaryErrorMessage);
+            salaryError.setText(ErrorMessages.Salary);
         } else {
             salaryError.setText("");
         }
@@ -111,16 +104,6 @@ public class CreateAgentController {
             _agentService.createAgent(fName.getText(), lName.getText(), username.getText(), phone.getText(), email.getText(), company.getText(), parsedSalary);
             onBack();
         }
-    }
-
-    private boolean validateInput(TextField field, Text errorLabel, String matchPattern, String errorMessage, boolean result){
-        if (!Pattern.matches(matchPattern, field.getText())){
-            result = false;
-            errorLabel.setText(errorMessage);
-        } else {
-            errorLabel.setText("");
-        }
-        return result;
     }
 
     public void onBack(){

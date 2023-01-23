@@ -1,6 +1,8 @@
 package com.storage.storagedb.Entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "agent")
@@ -13,6 +15,9 @@ public class Agent extends User {
     private String company;
     @Column (name="rating")
     private Double rating; // score 0-5
+
+    @OneToMany(mappedBy = "agent")
+    private List<Storage> storages = new ArrayList<>();
 
     public Double getRating() {
         return rating;
@@ -59,4 +64,11 @@ public class Agent extends User {
         this.company = company;
     }
 
+    public List<Storage> getStorages() {
+        return storages;
+    }
+
+    public void setStorages(List<Storage> storages) {
+        this.storages = storages;
+    }
 }

@@ -42,28 +42,4 @@ public class UserDAO extends DAO<User>
         return session.createQuery("Select u from User u").stream();
     }
 
-    @Override
-    public boolean save(User user) // returns true if user is successfully saved in DB and false if not
-    {
-        try {
-            executeInsideTransaction(session -> session.persist(user));
-        }
-        catch (Exception ex)
-        {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public void delete(User user)
-    {
-        executeInsideTransaction(session -> session.remove(user));
-    }
-
-    @Override
-    public void update(User user)
-    {
-        executeInsideTransaction(session -> session.merge(user));
-    }
 }

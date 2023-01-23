@@ -3,6 +3,7 @@ package com.storage.storageui.Controllers;
 import com.storage.storageBusiness.Services.OwnerService;
 import com.storage.storageBusiness.Services.UserService;
 import com.storage.storageui.Common.ErrorMessages;
+import com.storage.storageui.Controllers.Contracts.CreateController;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -10,9 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.util.regex.Pattern;
-
-public class CreateOwnerController {
+public class CreateOwnerController extends CreateController {
     private static final String NamePattern = "[A-Z][a-z]+$";
     private static final String PhonePattern = "\\+[0-9 ?]{4,}$";
     private static final String EmailPattern = "[A-Za-z.0-9]+@[A-Za-z]+.[A-Za-z]+";
@@ -75,14 +74,14 @@ public class CreateOwnerController {
     public void onCreate() {
         boolean isValid = true;
 
-        isValid = validateInput(fName, fNameError, NamePattern, ErrorMessages.FirstNameErrorMessage, isValid);
-        isValid = validateInput(lName, lNameError, NamePattern, ErrorMessages.LastNameErrorMessage, isValid);
-        isValid = validateInput(phone, phoneError, PhonePattern, ErrorMessages.PhoneErrorMessage, isValid);
-        isValid = validateInput(email, emailError, EmailPattern, ErrorMessages.EmailErrorMessage, isValid);
+        isValid = validateInput(fName, fNameError, NamePattern, ErrorMessages.FirstName, isValid);
+        isValid = validateInput(lName, lNameError, NamePattern, ErrorMessages.LastName, isValid);
+        isValid = validateInput(phone, phoneError, PhonePattern, ErrorMessages.Phone, isValid);
+        isValid = validateInput(email, emailError, EmailPattern, ErrorMessages.Email, isValid);
 
         if (_userService.checkUsername(username.getText())){
             isValid = false;
-            usernameError.setText(ErrorMessages.UsernameErrorMessage);
+            usernameError.setText(ErrorMessages.Username);
         } else {
             usernameError.setText("");
         }
@@ -91,16 +90,6 @@ public class CreateOwnerController {
             _ownerService.createOwner(fName.getText(), lName.getText(), username.getText(), phone.getText(), email.getText());
             onBack();
         }
-    }
-
-    private boolean validateInput(TextField field, Text errorLabel, String matchPattern, String errorMessage, boolean result){
-        if (!Pattern.matches(matchPattern, field.getText())){
-            result = false;
-            errorLabel.setText(errorMessage);
-        } else {
-            errorLabel.setText("");
-        }
-        return result;
     }
 
     public void onBack(){

@@ -38,26 +38,6 @@ public class SaleDAO extends DAO<Sales> {
         return (List<Sales>) query.getResultList();
     }
 
-    @Override
-    public boolean save(Sales s)
-    {
-        executeInsideTransaction(session->session.persist(s));
-        return true;
-
-    }
-    @Override
-    public void delete(Sales s)
-    {
-        executeInsideTransaction(session->session.remove(s));
-    }
-    @Override
-    public void update(Sales s)
-    {
-        executeInsideTransaction(session->session.merge(s));
-    }
-
-
-
     public SaleDAO()
     {
         super();
