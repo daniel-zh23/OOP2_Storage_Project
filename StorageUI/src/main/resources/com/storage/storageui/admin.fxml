@@ -21,9 +21,9 @@
                   </Text>
                </children>
             </HBox>
-            <HBox alignment="CENTER_RIGHT" prefHeight="44.0" prefWidth="454.0" spacing="10.0">
+            <HBox alignment="CENTER_RIGHT" prefHeight="44.0" prefWidth="655.0" spacing="10.0">
                <children>
-                  <Button fx:id="lAgentsBtn" mnemonicParsing="false" onAction="#onLoadAgents" text="Load agents" />
+                  <Button fx:id="lAgentsBtn" mnemonicParsing="false" onAction="#onLoadAgents" prefHeight="24.0" prefWidth="104.0" text="Load agents" />
                   <Button fx:id="lOwnersBtn" mnemonicParsing="false" onAction="#onLoadOwners" text="Load owners" />
                   <Button fx:id="cOwnerBtn" mnemonicParsing="false" onAction="#onCreateOwner" text="Create owner" />
                   <Button fx:id="cAgentBtn" mnemonicParsing="false" onAction="#onCreateAgent" text="Create agent" />
@@ -37,8 +37,9 @@
             <TableView fx:id="tableBox" prefHeight="198.0" prefWidth="675.0" />
             <VBox alignment="CENTER" prefHeight="277.0" prefWidth="134.0" spacing="20.0" style="-fx-background-color: white; -fx-border-color: grey;">
                <children>
-                  <Button mnemonicParsing="false" onAction="#onEdit" text="Edit" />
-                  <Button mnemonicParsing="false" onAction="#onDelete" text="Delete" />
+                  <Button mnemonicParsing="false" onAction="#onApply" text="Apply Changes" />
+                  <Button mnemonicParsing="false" onAction="#onDiscard" text="Discard changes" />
+                  <Button mnemonicParsing="false" onAction="#onDelete" text="Delete Highlighted" textAlignment="CENTER" wrapText="true" />
                </children>
                <opaqueInsets>
                   <Insets />

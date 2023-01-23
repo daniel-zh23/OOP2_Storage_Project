@@ -4,6 +4,7 @@ import com.google.common.hash.Hashing;
 import com.storage.storageBusiness.Models.AgentViewModel;
 import com.storage.storagedb.DAO.UserDAO;
 import com.storage.storagedb.Entity.Agent;
+import com.storage.storagedb.Entity.User;
 
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -34,6 +35,20 @@ public class AgentService {
                 .hashString(fName + phone, StandardCharsets.UTF_8)
                 .toString();
         _userDao.save(new Agent(fName, lName, username, email, phone, salary, company, fName + phone));
+        _userDao.close();
+    }
+    public void updateAgents(List<AgentViewModel>agents)
+    {
+        _userDao.openSession();
+        for (AgentViewModel a:agents) {
+            Agent agent =(Agent)_userDao.get(a.getId());
+            agent.setFirstName(a.getFirstName());
+            agent.setLastName(a.getLastName());
+            agent.setPhone(a.getPhone());
+            agent.setCompany(a.getCompany());
+            agent.setSalary(a.getSalary());
+            _userDao.update((User)agent);
+        }
         _userDao.close();
     }
 }

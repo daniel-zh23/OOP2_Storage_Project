@@ -1,13 +1,16 @@
 package com.storage.storageBusiness.Models.Contracts;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+
 public abstract class UserViewModel {
-    private int Id;
+    private IntegerProperty Id=new SimpleIntegerProperty();
 
     public UserViewModel(int id) {
-        Id = id;
+        Id.set(id);
     }
 
     public int getId() {
-        return Id;
+        return Id.getValue();
     }
 }

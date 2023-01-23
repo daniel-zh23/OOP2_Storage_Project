@@ -1,6 +1,7 @@
 package com.storage.storageBusiness.Models;
 
 import com.storage.storageBusiness.Models.Contracts.UserViewModel;
+import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 

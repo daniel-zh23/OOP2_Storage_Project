@@ -5,7 +5,9 @@ import com.storage.storageBusiness.Models.OwnerViewModel;
 import com.storage.storageBusiness.Models.StorageViewModel;
 import com.storage.storagedb.DAO.StorageDAO;
 import com.storage.storagedb.DAO.UserDAO;
+import com.storage.storagedb.Entity.Agent;
 import com.storage.storagedb.Entity.Owner;
+import com.storage.storagedb.Entity.User;
 
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -36,6 +38,18 @@ public class OwnerService {
                 .hashString(fName + phone, StandardCharsets.UTF_8)
                 .toString();
         _userDao.save(new Owner(fName, lName, username, email, phone, fName + phone));
+        _userDao.close();
+    }
+    public void updateOwners(List<OwnerViewModel>owners) {
+        _userDao.openSession();
+        for (OwnerViewModel o : owners) {
+            Owner owner = (Owner) _userDao.get(o.getId());
+            owner.setFirstName(o.getFirstName());
+            owner.setLastName(o.getLastName());
+            owner.setPhone(o.getPhone());
+            owner.setEmail(o.getEmail());
+            _userDao.update((User) owner);
+        }
         _userDao.close();
     }
 }

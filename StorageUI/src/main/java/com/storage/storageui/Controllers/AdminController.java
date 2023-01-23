@@ -6,21 +6,28 @@ import com.storage.storageBusiness.Models.OwnerViewModel;
 import com.storage.storageBusiness.Services.AgentService;
 import com.storage.storageBusiness.Services.OwnerService;
 import com.storage.storageBusiness.Services.UserService;
+import com.storage.storageui.Common.AgentTable;
+import com.storage.storageui.Common.OwnerTable;
 import com.storage.storageui.Controllers.Contracts.UserController;
 import com.storage.storageui.StorageApplication;
 import javafx.collections.FXCollections;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 public class AdminController extends UserController {
     private AgentService _agentService;
     private OwnerService _ownerService;
     private UserService _userService;
+    private boolean table_toggle =false; // false for agents, true for owners
 
     @Override
     public void setServices(AgentService agentService, OwnerService ownerService, UserService userService){
@@ -41,47 +48,8 @@ public class AdminController extends UserController {
     private TableView tableBox;
     @FXML
     private Button logoutBtn;
-
-    @FXML
-    protected void onLoadAgents(){
-
-        var agents = _agentService.getAgents();
-
-        tableBox.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-        TableColumn<AgentViewModel, String> fName = new TableColumn<>("FirstName");
-        fName.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
-        TableColumn<AgentViewModel, String> lName = new TableColumn<>("LastName");
-        lName.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
-        TableColumn<AgentViewModel, String> phone = new TableColumn<>("Phone");
-        phone.setCellValueFactory(cellData -> cellData.getValue().phoneProperty());
-        TableColumn<AgentViewModel, String> company = new TableColumn<>("Company");
-        company.setCellValueFactory(cellData -> cellData.getValue().companyProperty());
-        TableColumn<AgentViewModel, Double> salary = new TableColumn<>("Salary");
-        salary.setCellValueFactory(cellData -> cellData.getValue().salaryProperty().asObject());
-
-        tableBox.setItems(FXCollections.observableArrayList(agents));
-        tableBox.getColumns().setAll(fName, lName, phone, company, salary);
-    }
-
-    @FXML
-    protected void onLoadOwners(){
-
-        var owners = _ownerService.getOwners();
-
-        tableBox.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-        TableColumn<OwnerViewModel, String> fName = new TableColumn<>("FirstName");
-        fName.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
-        TableColumn<OwnerViewModel, String> lName = new TableColumn<>("LastName");
-        lName.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
-        TableColumn<OwnerViewModel, String> phone = new TableColumn<>("Phone");
-        phone.setCellValueFactory(cellData -> cellData.getValue().phoneProperty());
-        TableColumn<OwnerViewModel, String> email = new TableColumn<>("Email");
-        email.setCellValueFactory(cellData -> cellData.getValue().emailProperty());
-
-        tableBox.setItems(FXCollections.observableArrayList(owners));
-        tableBox.getColumns().setAll(fName, lName, phone, email);
-    }
-
+    AgentTable agentTable= new AgentTable();
+    OwnerTable ownerTable = new OwnerTable();
     @FXML
     public void onLogout() throws Exception{
         FXMLLoader fxmlLoader = new FXMLLoader(StorageApplication.class.getResource("login.fxml"));
@@ -116,10 +84,50 @@ public class AdminController extends UserController {
         if (_userService.checkId(data.getId())){
             _userService.deleteById(data.getId());
         }
+        tableBox.refresh();
     }
 
     @FXML
-    public void onEdit(){
-
+    public void onApply(){
+        if(table_toggle) {
+            _ownerService.updateOwners(ownerTable.retrieveOwners());
+            ownerTable.generateTable(tableBox);
+        }
+        else {
+            _agentService.updateAgents(agentTable.retrieveAgents());
+            agentTable.generateTable(tableBox);
+        }
+    }
+    @FXML
+    public void onDiscard()
+    {
+        if(table_toggle) {
+            ownerTable.feedOwners(_ownerService.getOwners());
+            ownerTable.generateTable(tableBox);
+        }
+        else {
+            agentTable.feedAgents(_agentService.getAgents());
+            agentTable.generateTable(tableBox);
+        }
+    }
+    @FXML
+    protected void onLoadOwners(){
+        table_toggle =true;
+        loadTable();
+    }
+    @FXML
+    protected void onLoadAgents()
+    {
+        table_toggle =false;
+        loadTable();
+    }
+    private void  loadTable() {
+        if (table_toggle) {
+            ownerTable.feedOwners(_ownerService.getOwners());
+            ownerTable.generateTable(tableBox);
+        } else {
+            agentTable.feedAgents(_agentService.getAgents());
+            agentTable.generateTable(tableBox);
+        }
     }
 }
