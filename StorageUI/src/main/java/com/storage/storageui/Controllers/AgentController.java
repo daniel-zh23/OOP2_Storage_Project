@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 
 public class AgentController extends UserController {
+    private Integer _agentId;
 
     @FXML
     private Button logoutBtn;
@@ -18,5 +19,11 @@ public class AgentController extends UserController {
     @Override
     public void setServices(AgentService agentService, OwnerService ownerService, UserService userService) {
 
+    }
+
+    public void setAgentId(int id) {
+        if (_agentId == null){
+            _agentId = id;
+        }
     }
 }

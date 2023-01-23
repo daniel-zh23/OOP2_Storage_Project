@@ -7,6 +7,7 @@ import com.storage.storagedb.Entity.Agent;
 
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class AgentService {
     private final UserDAO _userDao;
@@ -21,17 +22,18 @@ public class AgentService {
                 .filter(u -> u instanceof Agent)
                 .filter(u -> u.isActive())
                 .map(u -> new AgentViewModel(u.getId(), u.getFirstName(), u.getLastName(), u.getPhone(), ((Agent) u).getCompany(), ((Agent) u).getSalary()))
-                .toList();
+                .collect(Collectors.toList());
         _userDao.close();
         return users;
     }
 
     public void createAgent(String fName, String lName, String username, String phone, String email, String company, double salary){
         _userDao.openSession();
+        //TODO: Pass hash!
         String hashedPass = Hashing.sha256()
                 .hashString(fName + phone, StandardCharsets.UTF_8)
                 .toString();
-        _userDao.save(new Agent(fName, lName, username, email, phone, salary, company, hashedPass));
+        _userDao.save(new Agent(fName, lName, username, email, phone, salary, company, fName + phone));
         _userDao.close();
     }
 }

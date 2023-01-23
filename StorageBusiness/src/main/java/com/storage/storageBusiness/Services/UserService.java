@@ -22,10 +22,11 @@ public class UserService {
         if (user == null){
             return null;
         }
+        //TODO: Pass hash!
         String hashedPass = Hashing.sha256()
                 .hashString(password, StandardCharsets.UTF_8)
                 .toString();
-        if (!user.getPassword().equals(hashedPass)){
+        if (!user.getPassword().equals(password)){
             return null;
         }
         _userDao.close();
@@ -42,10 +43,12 @@ public class UserService {
     public boolean changePassword(String username, String password){
         _userDao.openSession();
         var user = _userDao.getByUsername(username);
+        //TODO: Pass hash!
+
         String hashedPass = Hashing.sha256()
                 .hashString(password, StandardCharsets.UTF_8)
                 .toString();
-        user.setPassword(hashedPass);
+        user.setPassword(password);
         if(user.isFirstLogin()) {
             user.setFirstLogin(false);
         }

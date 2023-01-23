@@ -19,7 +19,8 @@ public class Storage {
     private String address;
     @Column (name="status") // Free / Leased / For Lease 0/1/2
     private Integer status;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "ownerId")
     private Owner owner;
 
     public Storage( Double width, Double length, Double height, String address, Integer status,Owner owner) {
@@ -53,6 +54,46 @@ public class Storage {
 
     public void setOwner(Owner owner) {
         this.owner = owner;
+    }
+
+    public Double getWidth() {
+        return width;
+    }
+
+    public void setWidth(Double width) {
+        this.width = width;
+    }
+
+    public Double getLength() {
+        return length;
+    }
+
+    public void setLength(Double length) {
+        this.length = length;
+    }
+
+    public Double getHeight() {
+        return height;
+    }
+
+    public void setHeight(Double height) {
+        this.height = height;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     @Override
