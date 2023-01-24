@@ -1,6 +1,7 @@
 package com.storage.storagedb.Main;
 
 import com.storage.storagedb.DAO.NotificationDAO;
+import com.storage.storagedb.DAO.StatusDAO;
 import com.storage.storagedb.DAO.StorageDAO;
 import com.storage.storagedb.DAO.UserDAO;
 import com.storage.storagedb.Entity.*;
@@ -11,36 +12,62 @@ public class Main {
     {
         UserDAO user = new UserDAO();
         StorageDAO storage = new StorageDAO();
-        user.openSession();
+        StatusDAO status = new StatusDAO();
         NotificationDAO notifications= new NotificationDAO();
 
-        User user1= user.get(5);
-        user.close();
+        user.openSession();
+        storage.openSession();
+        status.openSession();
         notifications.openSession();
-        Notification n = new Notification(user1,"Putkimaini");
+
+
+        //Seeding with status rows
+        var status1 = new Status("Free");
+        var status2 = new Status("Leased");
+        var status3 = new Status("For lease");
+
+        status.save(status1);
+        status.save(status2);
+        status.save(status3);
+
+        //Seed Admin
+        //Pass: admin1234
+        var passAdmin = "ac9689e2272427085e35b9d3e3e8bed88cb3434828b43b86fc0596cad4c6e270";
+        Admin admin = new Admin("Daniel", "Zhekov", "daniel23", "daniel@abv.bg", "1234", "admin1234");
+        admin.setFirstLogin(false);
+
+        //Seed Agent
+        //Pass: agent1234
+        var passAgent = "6fd42aa949e5c54374638dd066e2017bb594b6d4899bbaeecf9dfbd0ceaa514f";
+        Agent agent = new Agent("Kris", "Mihalev", "mihalev64", "kris@abv.bg", "1234", 255d, "Google", "agent1234");
+        agent.setFirstLogin(false);
+
+        var passAgent2 = "6fd42aa949e5c54374638dd066e2017bb594b6d4899bbaeecf9dfbd0ceaa514f";
+        Agent agent2 = new Agent("Strahil", "Strahilov", "strahcho24", "strahil@abv.bg", "1234", 255d, "Oracle", "agent1234");
+        agent2.setFirstLogin(false);
+
+        //Seed Owner
+        //Pass: Ivan+1234
+        Owner owner = new Owner("Ivan", "Ivanov", "ivanov25", "kris@abv.bg", "1234", "owner1234");
+        owner.setFirstLogin(false);
+
+        Notification n = new Notification(agent,"Putkimaini");
+
+        Storage storage1 = new Storage(25.5, 25.5, 25.5, "Kur", 1, 4);
+        Storage storage2 = new Storage(25.5, 25.5, 25.5, "Kur", 1, 4);
+
+        storage1.getAgents().add(agent);
+        storage1.getAgents().add(agent2);
+
+        user.save(owner);
+        user.save(admin);
+        //user.save(agent);
+        storage.save(storage1);
+        storage.save(storage2);
         notifications.save(n);
         notifications.close();
-//        storage.openSession();
-//
-//        //admin1234
-//        var passAdmin = "ac9689e2272427085e35b9d3e3e8bed88cb3434828b43b86fc0596cad4c6e270";
-//        Admin admin = new Admin("Daniel", "Zhekov", "daniel23", "daniel@abv.bg", "1234", "admin");
-//        admin.setFirstLogin(false);
-//
-//        //admin1234
-//        var passAgent = "6fd42aa949e5c54374638dd066e2017bb594b6d4899bbaeecf9dfbd0ceaa514f";
-//        Agent agent = new Agent("Kris", "Mihalev", "mihalev64", "kris@abv.bg", "1234", 255d, "Google", "agent");
-//        agent.setFirstLogin(false);
-//
-//        Owner owner = new Owner("Ivan", "Ivanov", "ivanov25", "kris@abv.bg", "1234", "owner");
-//        owner.setFirstLogin(false);
-//
-//        Storage maikatidaeba = new Storage(25.5, 25.5, 25.5, "Kur", 2, owner);
-//
-//        user.save(owner);
-//        storage.save(maikatidaeba);
-//        user.save(admin);
-//        user.save(agent);
-//        user.close();
+        user.close();
+        storage.close();
+        status.close();
     }
 }

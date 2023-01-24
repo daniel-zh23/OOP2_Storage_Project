@@ -21,6 +21,7 @@
       <mapping class="com.storage.storagedb.Entity.Notification"/>
       <mapping class="com.storage.storagedb.Entity.Sales"/>
       <mapping class="com.storage.storagedb.Entity.Renter"/>
+      <mapping class="com.storage.storagedb.Entity.Status"/>
 
   </session-factory>
 </hibernate-configuration>

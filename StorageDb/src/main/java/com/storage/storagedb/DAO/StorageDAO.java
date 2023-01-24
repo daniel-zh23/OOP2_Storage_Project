@@ -29,24 +29,6 @@ public Stream<Storage> getAll()
                 .filter(s -> s.getOwner().getId() == id);
         return storages;
     }
-    @Override
-    public boolean save(Storage s)
-    {
-            executeInsideTransaction(session->session.persist(s));
-            return true;
-    }
-    @Override
-    public void delete(Storage s)
-    {
-        executeInsideTransaction(session->session.remove(s));
-    }
-    @Override
-    public void update(Storage s)
-    {
-        executeInsideTransaction(session->session.merge(s));
-    }
-
-
 
     public StorageDAO()
     {

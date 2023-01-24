@@ -79,23 +79,7 @@ public class NotificationDAO extends DAO<Notification>
         //query.setParameter("usr",user);
       //  return (List<Notification>) query.getResultList();
     }
-    @Override
-    public boolean save(Notification n)
-    {
-            executeInsideTransaction(session->session.persist(n));
-            return true;
 
-    }
-    @Override
-    public void delete(Notification n)
-    {
-        executeInsideTransaction(session->session.remove(n));
-    }
-    @Override
-    public void update(Notification n)
-    {
-        executeInsideTransaction(session->session.merge(n));
-    }
     public NotificationDAO()
     {
         super();

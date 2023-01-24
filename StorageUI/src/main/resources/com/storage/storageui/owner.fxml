@@ -37,7 +37,7 @@
             <VBox alignment="CENTER" prefHeight="277.0" prefWidth="134.0" spacing="20.0" style="-fx-background-color: white; -fx-border-color: grey;">
                <children>
                   <Button mnemonicParsing="false" text="Edit" />
-                  <Button mnemonicParsing="false" text="Delete" />
+                  <Button mnemonicParsing="false" onAction="#onDelete" text="Delete" />
                </children>
                <opaqueInsets>
                   <Insets />

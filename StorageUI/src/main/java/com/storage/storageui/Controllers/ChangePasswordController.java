@@ -1,10 +1,7 @@
 package com.storage.storageui.Controllers;
 
-import com.storage.storageBusiness.Services.AgentService;
-import com.storage.storageBusiness.Services.OwnerService;
 import com.storage.storageBusiness.Services.UserService;
 import com.storage.storageui.Common.ErrorMessages;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
@@ -36,7 +33,7 @@ public class ChangePasswordController {
             }
             return;
         }
-        errorMessage.setText(ErrorMessages.PasswordChangeErrorMessage);
+        errorMessage.setText(ErrorMessages.PasswordChange);
     }
 
     public void setServices(Scene scene, UserService userManager, String username) {

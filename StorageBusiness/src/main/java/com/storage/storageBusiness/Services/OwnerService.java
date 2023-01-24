@@ -33,7 +33,6 @@ public class OwnerService {
     public void createOwner(String fName, String lName, String username, String phone, String email) {
         _userDao.openSession();
         //TODO: Pass hash!
-
         String hashedPass = Hashing.sha256()
                 .hashString(fName + phone, StandardCharsets.UTF_8)
                 .toString();

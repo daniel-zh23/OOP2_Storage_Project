@@ -1,6 +1,10 @@
 package com.storage.storagedb.Entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "storage")
@@ -17,27 +21,63 @@ public class Storage {
     private Double height;
     @Column (name="address")
     private String address;
-    @Column (name="status") // Free / Leased / For Lease 0/1/2
-    private Integer status;
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "ownerId")
+
+    @Column (name="is_active")
+    private boolean isActive = true;
+
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Status.class)
+    @JoinColumn(name = "status_id", insertable = false, updatable = false) // Free / Leased / For Lease 0/1/2
+    private Status status;
+
+    @Column(name = "status_id")
+    private Integer statusId;
+
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Owner.class)
+    @JoinColumn(name = "owner_id", insertable = false, updatable = false)
     private Owner owner;
 
-    public Storage( Double width, Double length, Double height, String address, Integer status,Owner owner) {
+    @Column(name = "owner_id")
+    private Integer ownerId;
+
+    //@ManyToOne(fetch = FetchType.EAGER, targetEntity = Agent.class)
+    //@JoinColumn(name = "agent_id", insertable = false, updatable = false)
+    //private Agent agent;
+
+    //@Column(name = "agentId_id")
+    //private Integer agentId;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+    @JoinTable(
+            name = "agent_storage",
+            joinColumns = { @JoinColumn(name = "storage_id") },
+            inverseJoinColumns = { @JoinColumn(name = "agent_id") }
+    )
+    private Set<Agent> agents = new HashSet<>();
+
+    public Storage( Double width, Double length, Double height, String address, int status) {
         this.width = width;
         this.length = length;
         this.height = height;
         this.address = address;
-        this.status = status;
-        this.owner=owner;
+        this.statusId = status;
     }
+
+    public Storage( Double width, Double length, Double height, String address, int status, int owner) {
+        this(width, length, height, address, status);
+        this.ownerId = owner;
+    }
+
     public Storage()
     {
         this.width = 0.0;
         this.length = 0.0;
         this.height = 0.0;
         this.address = null;
-        this.status = 0;
+        this.status = null;
+    }
+
+    public Set<Agent> getAgents() {
+        return agents;
     }
 
     public Integer getId() {
@@ -88,12 +128,20 @@ public class Storage {
         this.address = address;
     }
 
-    public Integer getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public boolean getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
     }
 
     @Override
