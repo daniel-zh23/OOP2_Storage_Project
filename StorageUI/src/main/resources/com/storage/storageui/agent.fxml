@@ -13,7 +13,7 @@
     <children>
         <HBox alignment="CENTER_RIGHT" prefHeight="64.0" prefWidth="802.0" spacing="10.0" style="-fx-background-color: gray; -fx-padding: 10;">
             <children>
-            <ComboBox fx:id="notisCombo" prefWidth="150.0" promptText="Notifications" />
+            <ComboBox fx:id="notificationsCombo" onShowing="#onNotificationClick" prefWidth="150.0" promptText="Notifications" />
             <Button mnemonicParsing="false" text="Clear Notifications" visible="false" />
                 <Button fx:id="logoutBtn" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onLogout" text="Logout" />
             </children>

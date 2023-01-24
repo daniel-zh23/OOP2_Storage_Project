@@ -2,12 +2,16 @@ package com.storage.storageBusiness.Services;
 
 
 import com.google.common.hash.Hashing;
+import com.storage.storageBusiness.Models.NotificationModel;
 import com.storage.storageBusiness.Models.ResultLoginModel;
 import com.storage.storagedb.DAO.NotificationDAO;
 import com.storage.storagedb.DAO.UserDAO;
+import com.storage.storagedb.Entity.Notification;
 import com.storage.storagedb.Entity.User;
 
 import java.nio.charset.StandardCharsets;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class UserService {
     private final UserDAO _userDao;
@@ -73,6 +77,29 @@ public class UserService {
         user.setActive(false);
         _userDao.save(user);
         _userDao.close();
+    }
+    public List<NotificationModel> fetchNotificationsbyUserId(int id,boolean unreadOnly)
+    {
+        _notificationDao.openSession();
+         List<NotificationModel> notifications =_notificationDao.getByUserId(id,unreadOnly).stream()
+                 .map(n->new NotificationModel(n.getId(),n.getUserId(),n.getValue())).collect(Collectors.toList());
+        _notificationDao.close();
+        return notifications;
+    }
+    public void setNotificationReadStatus(List<NotificationModel> notifications) {
+        _notificationDao.openSession();
+        for (NotificationModel n : notifications) {
+            Notification notification = _notificationDao.get(n.getId());
+            notification.setRead(true);
+            _notificationDao.update(notification);
+        }
+        _notificationDao.close();
+    }
+    public void addNotification(int userId,String notificationBody)
+    {
+        _notificationDao.openSession();
+        _notificationDao.save(new Notification(_userDao.get(userId),notificationBody));
+        _notificationDao.close();
     }
 
 }

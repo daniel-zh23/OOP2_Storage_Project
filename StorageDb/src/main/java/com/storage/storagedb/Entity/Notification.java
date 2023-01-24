@@ -31,6 +31,11 @@ public class Notification {
     public void setValue(String value) {
         this.value = value;
     }
+
+    public Integer getId() {
+        return id;
+    }
+
     public User getUser(){return this.user;}
     public Integer getUserId(){return this.user.getId();}
 

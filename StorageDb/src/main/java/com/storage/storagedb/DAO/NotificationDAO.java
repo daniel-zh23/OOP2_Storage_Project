@@ -39,23 +39,20 @@ public class NotificationDAO extends DAO<Notification>
 //        Query<Notification> query = session.createQuery(cq);
 //        return query.getResultList();
     }
-    public Stream<Notification>getByUserId(int id,boolean unreadOnly)
+    public List<Notification>getByUserId(int id,boolean unreadOnly)
     {
         try {
            var notifications= session.createQuery("Select n from Notification n",Notification.class).stream()
-                    .filter(n->n.getUserId().equals(id));
-            if(unreadOnly)
-            {
-                notifications.filter(n->n.getRead()==false);
-            }
-           return notifications;
+                    .filter(n->n.getUserId()==id).filter(n->!n.getRead());
+           return notifications.toList();
         }
         catch(Exception e)
         {
+            System.out.println(e.getMessage());
             return null;
         }
     }
-    public Stream<Notification> getByUser(User user,boolean unreadOnly)
+    public List<Notification> getByUser(User user,boolean unreadOnly)
     {
         try
         {
@@ -65,7 +62,7 @@ public class NotificationDAO extends DAO<Notification>
             {
                 notifications.filter(n->n.getRead()==false);
             }
-            return notifications;
+            return notifications.toList();
         }
         catch(Exception e)
         {
