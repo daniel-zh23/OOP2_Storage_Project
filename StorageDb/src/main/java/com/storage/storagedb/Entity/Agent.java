@@ -2,7 +2,9 @@ package com.storage.storagedb.Entity;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "agent")
@@ -16,8 +18,11 @@ public class Agent extends User {
     @Column (name="rating")
     private Double rating; // score 0-5
 
-    @OneToMany(mappedBy = "agent")
-    private List<Storage> storages = new ArrayList<>();
+    //@OneToMany(mappedBy = "agent")
+    //private List<Storage> storages = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "agents", fetch = FetchType.EAGER)
+    private Set<Storage> storages = new HashSet<>();
 
     public Double getRating() {
         return rating;
@@ -64,11 +69,11 @@ public class Agent extends User {
         this.company = company;
     }
 
-    public List<Storage> getStorages() {
+    public Set<Storage> getStorages() {
         return storages;
     }
 
-    public void setStorages(List<Storage> storages) {
+    public void setStorages(Set<Storage> storages) {
         this.storages = storages;
     }
 }

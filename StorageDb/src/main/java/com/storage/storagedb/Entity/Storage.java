@@ -1,6 +1,10 @@
 package com.storage.storagedb.Entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "storage")
@@ -18,6 +22,9 @@ public class Storage {
     @Column (name="address")
     private String address;
 
+    @Column (name="is_active")
+    private boolean isActive = true;
+
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Status.class)
     @JoinColumn(name = "status_id", insertable = false, updatable = false) // Free / Leased / For Lease 0/1/2
     private Status status;
@@ -32,12 +39,20 @@ public class Storage {
     @Column(name = "owner_id")
     private Integer ownerId;
 
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Agent.class)
-    @JoinColumn(name = "agent_id", insertable = false, updatable = false)
-    private Agent agent;
+    //@ManyToOne(fetch = FetchType.EAGER, targetEntity = Agent.class)
+    //@JoinColumn(name = "agent_id", insertable = false, updatable = false)
+    //private Agent agent;
 
-    @Column(name = "agentId_id")
-    private Integer agentId;
+    //@Column(name = "agentId_id")
+    //private Integer agentId;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+    @JoinTable(
+            name = "agent_storage",
+            joinColumns = { @JoinColumn(name = "storage_id") },
+            inverseJoinColumns = { @JoinColumn(name = "agent_id") }
+    )
+    private Set<Agent> agents = new HashSet<>();
 
     public Storage( Double width, Double length, Double height, String address, int status) {
         this.width = width;
@@ -59,6 +74,10 @@ public class Storage {
         this.height = 0.0;
         this.address = null;
         this.status = null;
+    }
+
+    public Set<Agent> getAgents() {
+        return agents;
     }
 
     public Integer getId() {
@@ -115,6 +134,14 @@ public class Storage {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public boolean getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
     }
 
     @Override

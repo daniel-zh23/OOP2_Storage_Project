@@ -37,17 +37,26 @@ public class Main {
         Agent agent = new Agent("Kris", "Mihalev", "mihalev64", "kris@abv.bg", "1234", 255d, "Google", "agent1234");
         agent.setFirstLogin(false);
 
+        var passAgent2 = "6fd42aa949e5c54374638dd066e2017bb594b6d4899bbaeecf9dfbd0ceaa514f";
+        Agent agent2 = new Agent("Strahil", "Strahilov", "strahcho24", "strahil@abv.bg", "1234", 255d, "Oracle", "agent1234");
+        agent2.setFirstLogin(false);
+
         //Seed Owner
         //Pass: Ivan+1234
         Owner owner = new Owner("Ivan", "Ivanov", "ivanov25", "kris@abv.bg", "1234", "owner1234");
         owner.setFirstLogin(false);
 
-        Storage maikatidaeba = new Storage(25.5, 25.5, 25.5, "Kur", 1, 4);
+        Storage storage1 = new Storage(25.5, 25.5, 25.5, "Kur", 1, 4);
+        Storage storage2 = new Storage(25.5, 25.5, 25.5, "Kur", 1, 4);
+
+        storage1.getAgents().add(agent);
+        storage1.getAgents().add(agent2);
 
         user.save(owner);
-        storage.save(maikatidaeba);
         user.save(admin);
-        user.save(agent);
+        //user.save(agent);
+        storage.save(storage1);
+        storage.save(storage2);
         user.close();
         storage.close();
         status.close();

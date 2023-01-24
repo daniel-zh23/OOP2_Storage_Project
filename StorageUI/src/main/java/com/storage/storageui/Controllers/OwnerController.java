@@ -1,6 +1,7 @@
 package com.storage.storageui.Controllers;
 
 import com.storage.storageBusiness.Models.AgentViewModel;
+import com.storage.storageBusiness.Models.Contracts.UserViewModel;
 import com.storage.storageBusiness.Models.StorageViewModel;
 import com.storage.storageBusiness.Services.AgentService;
 import com.storage.storageBusiness.Services.OwnerService;
@@ -63,7 +64,7 @@ public class OwnerController extends UserController {
     public void onMyStorages() {
         var storages = _storageService.getAllByOwnerId(ownerId);
 
-        tableBox.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        tableBox.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
         TableColumn<StorageViewModel, String> address = new TableColumn<>("Address");
         address.setCellValueFactory(cellData -> cellData.getValue().addressProperty());
         TableColumn<StorageViewModel, String> status = new TableColumn<>("Status");
@@ -74,9 +75,11 @@ public class OwnerController extends UserController {
         width.setCellValueFactory(cellData -> cellData.getValue().widthProperty().asObject());
         TableColumn<StorageViewModel, Double> length = new TableColumn<>("Length");
         length.setCellValueFactory(cellData -> cellData.getValue().lengthProperty().asObject());
+        TableColumn<StorageViewModel, String> agentInfo = new TableColumn<>("Agent");
+        agentInfo.setCellValueFactory(cellData -> cellData.getValue().agentsInfoProperty());
 
         tableBox.setItems(FXCollections.observableArrayList(storages));
-        tableBox.getColumns().setAll(address, status, height, width, length);
+        tableBox.getColumns().setAll(address, status, height, width, length, agentInfo);
     }
 
     public void onViewAgents(ActionEvent actionEvent) {
@@ -93,6 +96,10 @@ public class OwnerController extends UserController {
         window.setScene(scene);
     }
 
-    public void onDelete(ActionEvent actionEvent) {
+    public void onDelete() {
+        var data = (UserViewModel) tableBox.getSelectionModel().getSelectedItem();
+        if (data instanceof StorageViewModel && _storageService.checkId(data.getId())){
+            _storageService.deleteById(data.getId());
+        }
     }
 }
