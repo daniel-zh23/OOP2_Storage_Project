@@ -3,6 +3,7 @@ package com.storage.storageBusiness.Services;
 
 import com.google.common.hash.Hashing;
 import com.storage.storageBusiness.Models.ResultLoginModel;
+import com.storage.storagedb.DAO.NotificationDAO;
 import com.storage.storagedb.DAO.UserDAO;
 import com.storage.storagedb.Entity.User;
 
@@ -10,9 +11,11 @@ import java.nio.charset.StandardCharsets;
 
 public class UserService {
     private final UserDAO _userDao;
+    private final NotificationDAO _notificationDao;
 
     public UserService(){
         _userDao = new UserDAO();
+        _notificationDao = new NotificationDAO();
     }
 
 
@@ -71,4 +74,5 @@ public class UserService {
         _userDao.save(user);
         _userDao.close();
     }
+
 }

@@ -22,6 +22,14 @@ public class NotificationDAO extends DAO<Notification>
     public Stream<Notification> getAll()
     {
         //TODO: getAll notificationDAO
+        try {
+            var notifications = session.createQuery("Select n from Notification n",Notification.class).stream();
+            return notifications;
+        }
+        catch(Exception e)
+        {
+            return null;
+        }
 //        //Query query = session.createQuery("Select n from Notification n");
 //        //return (List<Notification>) query.getResultList();
 //        CriteriaBuilder cb = session.getCriteriaBuilder();
@@ -30,20 +38,49 @@ public class NotificationDAO extends DAO<Notification>
 //        cq.select(root);
 //        Query<Notification> query = session.createQuery(cq);
 //        return query.getResultList();
-        return null;
     }
-    public List<Notification> getByUser(User user)
+    public Stream<Notification>getByUserId(int id,boolean unreadOnly)
     {
-        CriteriaBuilder cb = session.getCriteriaBuilder();
-        CriteriaQuery<Notification> cq = cb.createQuery(Notification.class);
-        Root<Notification> root = cq.from(Notification.class);
-        cq.select(root).where(cb.equal(root.get("user"),user));
-        Query<Notification>  query = session.createQuery(cq);
+        try {
+           var notifications= session.createQuery("Select n from Notification n",Notification.class).stream()
+                    .filter(n->n.getUserId().equals(id));
+            if(unreadOnly)
+            {
+                notifications.filter(n->n.getRead()==false);
+            }
+           return notifications;
+        }
+        catch(Exception e)
+        {
+            return null;
+        }
+    }
+    public Stream<Notification> getByUser(User user,boolean unreadOnly)
+    {
+        try
+        {
+            var notifications = session.createQuery("Select n from Notification n",Notification.class).stream()
+                    .filter(n->n.getUser().equals(user));
+            if(unreadOnly)
+            {
+                notifications.filter(n->n.getRead()==false);
+            }
+            return notifications;
+        }
+        catch(Exception e)
+        {
+            return null;
+        }
+//        CriteriaBuilder cb = session.getCriteriaBuilder();
+//        CriteriaQuery<Notification> cq = cb.createQuery(Notification.class);
+//        Root<Notification> root = cq.from(Notification.class);
+//        cq.select(root).where(cb.equal(root.get("user"),user));
+//        Query<Notification>  query = session.createQuery(cq);
 
 
         //Query query = session.createQuery("Select n from Notification n where  like :usr");
         //query.setParameter("usr",user);
-        return (List<Notification>) query.getResultList();
+      //  return (List<Notification>) query.getResultList();
     }
     @Override
     public boolean save(Notification n)

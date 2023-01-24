@@ -8,7 +8,7 @@ public class Notification {
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="user_id", nullable = false)
     private User user;
     @Column(name="isread")
@@ -24,13 +24,15 @@ public class Notification {
         isRead = read;
     }
 
-    public boolean isRead() {
+    public boolean getRead() {
         return isRead;
     }
 
     public void setValue(String value) {
         this.value = value;
     }
+    public User getUser(){return this.user;}
+    public Integer getUserId(){return this.user.getId();}
 
 
     @Override
