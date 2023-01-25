@@ -51,20 +51,26 @@ public class Main {
         Owner owner = new Owner("Ivan", "Ivanov", "ivanov25", "kris@abv.bg", "1234", "owner1234");
         owner.setFirstLogin(false);
 
-        Notification n = new Notification(agent,"Putkimaini");
+        Notification n = new Notification(agent,"NotificationTest1");
+        Notification n2 = new Notification(agent,"NotificationTest2");
 
         Storage storage1 = new Storage(25.5, 25.5, 25.5, "Kur", 1, 4);
         Storage storage2 = new Storage(25.5, 25.5, 25.5, "Kur", 1, 4);
 
-        storage1.getAgents().add(agent);
-        storage1.getAgents().add(agent2);
+
 
         user.save(owner);
         user.save(admin);
-        //user.save(agent);
+        user.save(agent);
         storage.save(storage1);
         storage.save(storage2);
+        storage1.getAgents().add(agent);
+        storage1.getAgents().add(agent2);
+
+        storage.update(storage1);
+
         notifications.save(n);
+        notifications.save(n2);
         notifications.close();
         user.close();
         storage.close();

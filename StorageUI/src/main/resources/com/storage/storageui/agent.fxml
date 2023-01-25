@@ -2,8 +2,8 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.HBox?>
@@ -13,8 +13,8 @@
     <children>
         <HBox alignment="CENTER_RIGHT" prefHeight="64.0" prefWidth="802.0" spacing="10.0" style="-fx-background-color: gray; -fx-padding: 10;">
             <children>
-            <ComboBox fx:id="notificationsCombo" onShowing="#onNotificationClick" prefWidth="150.0" promptText="Notifications" />
-            <Button mnemonicParsing="false" text="Clear Notifications" visible="false" />
+            <MenuButton fx:id="notificationsCombo2" mnemonicParsing="false" text="Notifications" />
+            <Button fx:id="clearNotificationsBtn" mnemonicParsing="false" onAction="#onClearNotifications" text="Clear Notifications" visible="false" />
                 <Button fx:id="logoutBtn" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onLogout" text="Logout" />
             </children>
         </HBox>

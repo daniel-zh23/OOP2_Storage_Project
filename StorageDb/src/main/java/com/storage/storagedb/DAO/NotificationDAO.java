@@ -30,14 +30,6 @@ public class NotificationDAO extends DAO<Notification>
         {
             return null;
         }
-//        //Query query = session.createQuery("Select n from Notification n");
-//        //return (List<Notification>) query.getResultList();
-//        CriteriaBuilder cb = session.getCriteriaBuilder();
-//        CriteriaQuery<Notification> cq =cb.createQuery(Notification.class);
-//        Root<Notification> root = cq.from(Notification.class);
-//        cq.select(root);
-//        Query<Notification> query = session.createQuery(cq);
-//        return query.getResultList();
     }
     public List<Notification>getByUserId(int id,boolean unreadOnly)
     {
