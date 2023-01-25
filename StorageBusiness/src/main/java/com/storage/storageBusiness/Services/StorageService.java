@@ -90,4 +90,25 @@ public class StorageService {
 
 
     }
+    public List<StorageViewModel> getAllByAgentId(int id)
+    {
+        _userDao.openSession();
+       Agent agent = (Agent)_userDao.get(id);
+       _userDao.close();
+        List<StorageViewModel> storages = agent.getStorages().stream()
+                .map(ss -> new StorageViewModel(
+                        ss.getId(),
+                        ss.getAddress(),
+                        ss.getStatus().getName(),
+                        ss.getHeight(),
+                        ss.getWidth(),
+                        ss.getLength(),
+                        ss.getAgents().isEmpty()
+                                ? "None"
+                                : String.join("\n", ss.getAgents().stream()
+                                .map(a -> String.format("%s %s - %s", a.getFirstName(), a.getLastName(), a.getPhone()))
+                                .collect(Collectors.toList()))))
+                .collect(Collectors.toList());
+        return storages;
+    }
 }

@@ -63,26 +63,8 @@ private StorageTable storageTable = new StorageTable();
     }
     @FXML
     protected void onMyStorages() {
-        //var storages = _storageService.getAllByOwnerId(ownerId);
         storageTable.feedStorages(_storageService.getAllByOwnerId(ownerId));
         storageTable.generateTable(tableBox,true);
-
-//        tableBox.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
-//        TableColumn<StorageViewModel, String> address = new TableColumn<>("Address");
-//        address.setCellValueFactory(cellData -> cellData.getValue().addressProperty());
-//        TableColumn<StorageViewModel, String> status = new TableColumn<>("Status");
-//        status.setCellValueFactory(cellData -> cellData.getValue().statusProperty());
-//        TableColumn<StorageViewModel, Double> height = new TableColumn<>("Height");
-//        height.setCellValueFactory(cellData -> cellData.getValue().heightProperty().asObject());
-//        TableColumn<StorageViewModel, Double> width = new TableColumn<>("Width");
-//        width.setCellValueFactory(cellData -> cellData.getValue().widthProperty().asObject());
-//        TableColumn<StorageViewModel, Double> length = new TableColumn<>("Length");
-//        length.setCellValueFactory(cellData -> cellData.getValue().lengthProperty().asObject());
-//        TableColumn<StorageViewModel, String> agentInfo = new TableColumn<>("Agent");
-//        agentInfo.setCellValueFactory(cellData -> cellData.getValue().agentsInfoProperty());
-//
-//        tableBox.setItems(FXCollections.observableArrayList(storages));
-//        tableBox.getColumns().setAll(address, status, height, width, length, agentInfo);
     }
     @FXML
     protected void onViewAgents() throws Exception {

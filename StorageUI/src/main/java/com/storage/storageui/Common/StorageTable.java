@@ -68,10 +68,18 @@ public class StorageTable {
             }
         });
         //agents
-        TableColumn<StorageViewModel,String> colAgents = new TableColumn<>("Agent");
-        colAgents.setCellValueFactory(cellData->cellData.getValue().agentsInfoProperty());
-        table.setItems(FXCollections.observableArrayList(storages));
-        table.getColumns().setAll(colAddress,colStatus,colHeight,colWidth,colLength,colAgents);
+        if(isEditable) {
+            TableColumn<StorageViewModel, String> colAgents = new TableColumn<>("Agent");
+            colAgents.setCellValueFactory(cellData -> cellData.getValue().agentsInfoProperty());
+            table.setItems(FXCollections.observableArrayList(storages));
+            table.getColumns().setAll(colAddress, colStatus, colHeight, colWidth, colLength,colAgents);
+        }
+        else {
+            table.setItems(FXCollections.observableArrayList(storages));
+            table.getColumns().setAll(colAddress, colStatus, colHeight, colWidth, colLength);
+        }
+
+
     }
     public void feedStorages(List<StorageViewModel>storages)
     {

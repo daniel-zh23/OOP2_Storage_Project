@@ -60,16 +60,6 @@ public class NotificationDAO extends DAO<Notification>
         {
             return null;
         }
-//        CriteriaBuilder cb = session.getCriteriaBuilder();
-//        CriteriaQuery<Notification> cq = cb.createQuery(Notification.class);
-//        Root<Notification> root = cq.from(Notification.class);
-//        cq.select(root).where(cb.equal(root.get("user"),user));
-//        Query<Notification>  query = session.createQuery(cq);
-
-
-        //Query query = session.createQuery("Select n from Notification n where  like :usr");
-        //query.setParameter("usr",user);
-      //  return (List<Notification>) query.getResultList();
     }
 
     public NotificationDAO()

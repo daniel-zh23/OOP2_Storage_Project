@@ -13,7 +13,7 @@
    <children>
       <HBox alignment="CENTER_RIGHT" prefHeight="64.0" prefWidth="802.0" spacing="10.0" style="-fx-background-color: gray; -fx-padding: 10;">
          <children>
-            <HBox alignment="CENTER_LEFT" prefHeight="72.0" prefWidth="235.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="72.0" prefWidth="129.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Owner" wrappingWidth="105.42626953125">
                      <font>
@@ -22,13 +22,14 @@
                   </Text>
                </children>
             </HBox>
-            <VBox prefHeight="72.0" prefWidth="261.0">
+            <VBox prefHeight="72.0" prefWidth="190.0">
                <children>
                   <Button mnemonicParsing="false" onAction="#onMyStorages" text="View my storages" />
                   <Button fx:id="viewAgentsButton" mnemonicParsing="false" onAction="#onViewAgents" prefHeight="24.0" prefWidth="134.0" text="View Agents" />
                   <Button mnemonicParsing="false" onAction="#onAddStorage" prefHeight="24.0" prefWidth="134.0" text="Add storage" />
                </children>
             </VBox>
+            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="106.0" text="View Contracts" textAlignment="CENTER" wrapText="true" />
             <ComboBox prefHeight="24.0" prefWidth="192.0" promptText="Notifications" />
             <Button fx:id="clearNotifButton" mnemonicParsing="false" onAction="#onClearNotifications" prefHeight="44.0" prefWidth="147.0" text="Clear Notifications" textAlignment="CENTER" wrapText="true" />
             <Button fx:id="logoutBtn" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onLogout" prefHeight="24.0" prefWidth="103.0" text="Logout" />

@@ -29,11 +29,12 @@ public class NotificationsTask extends TimerTask {
     @Override
     public void run() {
         List<NotificationModel> notifications =_userService.fetchNotificationsbyUserId(_agentId,false);
-        if (notifications.size() != 0){
+        if (notifications.size() != 0) {
             clearNotificationsBtn.setVisible(true);
-        } else {
-            notificationsCombo2.setText("No notifications");
         }
+//        } else {
+//            notificationsCombo2.setText("No notifications");
+//        }
         notificationsCombo2.getItems().setAll(notifications.stream().map(n -> new MenuItem(n.getValue())).toList());
     }
 }

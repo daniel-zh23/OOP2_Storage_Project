@@ -1,10 +1,12 @@
 package com.storage.storageui.Controllers;
 
 import com.storage.storageBusiness.Models.NotificationModel;
+import com.storage.storageBusiness.Models.StorageViewModel;
 import com.storage.storageBusiness.Services.AgentService;
 import com.storage.storageBusiness.Services.OwnerService;
 import com.storage.storageBusiness.Services.StorageService;
 import com.storage.storageBusiness.Services.UserService;
+import com.storage.storageui.Common.StorageTable;
 import com.storage.storageui.Controllers.Contracts.UserController;
 import com.storage.storageui.Controllers.Extensions.NotificationsTask;
 import javafx.animation.Timeline;
@@ -40,6 +42,12 @@ public class AgentController extends UserController {
 
     @FXML
     private Button clearNotificationsBtn;
+    @FXML
+    private Button loadStorageButton;
+    @FXML
+    private TableView tableBox;
+    private StorageTable storageTable = new StorageTable();
+    private List<StorageViewModel>storages;
 
     @Override
     public void setServices(AgentService agentService, OwnerService ownerService, UserService userService) {
@@ -50,6 +58,7 @@ public class AgentController extends UserController {
 //        if(_storageService == null){
 //            _storageService = userService;
 //        }
+        _storageService= new StorageService();
     }
 
     public void setAgentId(int id) {
@@ -88,5 +97,11 @@ public class AgentController extends UserController {
         timer.cancel();
         timer.purge();
         executor.shutdown();
+    }
+    @FXML
+    private void onLoadStorage()
+    {
+        storageTable.feedStorages(_storageService.getAllByAgentId(_agentId));
+        storageTable.generateTable(tableBox,false);
     }
 }
