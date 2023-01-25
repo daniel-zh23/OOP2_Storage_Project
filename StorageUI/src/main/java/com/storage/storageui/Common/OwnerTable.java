@@ -15,10 +15,10 @@ public class OwnerTable {
     private List<OwnerViewModel> owners;
     public OwnerTable(List<OwnerViewModel> owners){this.owners=owners;}
     public OwnerTable(){this.owners=null;}
-    public void  generateTable(TableView table)
+    public void  generateTable(TableView table,boolean isEditable)
     {
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-        table.setEditable(true);
+        table.setEditable(isEditable);
         //Fist name
         TableColumn colFirstName = new TableColumn("First Name");
         colFirstName.setCellValueFactory(new PropertyValueFactory<OwnerViewModel,String>("firstName"));

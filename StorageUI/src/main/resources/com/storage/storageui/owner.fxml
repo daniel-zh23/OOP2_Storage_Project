@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -12,7 +13,7 @@
    <children>
       <HBox alignment="CENTER_RIGHT" prefHeight="64.0" prefWidth="802.0" spacing="10.0" style="-fx-background-color: gray; -fx-padding: 10;">
          <children>
-            <HBox alignment="CENTER_LEFT" prefHeight="44.0" prefWidth="329.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="72.0" prefWidth="235.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Owner" wrappingWidth="105.42626953125">
                      <font>
@@ -21,14 +22,16 @@
                   </Text>
                </children>
             </HBox>
-            <HBox alignment="CENTER_RIGHT" prefHeight="44.0" prefWidth="454.0" spacing="10.0">
+            <VBox prefHeight="72.0" prefWidth="261.0">
                <children>
                   <Button mnemonicParsing="false" onAction="#onMyStorages" text="View my storages" />
-                  <Button mnemonicParsing="false" onAction="#onViewAgents" text="View Agents" />
-                  <Button mnemonicParsing="false" onAction="#onAddStorage" text="Add storage" />
-                  <Button fx:id="logoutBtn" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onLogout" text="Logout" />
+                  <Button fx:id="viewAgentsButton" mnemonicParsing="false" onAction="#onViewAgents" prefHeight="24.0" prefWidth="134.0" text="View Agents" />
+                  <Button mnemonicParsing="false" onAction="#onAddStorage" prefHeight="24.0" prefWidth="134.0" text="Add storage" />
                </children>
-            </HBox>
+            </VBox>
+            <ComboBox prefHeight="24.0" prefWidth="192.0" promptText="Notifications" />
+            <Button fx:id="clearNotifButton" mnemonicParsing="false" onAction="#onClearNotifications" prefHeight="44.0" prefWidth="147.0" text="Clear Notifications" textAlignment="CENTER" wrapText="true" />
+            <Button fx:id="logoutBtn" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onLogout" prefHeight="24.0" prefWidth="103.0" text="Logout" />
          </children>
       </HBox>
       <HBox fx:id="horizontalBox" alignment="TOP_RIGHT" prefHeight="277.0" prefWidth="706.0">
@@ -36,8 +39,10 @@
             <TableView fx:id="tableBox" prefHeight="198.0" prefWidth="675.0" />
             <VBox alignment="CENTER" prefHeight="277.0" prefWidth="134.0" spacing="20.0" style="-fx-background-color: white; -fx-border-color: grey;">
                <children>
-                  <Button mnemonicParsing="false" text="Edit" />
-                  <Button mnemonicParsing="false" onAction="#onDelete" text="Delete" />
+                  <Button mnemonicParsing="false" onAction="#onApply" text="Apply Changes" />
+                  <Button mnemonicParsing="false" onAction="#onDiscard" text="Discard changes" />
+                  <Button mnemonicParsing="false" onAction="#onDelete" text="Delete Highlighted" textAlignment="CENTER" wrapText="true" />
+                  <Button mnemonicParsing="false" onAction="#onAssignAgent" text="Assign Agent on Highlighted" textAlignment="CENTER" wrapText="true" />
                </children>
                <opaqueInsets>
                   <Insets />

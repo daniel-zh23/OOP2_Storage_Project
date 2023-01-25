@@ -78,6 +78,26 @@ public class StorageViewModel extends UserViewModel {
         return length;
     }
 
+    public void setAddress(String address) {
+        this.address.set(address);
+    }
+
+    public void setStatus(String status) {
+        this.status.set(status);
+    }
+
+    public void setHeight(double height) {
+        this.height.set(height);
+    }
+
+    public void setWidth(double width) {
+        this.width.set(width);
+    }
+
+    public void setLength(double length) {
+        this.length.set(length);
+    }
+
     public void setAgentsInfo(String agentsInfo) {
         this.agentsInfo.set(agentsInfo);
     }

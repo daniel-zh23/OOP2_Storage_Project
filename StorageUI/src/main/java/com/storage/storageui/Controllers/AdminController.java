@@ -91,11 +91,11 @@ public class AdminController extends UserController {
     public void onApply(){
         if(table_toggle) {
             _ownerService.updateOwners(ownerTable.retrieveOwners());
-            ownerTable.generateTable(tableBox);
+            ownerTable.generateTable(tableBox,true);
         }
         else {
             _agentService.updateAgents(agentTable.retrieveAgents());
-            agentTable.generateTable(tableBox);
+            agentTable.generateTable(tableBox,true);
         }
     }
     @FXML
@@ -103,11 +103,11 @@ public class AdminController extends UserController {
     {
         if(table_toggle) {
             ownerTable.feedOwners(_ownerService.getOwners());
-            ownerTable.generateTable(tableBox);
+            ownerTable.generateTable(tableBox,true);
         }
         else {
             agentTable.feedAgents(_agentService.getAgents());
-            agentTable.generateTable(tableBox);
+            agentTable.generateTable(tableBox,true);
         }
     }
     @FXML
@@ -124,10 +124,10 @@ public class AdminController extends UserController {
     private void  loadTable() {
         if (table_toggle) {
             ownerTable.feedOwners(_ownerService.getOwners());
-            ownerTable.generateTable(tableBox);
+            ownerTable.generateTable(tableBox,true);
         } else {
             agentTable.feedAgents(_agentService.getAgents());
-            agentTable.generateTable(tableBox);
+            agentTable.generateTable(tableBox,true);
         }
     }
 }

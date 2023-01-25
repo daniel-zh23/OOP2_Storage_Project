@@ -1,8 +1,10 @@
 package com.storage.storageBusiness.Services;
 
+import com.storage.storageBusiness.Models.AgentViewModel;
 import com.storage.storageBusiness.Models.StorageViewModel;
 import com.storage.storagedb.DAO.StorageDAO;
 import com.storage.storagedb.DAO.UserDAO;
+import com.storage.storagedb.Entity.Agent;
 import com.storage.storagedb.Entity.Storage;
 
 import java.util.ArrayList;
@@ -15,6 +17,7 @@ public class StorageService {
 
     public StorageService() {
         _storageDao = new StorageDAO();
+        _userDao = new UserDAO();
     }
 
     public List<StorageViewModel> getAllByOwnerId(int id){
@@ -60,5 +63,31 @@ public class StorageService {
         storage.setIsActive(false);
         _storageDao.save(storage);
         _storageDao.close();
+    }
+    public void updateStorages(List<StorageViewModel>storages)
+    {
+        _storageDao.openSession();
+        for (StorageViewModel s:storages) {
+            Storage storage =_storageDao.get(s.getId());
+            storage.setAddress(s.getAddress());
+            storage.setHeight(s.getHeight());
+            storage.setLength(s.getLength());
+            storage.setWidth(s.getWidth());
+            _storageDao.update(storage);
+        }
+        _storageDao.close();
+    }
+    public void assignAgentToStorage(StorageViewModel storage, AgentViewModel agent)
+    {
+        _storageDao.openSession();
+        _userDao.openSession();
+        Agent a =(Agent)_userDao.get(agent.getId());
+        Storage s = _storageDao.get(storage.getId());
+        s.getAgents().add(a);
+        _storageDao.update(s);
+        _storageDao.close();
+        _userDao.close();
+
+
     }
 }

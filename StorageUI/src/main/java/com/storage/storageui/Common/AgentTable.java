@@ -26,16 +26,10 @@ public class AgentTable {
         this.agents=agents;
     }
     public AgentTable() {this.agents=null;}
-    public void generateTable(TableView table)
+    public void generateTable(TableView table,boolean isEditable)
     {
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-        table.setEditable(true);
-//        Callback<TableColumn, TableCell> cellFactory = new Callback<TableColumn, TableCell>() {
-//            @Override
-//            public TableCell call(TableColumn tableColumn) {
-//                return null;
-//            }
-//        };
+        table.setEditable(isEditable);
         //Fist name
         TableColumn colFirstName = new TableColumn("First Name");
         colFirstName.setCellValueFactory(new PropertyValueFactory<AgentViewModel,String>("firstName"));
