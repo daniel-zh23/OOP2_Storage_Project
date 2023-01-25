@@ -106,5 +106,6 @@ public class LoginController {
         var agentController = (AgentController) controller;
         agentController.setAgentId(id);
         agentController.setServices(new AgentService(), new OwnerService(), _userService);
+        agentController.startNotificationService();
     }
 }

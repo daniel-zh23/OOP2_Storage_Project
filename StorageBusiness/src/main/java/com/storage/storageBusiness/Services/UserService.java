@@ -87,12 +87,16 @@ public class UserService {
         return notifications;
     }
     public void setNotificationReadStatus(List<NotificationModel> notifications) {
+        var ids = notifications.stream().map(n -> n.getId()).toList();
         _notificationDao.openSession();
-        for (NotificationModel n : notifications) {
-            Notification notification = _notificationDao.get(n.getId());
-            notification.setRead(true);
-            _notificationDao.update(notification);
-        }
+        var result = _notificationDao.getAll()
+                .filter(n -> ids.stream().anyMatch(i -> i == n.getId()))
+                .collect(Collectors.toList());
+        result.forEach(n -> {
+            n.setRead(true);
+            _notificationDao.update(n);
+
+        });
         _notificationDao.close();
     }
     public void addNotification(int userId,String notificationBody)
