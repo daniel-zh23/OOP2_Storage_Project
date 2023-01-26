@@ -24,6 +24,13 @@ public class StorageService {
         _notificationService = notificationService;
     }
 
+    public int getOwnerId(int id){
+        _storageDao.openSession();
+        var result = _storageDao.get(id).getOwner().getId();
+        _storageDao.close();
+        return result;
+    }
+
     public List<StorageViewModel> getAllByOwnerId(int id){
         _storageDao.openSession();
         var storagesRaw = _storageDao.getByOwnerId(id)

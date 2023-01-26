@@ -56,7 +56,7 @@ public class Main {
         Notification n3 = new Notification(4,"NotificationTest1");
 
         Storage storage1 = new Storage(25.5, 25.5, 25.5, "Kur", 1, 4);
-        Storage storage2 = new Storage(25.5, 25.5, 25.5, "Kur", 1, 4);
+        Storage storage2 = new Storage(25.5, 25.5, 25.5, "Kur2", 1, 4);
 
 
 
