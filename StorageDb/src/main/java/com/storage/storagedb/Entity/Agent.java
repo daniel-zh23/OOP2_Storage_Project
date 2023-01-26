@@ -18,8 +18,6 @@ public class Agent extends User {
     @Column (name="rating")
     private Double rating; // score 0-5
 
-    //@OneToMany(mappedBy = "agent")
-    //private List<Storage> storages = new ArrayList<>();
 
     @ManyToMany(mappedBy = "agents", fetch = FetchType.EAGER)
     private Set<Storage> storages = new HashSet<>();

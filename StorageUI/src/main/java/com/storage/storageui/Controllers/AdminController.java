@@ -29,7 +29,6 @@ public class AdminController extends UserController {
     private UserService _userService;
     private boolean table_toggle =false; // false for agents, true for owners
 
-    @Override
     public void setServices(AgentService agentService, OwnerService ownerService, UserService userService){
         if (_agentService == null){
             _agentService = agentService;

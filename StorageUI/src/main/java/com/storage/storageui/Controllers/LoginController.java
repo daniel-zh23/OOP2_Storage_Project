@@ -1,11 +1,9 @@
 package com.storage.storageui.Controllers;
 
 import com.storage.storageBusiness.Models.ResultLoginModel;
-import com.storage.storageBusiness.Services.AgentService;
-import com.storage.storageBusiness.Services.OwnerService;
-import com.storage.storageBusiness.Services.StorageService;
-import com.storage.storageBusiness.Services.UserService;
+import com.storage.storageBusiness.Services.*;
 import com.storage.storageui.Controllers.Contracts.UserController;
+import com.storage.storageui.Controllers.Extensions.DependencyInjector;
 import com.storage.storageui.StorageApplication;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,12 +20,15 @@ import java.util.Map;
 
 
 public class LoginController {
+    private static DependencyInjector _injector;
+
     private static UserService _userService;
 
     private Map<String, Method> configures = new HashMap<>();
 
     public LoginController() {
-        _userService = new UserService();
+        _injector = new DependencyInjector();
+        _userService = _injector.userServiceInstance();
         try{
             configures = Map.ofEntries(
                     Map.entry("Owner", LoginController.class.getMethod("configureOwnerController", UserController.class, int.class)),
@@ -93,19 +94,34 @@ public class LoginController {
 
     public static void configureOwnerController(UserController controller, int id){
         var ownerController = (OwnerController) controller;
+        ownerController.setServices(
+                _injector.agentServiceInstance(),
+                _injector.ownerServiceInstance(),
+                _injector.userServiceInstance(),
+                _injector.storageServiceInstance(),
+                _injector.notificationServiceInstance()
+        );
         ownerController.setOwnerId(id);
-        ownerController.setStorageService(new StorageService());
+        ownerController.startNotificationService();
     }
 
     public static void configureAdminController(UserController controller, int id){
         var adminController = (AdminController) controller;
-        adminController.setServices(new AgentService(), new OwnerService(), _userService);
+        adminController.setServices(
+                _injector.agentServiceInstance(),
+                _injector.ownerServiceInstance(),
+                _injector.userServiceInstance());
     }
 
     public static void configureAgentController(UserController controller, int id){
         var agentController = (AgentController) controller;
         agentController.setAgentId(id);
-        agentController.setServices(new AgentService(), new OwnerService(), _userService);
+        agentController.setServices(
+                _injector.agentServiceInstance(),
+                _injector.ownerServiceInstance(),
+                _injector.userServiceInstance(),
+                _injector.storageServiceInstance(),
+                _injector.notificationServiceInstance());
         agentController.startNotificationService();
     }
 }

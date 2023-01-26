@@ -1,4 +1,4 @@
-package com.storage.storageui.Common;
+package com.storage.storageBusiness.Common;
 
 public class NotificationMessages {
     public static final String agentNewStorage = "You have new storage assigned to you.";

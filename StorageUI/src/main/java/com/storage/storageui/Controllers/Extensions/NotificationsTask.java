@@ -1,6 +1,7 @@
 package com.storage.storageui.Controllers.Extensions;
 
 import com.storage.storageBusiness.Models.NotificationModel;
+import com.storage.storageBusiness.Services.NotificationService;
 import com.storage.storageBusiness.Services.UserService;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
@@ -13,14 +14,16 @@ public class NotificationsTask extends TimerTask {
 
     private int _agentId;
 
-    private UserService _userService;
+    private NotificationService _notificationService;
+
+
 
     private MenuButton notificationsCombo2;
 
     private Button clearNotificationsBtn;
 
-    public NotificationsTask(UserService _userService, MenuButton notificationsCombo2, Button clearNotificationsBtn, int agentId) {
-        this._userService = _userService;
+    public NotificationsTask(NotificationService notificationService, MenuButton notificationsCombo2, Button clearNotificationsBtn, int agentId) {
+        this._notificationService = notificationService;
         this.notificationsCombo2 = notificationsCombo2;
         this.clearNotificationsBtn = clearNotificationsBtn;
         _agentId = agentId;
@@ -28,11 +31,9 @@ public class NotificationsTask extends TimerTask {
 
     @Override
     public void run() {
-        List<NotificationModel> notifications =_userService.fetchNotificationsbyUserId(_agentId,false);
+        List<NotificationModel> notifications =_notificationService.fetchNotificationsbyUserId(_agentId,false);
         if (notifications.size() != 0){
             clearNotificationsBtn.setVisible(true);
-        } else {
-            notificationsCombo2.setText("No notifications");
         }
         notificationsCombo2.getItems().setAll(notifications.stream().map(n -> new MenuItem(n.getValue())).toList());
     }

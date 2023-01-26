@@ -11,8 +11,12 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.util.Timer;
+import java.util.concurrent.ScheduledExecutorService;
+
 public abstract class UserController {
-    public abstract void setServices(AgentService agentService, OwnerService ownerService, UserService userService);
+    protected Timer timer;
+    protected ScheduledExecutorService executor;
 
     @FXML
     public void onLogout(ActionEvent event) throws Exception{
@@ -21,5 +25,11 @@ public abstract class UserController {
         Node node = (Node) event.getSource();
         Stage window = (Stage) node.getScene().getWindow();
         window.setScene(scene);
+
+        if (timer != null && executor != null){
+            timer.cancel();
+            timer.purge();
+            executor.shutdown();
+        }
     }
 }

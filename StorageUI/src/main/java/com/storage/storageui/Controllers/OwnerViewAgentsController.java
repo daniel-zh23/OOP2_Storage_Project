@@ -25,16 +25,20 @@ public class OwnerViewAgentsController {
     private AgentService _agentService;
     private StorageService _storageService;
     private StorageViewModel storage;
-    public void setServices(Scene scene, boolean assign, StorageViewModel storage) // boolean to indicate if the scene is used to assign agent to storage
+    public void setServices(AgentService agentService, StorageService storageService, Scene scene, boolean assign, StorageViewModel storage) // boolean to indicate if the scene is used to assign agent to storage
     {
         if (_scene == null){
             _scene = scene;
         }
-            assignButton.setVisible(assign);
-            this.storage=storage;
+        if (_agentService == null){
+            _agentService = agentService;
+        }
+        if (_storageService == null){
+            _storageService = storageService;
+        }
 
-        _agentService=new AgentService();
-        _storageService = new StorageService();
+        assignButton.setVisible(assign);
+        this.storage=storage;
     }
     @FXML
     protected void onBack(){

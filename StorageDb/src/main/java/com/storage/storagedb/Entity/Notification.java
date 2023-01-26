@@ -8,9 +8,14 @@ public class Notification {
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="user_id", nullable = false)
+
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = User.class)
+    @JoinColumn(name="user_id", insertable = false, updatable = false, nullable = false)
     private User user;
+
+    @Column(name = "user_id")
+    private Integer userId;
+
     @Column(name="isread")
     private boolean isRead;
     @Column(name="value")
@@ -50,8 +55,8 @@ public class Notification {
                 '}';
     }
 
-    public Notification(User user, String value) {
-        this.user = user;
+    public Notification(int userId, String value) {
+        this.userId = userId;
         this.value = value;
         this.isRead=false;
     }
