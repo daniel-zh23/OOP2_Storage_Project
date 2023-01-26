@@ -107,7 +107,7 @@ public class AgentTableBuilder {
     }
 
     public AgentTableBuilder salaryCol(boolean editable){
-        TableColumn<AgentViewModel, Double> column = new TableColumn<>("Salary");
+        TableColumn<AgentViewModel, Double> column = new TableColumn<>("Base Salary");
         column.setCellValueFactory(new PropertyValueFactory<AgentViewModel,Double>("salary"));
         if (editable){
             column.setCellFactory(TextFieldTableCell.forTableColumn((new DoubleStringConverter())));
@@ -116,6 +116,13 @@ public class AgentTableBuilder {
                 _agents.stream().filter(a->a.getId()==agent.getId()).forEach(a->a.setSalary((double)cellEditEvent.getNewValue()));
             });
         }
+        _table.getColumns().add(column);
+        return this;
+    }
+
+    public AgentTableBuilder calculatedSalaryCol(){
+        TableColumn<AgentViewModel, Double> column = new TableColumn<>("Salary");
+        column.setCellValueFactory(new PropertyValueFactory<AgentViewModel,Double>("calculatedSalary"));
         _table.getColumns().add(column);
         return this;
     }

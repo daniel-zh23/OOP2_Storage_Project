@@ -16,8 +16,10 @@ public class AgentViewModel extends UserViewModel {
 
     private StringProperty rating;
 
+    private DoubleProperty calculatedSalary;
 
-    public AgentViewModel(int id, String firstName, String lastName, String phone, String company, Double salary, String rating){
+
+    public AgentViewModel(int id, String firstName, String lastName, String phone, String company, Double salary, String rating, Double calculatedSalary){
         super(id);
         this.firstName = new SimpleStringProperty(firstName);
         this.lastName = new SimpleStringProperty(lastName);
@@ -25,6 +27,7 @@ public class AgentViewModel extends UserViewModel {
         this.company = new SimpleStringProperty(company);
         this.salary = new SimpleDoubleProperty(salary);
         this.rating = new SimpleStringProperty(rating);
+        this.calculatedSalary = new SimpleDoubleProperty(calculatedSalary);
     }
 
     public String getFirstName() {
@@ -94,5 +97,13 @@ public class AgentViewModel extends UserViewModel {
 
     public StringProperty ratingProperty() {
         return rating;
+    }
+
+    public double getCalculatedSalary() {
+        return calculatedSalary.get();
+    }
+
+    public DoubleProperty calculatedSalaryProperty() {
+        return calculatedSalary;
     }
 }

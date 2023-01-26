@@ -6,8 +6,13 @@ import com.storage.storagedb.DAO.UserDAO;
 import com.storage.storagedb.Entity.Agent;
 import com.storage.storagedb.Entity.User;
 
+import java.lang.reflect.Method;
+import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class AgentService {
@@ -18,11 +23,22 @@ public class AgentService {
     }
 
     public List<AgentViewModel> getAgents(){
+        return this.getAgents(Comparator.comparing(AgentViewModel::getId));
+    }
+
+    public List<AgentViewModel> getAgents(Comparator<AgentViewModel> comparator){
         _userDao.openSession();
         var users = _userDao.getAll()
                 .filter(u -> u instanceof Agent)
                 .filter(u -> u.isActive())
-                .map(u -> new AgentViewModel(u.getId(), u.getFirstName(), u.getLastName(), u.getPhone(), ((Agent) u).getCompany(), ((Agent) u).getSalary(), ((Agent) u).getRating().toString()))
+                .map(u -> {
+                    var salary = ((Agent) u).getSalary();
+                    var rating = ((Agent) u).getRating();
+                    salary = salary * (1.0 + (rating / 100.0));
+                    var model = new AgentViewModel(u.getId(), u.getFirstName(), u.getLastName(), u.getPhone(), ((Agent) u).getCompany(), ((Agent) u).getSalary(), ((Agent) u).getRating().toString(), salary);
+                    return model;
+                })
+                .sorted(comparator)
                 .collect(Collectors.toList());
         _userDao.close();
         return users;

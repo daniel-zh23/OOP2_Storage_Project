@@ -12,6 +12,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
+import java.util.Comparator;
+
 public class OwnerViewAgentsController {
     @FXML
     private Button backButton;
@@ -49,13 +51,13 @@ public class OwnerViewAgentsController {
     @FXML
     protected void onLoadAgents()
     {
-        agentTable.feedData(tableBox, _agentService.getAgents(), false)
+        agentTable.feedData(tableBox, _agentService.getAgents(Comparator.comparing(AgentViewModel::getRating).reversed()), false)
                 .firstNameCol()
                 .lastNameCol()
                 .phoneCol()
                 .companyCol()
                 .ratingCol()
-                .salaryCol()
+                .calculatedSalaryCol()
                 .build();
     }
     @FXML
