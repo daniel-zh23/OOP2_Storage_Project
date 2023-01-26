@@ -13,12 +13,15 @@ public class DependencyInjector {
 
     private UserService _userService;
 
+    private RentService _rentService;
+
     public DependencyInjector() {
         _notificationService = new NotificationService();
         _userService = new UserService();
         _storageService = new StorageService(_notificationService);
         _ownerService = new OwnerService();
         _agentService = new AgentService();
+        _rentService = new RentService();
     }
 
     public AgentService agentServiceInstance() {
@@ -36,6 +39,8 @@ public class DependencyInjector {
     public StorageService storageServiceInstance() {
         return _storageService;
     }
+
+    public RentService rentServiceInstance() { return _rentService; }
 
     public UserService userServiceInstance() {
         return _userService;

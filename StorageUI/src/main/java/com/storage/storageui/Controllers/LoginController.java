@@ -99,7 +99,8 @@ public class LoginController {
                 _injector.ownerServiceInstance(),
                 _injector.userServiceInstance(),
                 _injector.storageServiceInstance(),
-                _injector.notificationServiceInstance()
+                _injector.notificationServiceInstance(),
+                _injector.rentServiceInstance()
         );
         ownerController.setOwnerId(id);
         ownerController.startNotificationService();
@@ -117,11 +118,10 @@ public class LoginController {
         var agentController = (AgentController) controller;
         agentController.setAgentId(id);
         agentController.setServices(
-                _injector.agentServiceInstance(),
-                _injector.ownerServiceInstance(),
                 _injector.userServiceInstance(),
                 _injector.storageServiceInstance(),
-                _injector.notificationServiceInstance());
+                _injector.notificationServiceInstance(),
+                _injector.rentServiceInstance());
         agentController.startNotificationService();
     }
 }

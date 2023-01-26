@@ -41,6 +41,7 @@ public class OwnerController extends UserController {
 
     private NotificationService _notificationService;
 
+    private RentService _rentService;
 
     @FXML
     private TableView tableBox;
@@ -77,6 +78,9 @@ public class OwnerController extends UserController {
         }
         if (_notificationService == null){
             _notificationService = notificationService;
+        }
+        if (_rentService == null){
+            _rentService = rentService;
         }
     }
 

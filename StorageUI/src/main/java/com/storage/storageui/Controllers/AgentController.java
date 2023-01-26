@@ -57,15 +57,9 @@ public class AgentController extends UserController {
     private RentersTable renterTable = new RentersTable();
     private boolean tableToggle = false; //false for storages , true for contracts
 
-    public void setServices(AgentService agentService, OwnerService ownerService, UserService userService, StorageService storageService, NotificationService notificationService, RentService rentService) {
-        if (_ownerService == null){
-            _ownerService = ownerService;
-        }
+    public void setServices(UserService userService, StorageService storageService, NotificationService notificationService, RentService rentService) {
         if (_userService == null){
             _userService = userService;
-        }
-        if (_agentService == null){
-            _agentService = agentService;
         }
         if (_storageService == null){
             _storageService = storageService;
@@ -97,7 +91,12 @@ public class AgentController extends UserController {
                 new NotificationsTask(_notificationService, notificationsCombo2, clearNotificationsBtn, _agentId),
                 0, 14500);
         Runnable task = () -> {
-            Platform.runLater(() -> notificationsCombo2.setText(String.format("%s notifications", notificationsCombo2.getItems().size())));
+            Platform.runLater(() -> {
+                notificationsCombo2
+                        .setText(notificationsCombo2.getItems().size() != 0
+                                ? String.format("%s notifications", notificationsCombo2.getItems().size())
+                                : "No notifications");
+            });
         };
         this.executor = Executors.newScheduledThreadPool(5, r -> {
             Thread t = new Thread(r);
