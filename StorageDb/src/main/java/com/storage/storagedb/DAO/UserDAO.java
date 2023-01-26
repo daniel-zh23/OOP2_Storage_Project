@@ -24,9 +24,10 @@ public class UserDAO extends DAO<User>
     }
     }
 
-    public Stream<User> getUsernames(){
+    public Stream<String> getUsernames(){
         try {
-            return session.createQuery("Select u from User u", User.class).stream();
+            return session.createQuery("Select u from User u", User.class).stream()
+                    .map(u -> u.getUsername());
         } catch(Exception e) {
             return null;
         }

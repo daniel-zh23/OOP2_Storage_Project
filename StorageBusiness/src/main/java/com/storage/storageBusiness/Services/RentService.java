@@ -11,6 +11,8 @@ import com.storage.storagedb.Entity.Sales;
 import com.storage.storagedb.Entity.Agent;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -28,21 +30,21 @@ public class RentService {
     public List<RenterViewModel> getAllRenters()
     {
         _renterDao.openSession();
-        List<RenterViewModel> renters = _renterDao.getAll().map(r->new RenterViewModel(r.getId(),r.getFirstName(),r.getLastName())).toList();
+        List<RenterViewModel> renters = _renterDao.getAll().map(r->new RenterViewModel(r.getId(),r.getFirstName(),r.getLastName(), r.getPhone())).toList();
         _renterDao.close();
         return renters;
     }
-    public void createRenter(RenterViewModel renter)
+    public void createRenter(String fName, String lName, String phone)
     {
         _renterDao.openSession();
-        _renterDao.save(new Renter(renter.getFirstName(),renter.getLastName()));
+        _renterDao.save(new Renter(fName, lName, phone));
         _renterDao.close();
     }
-    public void createSale(SaleViewModel sale)
+    public void createSale(Double price, Integer duration, Integer storageId, Integer agentId, Integer renterId)
     {
         try {
             _saleDao.openSession();
-            _saleDao.save(new Sales(sale.getPrice(), sale.getDuration(), new SimpleDateFormat("dd/MM/yyyy").parse(sale.getDate()),sale.getStorageId(),sale.getAgentId(),sale.getRenterId()));
+            _saleDao.save(new Sales(price, duration, LocalDate.now(), storageId, agentId, renterId));
             _saleDao.close();
         }
         catch(Exception e)
@@ -82,4 +84,10 @@ public class RentService {
     }
 
 
+    public boolean checkPhone(String phone) {
+        _renterDao.openSession();
+        var result = _renterDao.getAll().map(r -> r.getPhone()).anyMatch(u -> u.equals(phone));
+        _renterDao.close();
+        return result;
+    }
 }

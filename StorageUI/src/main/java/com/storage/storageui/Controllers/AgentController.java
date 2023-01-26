@@ -1,32 +1,23 @@
 package com.storage.storageui.Controllers;
 
-import com.storage.storageBusiness.Models.NotificationModel;
 import com.storage.storageBusiness.Models.StorageViewModel;
 import com.storage.storageBusiness.Services.*;
 import com.storage.storageui.Common.RentersTable;
+import com.storage.storageui.Common.SalesTable;
 import com.storage.storageui.Common.StorageTable;
 import com.storage.storageui.Controllers.Contracts.UserController;
 import com.storage.storageui.Controllers.Extensions.NotificationsTask;
 import com.storage.storageui.StorageApplication;
-import javafx.animation.Timeline;
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import javafx.util.Duration;
-import org.controlsfx.control.Notifications;
 
-import java.util.List;
 import java.util.Timer;
 import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class AgentController extends UserController {
@@ -54,7 +45,7 @@ public class AgentController extends UserController {
     @FXML
     private TableView tableBox;
     private StorageTable storageTable = new StorageTable();
-    private RentersTable renterTable = new RentersTable();
+    private SalesTable salesTable = new SalesTable();
     private boolean tableToggle = false; //false for storages , true for contracts
 
     public void setServices(UserService userService, StorageService storageService, NotificationService notificationService, RentService rentService) {
@@ -120,8 +111,8 @@ public class AgentController extends UserController {
 
     private void loadTable() {
         if (tableToggle) {
-            renterTable.feedRenters(_rentService.getAllRenters());
-            renterTable.generateTable(tableBox);
+            salesTable.feedSales(_rentService.fetchByAgentId(_agentId));
+            salesTable.generateTable(tableBox);
         }
         else {
             storageTable.feedStorages(_storageService.getAllByAgentId(_agentId));
@@ -135,7 +126,7 @@ public class AgentController extends UserController {
         FXMLLoader fxmlLoader = new FXMLLoader(StorageApplication.class.getResource("create_sale.fxml"));
         Parent object = fxmlLoader.load();
         var controller = fxmlLoader.<CreateSaleController>getController();
-        controller.setServices(logoutBtn.getScene(),_userService,_rentService);
+        controller.setServices(logoutBtn.getScene(),_userService,_rentService, _agentId, (((StorageViewModel) tableBox.getSelectionModel().getSelectedItem()).getId()));
         Scene scene = new Scene(object);
         Stage window = (Stage)logoutBtn.getScene().getWindow();
         window.setScene(scene);

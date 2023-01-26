@@ -12,10 +12,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class CreateAgentController extends CreateController {
-    private static final String NamePattern = "[A-Z][a-zA-Z]+$";
-    private static final String PhonePattern = "\\+[0-9 ?]{4,}$";
-    private static final String EmailPattern = "[A-Za-z.0-9]+@[A-Za-z]+.[A-Za-z]+";
-
     private Scene _scene;
     private AgentService _agentService;
     private UserService _userService;

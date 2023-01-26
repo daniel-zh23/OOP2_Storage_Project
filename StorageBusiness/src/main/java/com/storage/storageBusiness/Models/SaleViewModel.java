@@ -5,6 +5,7 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class SaleViewModel {
@@ -21,7 +22,7 @@ public class SaleViewModel {
 
     private SimpleBooleanProperty active;
 
-    public SaleViewModel(int id, double price, int duration, Date date, int storageId, int  agentId, int  renterId,String storageInfo,String agentInfo,String renterInfo )
+    public SaleViewModel(int id, double price, int duration, LocalDate date, int storageId, int  agentId, int  renterId, String storageInfo, String agentInfo, String renterInfo )
     {
         this.id=new SimpleIntegerProperty(id);
         this.price=new SimpleDoubleProperty(price);

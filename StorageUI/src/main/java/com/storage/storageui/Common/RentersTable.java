@@ -21,8 +21,11 @@ public class RentersTable {
         colFirstName.setCellValueFactory(new PropertyValueFactory<RenterViewModel,String>("firstName"));
         TableColumn<RenterViewModel, String> colLastName = new TableColumn<>("Last Name");
         colLastName.setCellValueFactory(new PropertyValueFactory<RenterViewModel,String>("lastName"));
+        TableColumn<RenterViewModel, String> colPhone = new TableColumn<>("Phone");
+        colPhone.setCellValueFactory(new PropertyValueFactory<RenterViewModel,String>("phone"));
+
         table.setItems(FXCollections.observableArrayList(renters));
-        table.getColumns().setAll(colFirstName, colLastName);
+        table.getColumns().setAll(colFirstName, colLastName, colPhone);
     }
     public void feedRenters(List<RenterViewModel>renters)
     {

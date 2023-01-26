@@ -12,10 +12,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class CreateOwnerController extends CreateController {
-    private static final String NamePattern = "[A-Z][a-z]+$";
-    private static final String PhonePattern = "\\+[0-9 ?]{4,}$";
-    private static final String EmailPattern = "[A-Za-z.0-9]+@[A-Za-z]+.[A-Za-z]+";
-
     private Scene _scene;
     private OwnerService _ownerService;
     private UserService _userService;

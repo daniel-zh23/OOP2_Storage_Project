@@ -5,14 +5,17 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class RenterViewModel extends UserViewModel {
-    private SimpleStringProperty firstName= new SimpleStringProperty();
-    private SimpleStringProperty lastName= new SimpleStringProperty();
+    private SimpleStringProperty firstName;
+    private SimpleStringProperty lastName;
+    private SimpleStringProperty phone;
 
-   public RenterViewModel(int id, String fName,String lname)
+
+    public RenterViewModel(int id, String fName,String lname, String phone)
    {
        super(id);
        this.firstName=new SimpleStringProperty(fName);
        this.lastName=new SimpleStringProperty(lname);
+       this.phone=new SimpleStringProperty(phone);
    }
 
     public String getFirstName() {
@@ -37,5 +40,13 @@ public class RenterViewModel extends UserViewModel {
 
     public void setLastName(String lastName) {
         this.lastName.set(lastName);
+    }
+
+    public String getPhone() {
+        return phone.get();
+    }
+
+    public SimpleStringProperty phoneProperty() {
+        return phone;
     }
 }

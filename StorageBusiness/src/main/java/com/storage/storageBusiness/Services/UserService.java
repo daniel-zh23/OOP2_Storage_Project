@@ -40,7 +40,7 @@ public class UserService {
 
     public boolean checkUsername(String username){
         _userDao.openSession();
-        var result = _userDao.getUsernames().anyMatch(u -> u.getUsername().equals(username));
+        var result = _userDao.getUsernames().anyMatch(u -> u.equals(username));
         _userDao.close();
         return result;
     }

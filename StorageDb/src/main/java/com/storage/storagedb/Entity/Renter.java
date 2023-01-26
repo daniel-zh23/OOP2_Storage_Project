@@ -13,6 +13,19 @@ public class Renter {
     @Column(name="lastName")
     private String lastName;
 
+    @Column(name="phone", nullable = false, unique = true)
+    private String phone;
+
+    public Renter() {
+    }
+
+    public Renter(String firstName,String lastName, String phone)
+    {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phone = phone;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -33,9 +46,12 @@ public class Renter {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-    public Renter(String firstName,String lastName)
-    {
-        this.firstName=firstName;
-        this.lastName=lastName;
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

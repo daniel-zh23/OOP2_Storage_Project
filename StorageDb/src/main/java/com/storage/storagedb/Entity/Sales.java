@@ -1,6 +1,7 @@
 package com.storage.storagedb.Entity;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 @Entity
 @Table(name="sales")
@@ -14,26 +15,29 @@ public class Sales {
     @Column (name="duration") // in months
     private Integer duration;
     @Column (name="date")
-    private Date dateOfSale;
+    private LocalDate dateOfSale;
     @Column (name="active")
     private boolean active=true;
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Owner.class)
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Storage.class)
     @JoinColumn(name = "storage_id", insertable = false, updatable = false)
     private Storage storage;
     @Column(name="storage_id")
     private Integer storageId;
-    @ManyToOne(fetch=FetchType.EAGER,targetEntity=Agent.class)
-    @JoinColumn(name="agent_id",nullable = false)
+    @ManyToOne(fetch=FetchType.EAGER, targetEntity=Agent.class)
+    @JoinColumn(name="agent_id", nullable = false, insertable = false, updatable = false)
     private Agent agent;
-    @Column
+    @Column(name = "agent_id")
     private Integer agentId;
-    @ManyToOne(fetch=FetchType.EAGER,targetEntity=Renter.class)
-    @JoinColumn(name="renter_id",nullable = false)
+    @ManyToOne(fetch=FetchType.EAGER, targetEntity=Renter.class)
+    @JoinColumn(name="renter_id", nullable = false, insertable = false, updatable = false)
     private Renter renter;
-    @Column
+    @Column(name = "renter_id")
     private Integer renterId;
 
-    public Sales(Double price, Integer duration, Date dateOfSale, Integer storageId, Integer agentId, Integer renterId) {
+    public Sales() {
+    }
+
+    public Sales(Double price, Integer duration, LocalDate dateOfSale, Integer storageId, Integer agentId, Integer renterId) {
         this.price = price;
         this.duration = duration;
         this.dateOfSale = dateOfSale;
@@ -62,11 +66,11 @@ public class Sales {
         this.duration = duration;
     }
 
-    public Date getDateOfSale() {
+    public LocalDate getDateOfSale() {
         return dateOfSale;
     }
 
-    public void setDateOfSale(Date dateOfSale) {
+    public void setDateOfSale(LocalDate dateOfSale) {
         this.dateOfSale = dateOfSale;
     }
 
