@@ -1,7 +1,5 @@
 package com.storage.storageui.Controllers.Contracts;
 
-import com.storage.storageBusiness.Services.AgentService;
-import com.storage.storageBusiness.Services.OwnerService;
 import com.storage.storageBusiness.Services.UserService;
 import com.storage.storageui.StorageApplication;
 import javafx.event.ActionEvent;

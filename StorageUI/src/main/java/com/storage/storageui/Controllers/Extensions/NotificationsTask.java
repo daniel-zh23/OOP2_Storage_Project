@@ -16,8 +16,6 @@ public class NotificationsTask extends TimerTask {
 
     private NotificationService _notificationService;
 
-
-
     private MenuButton notificationsCombo2;
 
     private Button clearNotificationsBtn;

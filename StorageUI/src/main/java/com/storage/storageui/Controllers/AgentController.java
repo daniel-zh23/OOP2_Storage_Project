@@ -1,9 +1,13 @@
 package com.storage.storageui.Controllers;
 
 import com.storage.storageBusiness.Models.NotificationModel;
+import com.storage.storageBusiness.Models.StorageViewModel;
 import com.storage.storageBusiness.Services.*;
+import com.storage.storageui.Common.RentersTable;
+import com.storage.storageui.Common.StorageTable;
 import com.storage.storageui.Controllers.Contracts.UserController;
 import com.storage.storageui.Controllers.Extensions.NotificationsTask;
+import com.storage.storageui.StorageApplication;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -11,7 +15,11 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 
@@ -23,13 +31,12 @@ import java.util.concurrent.TimeUnit;
 
 public class AgentController extends UserController {
     private Integer _agentId;
-    private AgentService _agentService;
-    private OwnerService _ownerService;
     private UserService _userService;
     private StorageService _storageService;
 
     private NotificationService _notificationService;
 
+    private RentService _rentService;
     @FXML
     private Button logoutBtn;
 
@@ -38,8 +45,19 @@ public class AgentController extends UserController {
 
     @FXML
     private Button clearNotificationsBtn;
+    @FXML
+    private Button loadStorageButton;
+    @FXML
+    private Button viewContractsButton;
+    @FXML
+    private Button createContractButton;
+    @FXML
+    private TableView tableBox;
+    private StorageTable storageTable = new StorageTable();
+    private RentersTable renterTable = new RentersTable();
+    private boolean tableToggle = false; //false for storages , true for contracts
 
-    public void setServices(AgentService agentService, OwnerService ownerService, UserService userService, StorageService storageService, NotificationService notificationService) {
+    public void setServices(AgentService agentService, OwnerService ownerService, UserService userService, StorageService storageService, NotificationService notificationService, RentService rentService) {
         if (_ownerService == null){
             _ownerService = ownerService;
         }
@@ -55,10 +73,13 @@ public class AgentController extends UserController {
         if (_notificationService == null){
             _notificationService = notificationService;
         }
+        if(_rentService==null) {
+            _rentService = rentService;
+        }
     }
 
     public void setAgentId(int id) {
-        if (_agentId == null){
+        if (_agentId == null) {
             _agentId = id;
         }
     }
@@ -70,7 +91,7 @@ public class AgentController extends UserController {
         notificationsCombo2.getItems().setAll();
     }
 
-    public void startNotificationService(){
+    public void startNotificationService() {
         this.timer = new Timer();
         timer.scheduleAtFixedRate(
                 new NotificationsTask(_notificationService, notificationsCombo2, clearNotificationsBtn, _agentId),
@@ -81,8 +102,45 @@ public class AgentController extends UserController {
         this.executor = Executors.newScheduledThreadPool(5, r -> {
             Thread t = new Thread(r);
             t.setDaemon(true);
-            return t ;
+            return t;
         });
         executor.scheduleAtFixedRate(task, 0, 15, TimeUnit.SECONDS);
     }
+
+    @FXML
+    private void onLoadStorage() {
+       tableToggle=false;
+       loadTable();
+    }
+    @FXML
+    private void onViewContracts()
+    {
+        tableToggle=true;
+        loadTable();
+    }
+
+    private void loadTable() {
+        if (tableToggle) {
+            renterTable.feedRenters(_rentService.getAllRenters());
+            renterTable.generateTable(tableBox);
+        }
+        else {
+            storageTable.feedStorages(_storageService.getAllByAgentId(_agentId));
+            storageTable.generateTable(tableBox, false);
+        }
+    }
+    public void onCreateContract()throws Exception
+    {
+        if(tableToggle){System.out.println("Wrong table selected!");return;}
+        var data=(StorageViewModel)tableBox.getSelectionModel().getSelectedItem();
+        FXMLLoader fxmlLoader = new FXMLLoader(StorageApplication.class.getResource("create_sale.fxml"));
+        Parent object = fxmlLoader.load();
+        var controller = fxmlLoader.<CreateSaleController>getController();
+        controller.setServices(logoutBtn.getScene(),_userService,_rentService);
+        Scene scene = new Scene(object);
+        Stage window = (Stage)logoutBtn.getScene().getWindow();
+        window.setScene(scene);
+
+    }
 }
+

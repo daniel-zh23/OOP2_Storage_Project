@@ -1,0 +1,41 @@
+package com.storage.storageBusiness.Models;
+
+import com.storage.storageBusiness.Models.Contracts.UserViewModel;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+
+public class RenterViewModel extends UserViewModel {
+    private SimpleStringProperty firstName= new SimpleStringProperty();
+    private SimpleStringProperty lastName= new SimpleStringProperty();
+
+   public RenterViewModel(int id, String fName,String lname)
+   {
+       super(id);
+       this.firstName=new SimpleStringProperty(fName);
+       this.lastName=new SimpleStringProperty(lname);
+   }
+
+    public String getFirstName() {
+        return firstName.get();
+    }
+
+    public SimpleStringProperty firstNameProperty() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName.set(firstName);
+    }
+
+    public String getLastName() {
+        return lastName.get();
+    }
+
+    public SimpleStringProperty lastNameProperty() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName.set(lastName);
+    }
+}

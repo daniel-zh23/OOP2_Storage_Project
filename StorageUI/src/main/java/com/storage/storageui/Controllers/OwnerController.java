@@ -60,7 +60,8 @@ public class OwnerController extends UserController {
             OwnerService ownerService,
             UserService userService,
             StorageService storageService,
-            NotificationService notificationService) {
+            NotificationService notificationService,
+            RentService rentService) {
 
         if (_ownerService == null){
             _ownerService = ownerService;

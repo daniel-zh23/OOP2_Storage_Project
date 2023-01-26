@@ -5,8 +5,8 @@ import com.storage.storageBusiness.Models.Contracts.UserViewModel;
 import com.storage.storageBusiness.Models.OwnerViewModel;
 import com.storage.storageBusiness.Services.AgentService;
 import com.storage.storageBusiness.Services.OwnerService;
+import com.storage.storageBusiness.Services.RentService;
 import com.storage.storageBusiness.Services.UserService;
-import com.storage.storageui.Common.AgentTable;
 import com.storage.storageui.Common.AgentTableBuilder;
 import com.storage.storageui.Common.OwnerTable;
 import com.storage.storageui.Controllers.Contracts.UserController;
@@ -28,7 +28,7 @@ public class AdminController extends UserController {
     private AgentService _agentService;
     private OwnerService _ownerService;
     private UserService _userService;
-    private boolean table_toggle =false; // false for agents, true for owners
+    private boolean tableToggle =false; // false for agents, true for owners
 
     public void setServices(AgentService agentService, OwnerService ownerService, UserService userService){
         if (_agentService == null){
@@ -89,7 +89,7 @@ public class AdminController extends UserController {
 
     @FXML
     public void onApply(){
-        if(table_toggle) {
+        if(tableToggle) {
             _ownerService.updateOwners(ownerTable.retrieveOwners());
             ownerTable.generateTable(tableBox,true);
         }
@@ -101,7 +101,7 @@ public class AdminController extends UserController {
     @FXML
     public void onDiscard()
     {
-        if(table_toggle) {
+        if(tableToggle) {
             ownerTable.feedOwners(_ownerService.getOwners());
             ownerTable.generateTable(tableBox,true);
         }
@@ -117,17 +117,17 @@ public class AdminController extends UserController {
     }
     @FXML
     protected void onLoadOwners(){
-        table_toggle =true;
+        tableToggle =true;
         loadTable();
     }
     @FXML
     protected void onLoadAgents()
     {
-        table_toggle =false;
+        tableToggle =false;
         loadTable();
     }
     private void  loadTable() {
-        if (table_toggle) {
+        if (tableToggle) {
             ownerTable.feedOwners(_ownerService.getOwners());
             ownerTable.generateTable(tableBox,true);
         } else {

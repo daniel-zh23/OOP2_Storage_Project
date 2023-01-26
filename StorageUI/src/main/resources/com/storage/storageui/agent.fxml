@@ -4,28 +4,47 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="566.0" prefWidth="802.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.storage.storageui.Controllers.AgentController">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="363.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.storage.storageui.Controllers.AgentController">
     <children>
         <HBox alignment="CENTER_RIGHT" prefHeight="64.0" prefWidth="802.0" spacing="10.0" style="-fx-background-color: gray; -fx-padding: 10;">
             <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Agent" wrappingWidth="448.5986328125">
+               <font>
+                  <Font size="35.0" />
+               </font>
+            </Text>
             <MenuButton fx:id="notificationsCombo2" mnemonicParsing="false" text="Notifications" />
             <Button fx:id="clearNotificationsBtn" mnemonicParsing="false" onAction="#onClearNotifications" text="Clear Notifications" visible="false" />
                 <Button fx:id="logoutBtn" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onLogout" text="Logout" />
             </children>
         </HBox>
-      <Label text="Available Storages" />
-      <TableView prefHeight="200.0" prefWidth="200.0">
-        <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
-        </columns>
-      </TableView>
-        <Label text="You are logged in, Agent!" textAlignment="CENTER" />
+      <HBox prefHeight="407.0" prefWidth="800.0">
+         <children>
+            <VBox prefHeight="221.0" prefWidth="578.0">
+               <children>
+                  <Label text="Available Storages" />
+                  <TableView fx:id="tableBox" prefHeight="199.0" prefWidth="390.0" />
+               </children>
+            </VBox>
+            <VBox prefHeight="299.0" prefWidth="173.0" spacing="10.0">
+               <children>
+                  <Button fx:id="loadStorageButton" lineSpacing="1.0" mnemonicParsing="false" onAction="#onLoadStorage" prefHeight="36.0" prefWidth="120.0" text="Load Storages">
+                     <padding>
+                        <Insets bottom="10.0" />
+                     </padding>
+                  </Button>
+                  <Button fx:id="viewContractsButton" mnemonicParsing="false" onAction="#onViewContracts" text="My Contracts" />
+                  <Button fx:id="createContractButton" mnemonicParsing="false" onAction="#onCreateContract" prefHeight="46.0" prefWidth="137.0" text="Create Contract for highlighted storage" textAlignment="CENTER" wrapText="true" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
     </children>
     <opaqueInsets>
         <Insets />
