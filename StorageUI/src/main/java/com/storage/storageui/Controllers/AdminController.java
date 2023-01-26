@@ -7,6 +7,7 @@ import com.storage.storageBusiness.Services.AgentService;
 import com.storage.storageBusiness.Services.OwnerService;
 import com.storage.storageBusiness.Services.UserService;
 import com.storage.storageui.Common.AgentTable;
+import com.storage.storageui.Common.AgentTableBuilder;
 import com.storage.storageui.Common.OwnerTable;
 import com.storage.storageui.Controllers.Contracts.UserController;
 import com.storage.storageui.StorageApplication;
@@ -47,7 +48,7 @@ public class AdminController extends UserController {
     private TableView tableBox;
     @FXML
     private Button logoutBtn;
-    AgentTable agentTable= new AgentTable();
+    AgentTableBuilder agentTable= new AgentTableBuilder();
     OwnerTable ownerTable = new OwnerTable();
     @FXML
     public void onLogout() throws Exception{
@@ -94,7 +95,7 @@ public class AdminController extends UserController {
         }
         else {
             _agentService.updateAgents(agentTable.retrieveAgents());
-            agentTable.generateTable(tableBox,true);
+            agentTable.build();
         }
     }
     @FXML
@@ -105,8 +106,13 @@ public class AdminController extends UserController {
             ownerTable.generateTable(tableBox,true);
         }
         else {
-            agentTable.feedAgents(_agentService.getAgents());
-            agentTable.generateTable(tableBox,true);
+            agentTable.feedData(tableBox, _agentService.getAgents(), true)
+                    .firstNameCol()
+                    .lastNameCol()
+                    .phoneCol()
+                    .companyCol()
+                    .salaryCol()
+                    .build();
         }
     }
     @FXML
@@ -125,8 +131,13 @@ public class AdminController extends UserController {
             ownerTable.feedOwners(_ownerService.getOwners());
             ownerTable.generateTable(tableBox,true);
         } else {
-            agentTable.feedAgents(_agentService.getAgents());
-            agentTable.generateTable(tableBox,true);
+            agentTable.feedData(tableBox, _agentService.getAgents(), true)
+                    .firstNameCol()
+                    .lastNameCol()
+                    .phoneCol()
+                    .companyCol()
+                    .salaryCol()
+                    .build();
         }
     }
 }

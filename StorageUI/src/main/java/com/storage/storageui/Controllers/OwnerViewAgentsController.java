@@ -5,6 +5,7 @@ import com.storage.storageBusiness.Models.StorageViewModel;
 import com.storage.storageBusiness.Services.AgentService;
 import com.storage.storageBusiness.Services.StorageService;
 import com.storage.storageui.Common.AgentTable;
+import com.storage.storageui.Common.AgentTableBuilder;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -20,7 +21,7 @@ public class OwnerViewAgentsController {
     private Button assignButton;
     @FXML
     private TableView tableBox;
-    private AgentTable agentTable = new AgentTable();
+    private AgentTableBuilder agentTable = new AgentTableBuilder();
     private Scene _scene;
     private AgentService _agentService;
     private StorageService _storageService;
@@ -48,8 +49,14 @@ public class OwnerViewAgentsController {
     @FXML
     protected void onLoadAgents()
     {
-        agentTable.feedAgents(_agentService.getAgents());
-        agentTable.generateTable(tableBox,false);
+        agentTable.feedData(tableBox, _agentService.getAgents(), false)
+                .firstNameCol()
+                .lastNameCol()
+                .phoneCol()
+                .companyCol()
+                .ratingCol()
+                .salaryCol()
+                .build();
     }
     @FXML
     protected void onAssign()

@@ -86,9 +86,13 @@ public class AgentTable {
                 agents.stream().filter(a->a.getId()==agent.getId()).forEach(a->a.setSalary((double)cellEditEvent.getNewValue()));
             }
         });
-        table.setItems(FXCollections.observableArrayList(agents));
-        table.getColumns().setAll(colFirstName, colLastName, colPhone, colCompany,colSalary);
 
+        //Rating
+        TableColumn<AgentViewModel, String> colRating = new TableColumn<>("Rating");
+        colRating.setCellValueFactory(cellData -> cellData.getValue().ratingProperty());
+
+        table.setItems(FXCollections.observableArrayList(agents));
+        table.getColumns().setAll(colFirstName, colLastName, colPhone, colCompany, colRating, colSalary);
     }
 public void feedAgents(List<AgentViewModel> agents)
     {

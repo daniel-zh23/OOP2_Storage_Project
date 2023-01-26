@@ -57,6 +57,7 @@ public class Agent extends User {
 
     public Agent() {
         super();
+        this.rating = 0.0;
         this.salary = 0.0;
         this.company = "";
     }

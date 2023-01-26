@@ -22,7 +22,7 @@ public class AgentService {
         var users = _userDao.getAll()
                 .filter(u -> u instanceof Agent)
                 .filter(u -> u.isActive())
-                .map(u -> new AgentViewModel(u.getId(), u.getFirstName(), u.getLastName(), u.getPhone(), ((Agent) u).getCompany(), ((Agent) u).getSalary()))
+                .map(u -> new AgentViewModel(u.getId(), u.getFirstName(), u.getLastName(), u.getPhone(), ((Agent) u).getCompany(), ((Agent) u).getSalary(), ((Agent) u).getRating().toString()))
                 .collect(Collectors.toList());
         _userDao.close();
         return users;
