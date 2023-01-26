@@ -1,47 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.storage.storageui.Controllers.CreateSaleController">
+<VBox prefHeight="400.0" prefWidth="627.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.storage.storageui.Controllers.CreateSaleController">
    <children>
-      <VBox prefHeight="400.0" prefWidth="600.0">
+      <HBox prefHeight="50.0" prefWidth="600.0">
          <children>
-            <HBox prefHeight="50.0" prefWidth="600.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="414.0">
                <children>
-                  <Button fx:id="backButton" mnemonicParsing="false" onAction="#onBack" text="&lt;" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Create Sale" wrappingWidth="212.703125">
+                  <Button fx:id="backButton" mnemonicParsing="false" onAction="#onBack" text="&lt;">
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="720.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Create Sale" wrappingWidth="324.703125">
                      <font>
                         <Font size="32.0" />
                      </font>
                   </Text>
-                  <Button fx:id="loadRentersButton" mnemonicParsing="false" onAction="#onLoadRenters" prefHeight="49.0" prefWidth="122.0" text="Load Available Renters" textAlignment="CENTER" wrapText="true" />
-                  <Button fx:id="createRenterBUtton" mnemonicParsing="false" onAction="#onCreateRenter" prefHeight="49.0" prefWidth="98.0" text="Create New Renter" textAlignment="CENTER" wrapText="true" />
-               </children>
-            </HBox>
-            <HBox prefHeight="350.0" prefWidth="600.0">
-               <children>
-                  <TableView fx:id="tableBox" prefHeight="350.0" prefWidth="439.0" />
-                  <VBox prefHeight="350.0" prefWidth="155.0">
-                     <children>
-                        <Label prefHeight="47.0" prefWidth="155.0" text="Negotiated price:" />
-                        <TextField fx:id="priceText" />
-                        <Label prefHeight="42.0" prefWidth="156.0" text="Duration(in months):" />
-                        <TextField fx:id="durationText" prefHeight="27.0" prefWidth="154.0" />
-                        <Button fx:id="createSellButton" mnemonicParsing="false" onAction="#onCreateSell" prefHeight="49.0" prefWidth="147.0" text="Create Sell with highlighted renter" textAlignment="CENTER" wrapText="true" />
-                     </children>
-                  </VBox>
                </children>
             </HBox>
          </children>
-      </VBox>
+      </HBox>
+      <HBox prefHeight="350.0" prefWidth="600.0">
+         <children>
+            <TableView fx:id="tableBox" prefHeight="350.0" prefWidth="439.0" />
+            <VBox alignment="CENTER" prefHeight="350.0" prefWidth="191.0">
+               <children>
+                  <HBox prefHeight="68.0" prefWidth="155.0">
+                     <children>
+                        <Button fx:id="loadRentersButton" mnemonicParsing="false" onAction="#onLoadRenters" prefHeight="49.0" prefWidth="122.0" text="Load Available Renters" textAlignment="CENTER" wrapText="true" />
+                        <Button fx:id="createRenterBUtton" mnemonicParsing="false" onAction="#onCreateRenter" prefHeight="49.0" prefWidth="98.0" text="Create New Renter" textAlignment="CENTER" wrapText="true" />
+                     </children>
+                  </HBox>
+                  <VBox prefHeight="90.0" prefWidth="155.0">
+                     <children>
+                        <Label prefHeight="47.0" prefWidth="155.0" text="Negotiated price:" />
+                        <TextField fx:id="priceText" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="90.0" prefWidth="155.0">
+                     <children>
+                        <Label prefHeight="42.0" prefWidth="156.0" text="Duration(in months):" />
+                        <TextField fx:id="durationText" prefHeight="27.0" prefWidth="154.0" />
+                     </children>
+                  </VBox>
+                  <Button fx:id="createSellButton" mnemonicParsing="false" onAction="#onCreateSell" prefHeight="49.0" prefWidth="147.0" text="Create Sell with highlighted renter" textAlignment="CENTER" wrapText="true" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
    </children>
-</AnchorPane>
+</VBox>
