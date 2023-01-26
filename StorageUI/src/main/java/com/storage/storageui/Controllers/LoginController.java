@@ -1,10 +1,7 @@
 package com.storage.storageui.Controllers;
 
 import com.storage.storageBusiness.Models.ResultLoginModel;
-import com.storage.storageBusiness.Services.AgentService;
-import com.storage.storageBusiness.Services.OwnerService;
-import com.storage.storageBusiness.Services.StorageService;
-import com.storage.storageBusiness.Services.UserService;
+import com.storage.storageBusiness.Services.*;
 import com.storage.storageui.Controllers.Contracts.UserController;
 import com.storage.storageui.StorageApplication;
 import javafx.fxml.FXML;
@@ -99,13 +96,13 @@ public class LoginController {
 
     public static void configureAdminController(UserController controller, int id){
         var adminController = (AdminController) controller;
-        adminController.setServices(new AgentService(), new OwnerService(), _userService);
+        adminController.setServices(new AgentService(), new OwnerService(), _userService,null);
     }
 
     public static void configureAgentController(UserController controller, int id){
         var agentController = (AgentController) controller;
         agentController.setAgentId(id);
-        agentController.setServices(new AgentService(), new OwnerService(), _userService);
+        agentController.setServices(new AgentService(), new OwnerService(), _userService, new RentService());
         agentController.startNotificationService();
     }
 }

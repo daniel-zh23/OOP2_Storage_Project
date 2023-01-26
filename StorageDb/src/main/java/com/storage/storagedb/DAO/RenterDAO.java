@@ -28,5 +28,4 @@ public class RenterDAO extends DAO<Renter>
     {
         return this.getAll().toList();
     }
-
 }

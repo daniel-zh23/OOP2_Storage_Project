@@ -3,10 +3,7 @@ package com.storage.storageui.Controllers;
 import com.storage.storageBusiness.Models.AgentViewModel;
 import com.storage.storageBusiness.Models.Contracts.UserViewModel;
 import com.storage.storageBusiness.Models.StorageViewModel;
-import com.storage.storageBusiness.Services.AgentService;
-import com.storage.storageBusiness.Services.OwnerService;
-import com.storage.storageBusiness.Services.StorageService;
-import com.storage.storageBusiness.Services.UserService;
+import com.storage.storageBusiness.Services.*;
 import com.storage.storageui.Common.StorageTable;
 import com.storage.storageui.Controllers.Contracts.UserController;
 import com.storage.storageui.StorageApplication;
@@ -40,7 +37,7 @@ public class OwnerController extends UserController {
     private Button logoutBtn;
 private StorageTable storageTable = new StorageTable();
     @Override
-    public void setServices(AgentService agentService, OwnerService ownerService, UserService userService) {
+    public void setServices(AgentService agentService, OwnerService ownerService, UserService userService, RentService rentService) {
         if (_ownerService == null){
             _ownerService = ownerService;
         }

@@ -39,20 +39,14 @@ public class SaleDAO extends DAO<Sales> {
             return null;
         }
     }
-
-    public List<Sales> getByOwner(Owner owner)
+    public List<Sales>getAllActive()
     {
-        try {
-            return this.getAll().filter(s -> s.getOwner().equals(owner)).toList();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return null;
+        try
+        {
+            return this.getAll().filter(n->n.isActive()).toList();
         }
-    }
-    public List<Sales> getByOwnerId(int id) {
-        try {
-            return this.getAll().filter(n -> n.getOwner().getId() == id).toList();
-        } catch (Exception e) {
+        catch(Exception e)
+        {
             System.out.println(e.getMessage());
             return null;
         }
