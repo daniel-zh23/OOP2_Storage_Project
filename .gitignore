@@ -9,6 +9,7 @@ target/
 .idea/jpa-buddy.xml
 .idea/compiler.xml
 .idea/libraries/
+.idea/misc.xml
 *.iws
 *.iml
 *.ipr

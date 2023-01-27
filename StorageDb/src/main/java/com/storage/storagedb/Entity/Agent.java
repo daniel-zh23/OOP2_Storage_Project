@@ -15,7 +15,7 @@ public class Agent extends User {
     private Double salary;
     @Column(name="company")
     private String company;
-    @Column (name="rating")
+    @Column (name="rating",nullable = false)
     private Double rating; // score 0-5
 
 
@@ -66,6 +66,7 @@ public class Agent extends User {
         super(fname, lname, username, email, phone, pass);
         this.salary = salary;
         this.company = company;
+        this.rating=0.0;
     }
 
     public Set<Storage> getStorages() {

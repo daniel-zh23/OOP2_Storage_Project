@@ -3,9 +3,11 @@ package com.storage.storageBusiness.Services;
 import com.storage.storageBusiness.Common.NotificationMessages;
 import com.storage.storageBusiness.Models.AgentViewModel;
 import com.storage.storageBusiness.Models.StorageViewModel;
+import com.storage.storagedb.DAO.StatusDAO;
 import com.storage.storagedb.DAO.StorageDAO;
 import com.storage.storagedb.DAO.UserDAO;
 import com.storage.storagedb.Entity.Agent;
+import com.storage.storagedb.Entity.Status;
 import com.storage.storagedb.Entity.Storage;
 
 import java.util.ArrayList;
@@ -17,11 +19,13 @@ public class StorageService {
     private UserDAO _userDao;
 
     private NotificationService _notificationService;
+    private StatusDAO _statusDao;
 
     public StorageService(NotificationService notificationService) {
         _storageDao = new StorageDAO();
         _userDao = new UserDAO();
         _notificationService = notificationService;
+        _statusDao = new StatusDAO();
     }
 
     public List<StorageViewModel> getAllByOwnerId(int id){
@@ -88,10 +92,14 @@ public class StorageService {
         Agent a =(Agent)_userDao.get(agent.getId());
         Storage s = _storageDao.get(storage.getId());
         s.getAgents().add(a);
-        _notificationService.addNotification(agent.getId(), NotificationMessages.agentNewStorage);
+        _statusDao.openSession();
+        s.setStatusId(3);
+        _statusDao.close();
         _storageDao.update(s);
         _storageDao.close();
         _userDao.close();
+        _notificationService.addNotification(agent.getId(), NotificationMessages.agentNewStorage);
+
     }
     public List<StorageViewModel> getAllByAgentId(int id)
     {

@@ -40,6 +40,8 @@ public class CreateSaleController extends CreateController {
     private Label durationError;
     @FXML
     private Label error;
+    @FXML
+    private Label tableErrorLabel;
     private UserService _userService;
     private RentService _rentService;
     private Integer _agentId;
@@ -109,12 +111,16 @@ public class CreateSaleController extends CreateController {
         if (isValid){
             Integer renterId = null;
             try {
-                renterId = ((RenterViewModel) tableBox.getSelectionModel().getSelectedItem()).getId();
+                 renterId=((RenterViewModel) tableBox.getSelectionModel().getSelectedItem()).getId();
+                if(renterId==null){tableErrorLabel.setText("Select renter from table!");return;}
+
             } catch (Exception e) {
                 error.setText(ErrorMessages.InvalidSelection);
                 return;
             }
             _rentService.createSale(parsedPrice, parsedMonths, _storageId, _agentId, renterId);
+            Stage window = (Stage) backButton.getScene().getWindow();
+            window.setScene(_scene);
         }
     }
 }

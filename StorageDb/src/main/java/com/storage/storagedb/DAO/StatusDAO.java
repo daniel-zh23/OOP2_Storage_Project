@@ -7,11 +7,12 @@ import java.util.stream.Stream;
 public class StatusDAO extends DAO<Status>{
     @Override
     public Status get(Integer id) {
-        return null;
+        //return null;
+        return session.get(Status.class,id);
     }
 
     @Override
     public Stream<Status> getAll() {
-        return null;
+        return session.createQuery("Select s from Status s").stream();
     }
 }

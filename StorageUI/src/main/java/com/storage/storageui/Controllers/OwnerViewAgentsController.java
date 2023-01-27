@@ -67,6 +67,8 @@ public class OwnerViewAgentsController {
         _storageService.assignAgentToStorage(storage,agent);
         Stage window = (Stage) backButton.getScene().getWindow();
         window.setScene(_scene);
+
+
     }
 
 

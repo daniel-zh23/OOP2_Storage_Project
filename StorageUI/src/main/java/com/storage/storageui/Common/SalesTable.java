@@ -16,7 +16,7 @@ public class SalesTable {
     }
     public void generateTable(TableView table)
     {
-        table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        //table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         TableColumn<SaleViewModel, String> colStorageInfo = new TableColumn("Storage");
         colStorageInfo.setCellValueFactory(new PropertyValueFactory<SaleViewModel,String>("storageInfo"));
         TableColumn<SaleViewModel, String> colDate  = new TableColumn("Date of Rent");

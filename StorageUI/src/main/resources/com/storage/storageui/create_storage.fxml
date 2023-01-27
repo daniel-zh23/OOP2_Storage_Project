@@ -102,7 +102,7 @@
             <Insets left="15.0" right="15.0" />
          </VBox.margin>
       </VBox>
-      <Button mnemonicParsing="false" onAction="#onCreate" text="Submit">
+      <Button defaultButton="true" mnemonicParsing="false" onAction="#onCreate" text="Submit">
          <VBox.margin>
             <Insets bottom="15.0" top="15.0" />
          </VBox.margin></Button>

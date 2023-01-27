@@ -2,13 +2,8 @@ package com.storage.storageBusiness.Services;
 
 import com.storage.storageBusiness.Models.RenterViewModel;
 import com.storage.storageBusiness.Models.SaleViewModel;
-import com.storage.storagedb.DAO.RenterDAO;
-import com.storage.storagedb.DAO.SaleDAO;
-import com.storage.storagedb.DAO.UserDAO;
-import com.storage.storagedb.Entity.Owner;
-import com.storage.storagedb.Entity.Renter;
-import com.storage.storagedb.Entity.Sales;
-import com.storage.storagedb.Entity.Agent;
+import com.storage.storagedb.DAO.*;
+import com.storage.storagedb.Entity.*;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -21,11 +16,15 @@ public class RentService {
     private final RenterDAO _renterDao;
     private final SaleDAO _saleDao;
     private final UserDAO _userDao;
+    private final StorageDAO _storageDao;
+    private StatusDAO _statusDao;
     public RentService()
     {
         _renterDao= new RenterDAO();
         _saleDao=new SaleDAO();
         _userDao = new UserDAO();
+        _storageDao = new StorageDAO();
+        _statusDao = new StatusDAO();
     }
     public List<RenterViewModel> getAllRenters()
     {
@@ -46,6 +45,13 @@ public class RentService {
             _saleDao.openSession();
             _saleDao.save(new Sales(price, duration, LocalDate.now(), storageId, agentId, renterId));
             _saleDao.close();
+            _storageDao.openSession();
+            Storage storage = _storageDao.get(storageId);
+            _statusDao.openSession();
+            storage.setStatusId(2);
+            _statusDao.close();
+            _storageDao.update(storage);
+            _storageDao.close();
         }
         catch(Exception e)
         {

@@ -39,10 +39,10 @@
             <TableView fx:id="tableBox" prefHeight="350.0" prefWidth="439.0" />
             <VBox alignment="CENTER" prefHeight="350.0" prefWidth="202.0">
                <children>
-                  <Label fx:id="error" />
+                  <Label fx:id="error" wrapText="true" />
                   <HBox prefHeight="68.0" prefWidth="155.0">
                      <children>
-                        <Button fx:id="loadRentersButton" mnemonicParsing="false" onAction="#onLoadRenters" prefHeight="49.0" prefWidth="122.0" text="Load Available Renters" textAlignment="CENTER" wrapText="true" />
+                        <Button fx:id="loadRentersButton" defaultButton="true" mnemonicParsing="false" onAction="#onLoadRenters" prefHeight="49.0" prefWidth="122.0" text="Load Available Renters" textAlignment="CENTER" wrapText="true" />
                         <Button fx:id="createRenterBUtton" mnemonicParsing="false" onAction="#onCreateRenter" prefHeight="49.0" prefWidth="98.0" text="Create New Renter" textAlignment="CENTER" wrapText="true" />
                      </children>
                   </HBox>

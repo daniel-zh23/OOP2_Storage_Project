@@ -44,6 +44,8 @@ public class AgentController extends UserController {
     private Button createContractButton;
     @FXML
     private TableView tableBox;
+    @FXML
+    private Label errorLabel;
     private StorageTable storageTable = new StorageTable();
     private SalesTable salesTable = new SalesTable();
     private boolean tableToggle = false; //false for storages , true for contracts
@@ -121,8 +123,9 @@ public class AgentController extends UserController {
     }
     public void onCreateContract()throws Exception
     {
-        if(tableToggle){System.out.println("Wrong table selected!");return;}
+        if(tableToggle){errorLabel.setText("Wrong table selected!");return;}
         var data=(StorageViewModel)tableBox.getSelectionModel().getSelectedItem();
+        if(data==null){   errorLabel.setText("Select Storage!"); return;}
         FXMLLoader fxmlLoader = new FXMLLoader(StorageApplication.class.getResource("create_sale.fxml"));
         Parent object = fxmlLoader.load();
         var controller = fxmlLoader.<CreateSaleController>getController();
@@ -130,7 +133,6 @@ public class AgentController extends UserController {
         Scene scene = new Scene(object);
         Stage window = (Stage)logoutBtn.getScene().getWindow();
         window.setScene(scene);
-
     }
 }
 
