@@ -129,7 +129,7 @@ public class AgentController extends UserController {
         FXMLLoader fxmlLoader = new FXMLLoader(StorageApplication.class.getResource("create_sale.fxml"));
         Parent object = fxmlLoader.load();
         var controller = fxmlLoader.<CreateSaleController>getController();
-        controller.setServices(logoutBtn.getScene(),_userService,_rentService, _agentId, (((StorageViewModel) tableBox.getSelectionModel().getSelectedItem()).getId()));
+        controller.setServices(logoutBtn.getScene(),_userService,_rentService, _storageService, _agentId, (((StorageViewModel) tableBox.getSelectionModel().getSelectedItem()).getId()));
         Scene scene = new Scene(object);
         Stage window = (Stage)logoutBtn.getScene().getWindow();
         window.setScene(scene);

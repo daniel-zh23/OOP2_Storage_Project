@@ -46,6 +46,7 @@
                         <Button fx:id="createRenterBUtton" mnemonicParsing="false" onAction="#onCreateRenter" prefHeight="49.0" prefWidth="98.0" text="Create New Renter" textAlignment="CENTER" wrapText="true" />
                      </children>
                   </HBox>
+                  <Label fx:id="recommendedPrice" />
                   <VBox prefHeight="90.0" prefWidth="155.0">
                      <children>
                         <Label prefHeight="47.0" prefWidth="155.0" text="Negotiated price:" />

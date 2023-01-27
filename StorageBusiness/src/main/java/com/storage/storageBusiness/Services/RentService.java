@@ -16,14 +16,14 @@ import static java.util.stream.Collectors.toList;
 public class RentService {
     private final RenterDAO _renterDao;
     private final SaleDAO _saleDao;
-    private final UserDAO _userDao;
     private StorageService _storageService;
+    private UserService _userService;
     private NotificationService _notificationService;
-    public RentService(StorageService storageService, NotificationService notificationService)
+    public RentService(StorageService storageService, NotificationService notificationService, UserService userService)
     {
         _renterDao= new RenterDAO();
         _saleDao=new SaleDAO();
-        _userDao = new UserDAO();
+        _userService = userService;
         _storageService = storageService;
         _notificationService = notificationService;
     }
@@ -40,12 +40,18 @@ public class RentService {
         _renterDao.save(new Renter(fName, lName, phone));
         _renterDao.close();
     }
-    public void createSale(Double price, Integer duration, Integer storageId, Integer agentId, Integer renterId)
+    public void createSale(Double recommendedPrice, Double price, Integer duration, Integer storageId, Integer agentId, Integer renterId)
     {
         try {
             _saleDao.openSession();
             _saleDao.save(new Sales(price, duration, LocalDate.now(), storageId, agentId, renterId));
             var ownerId = _storageService.getOwnerId(storageId);
+            var priceDifference = (price - recommendedPrice) / 100;
+            if (priceDifference < 0){
+                _userService.decreaseRatingBy(agentId, priceDifference);
+            } else {
+                _userService.increaseRatingBy(agentId, priceDifference);
+            }
             _notificationService.addNotification(ownerId, NotificationMessages.ownerNewContract);
             _saleDao.close();
            _storageService.changeStoragestatusById(storageId,2);

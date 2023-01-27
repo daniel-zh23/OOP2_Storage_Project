@@ -7,10 +7,8 @@ import com.storage.storagedb.DAO.StatusDAO;
 import com.storage.storagedb.DAO.StorageDAO;
 import com.storage.storagedb.DAO.UserDAO;
 import com.storage.storagedb.Entity.Agent;
-import com.storage.storagedb.Entity.Status;
 import com.storage.storagedb.Entity.Storage;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,10 +33,20 @@ public class StorageService {
         _storageDao.update(storage);
         _storageDao.close();
     }
-public StorageViewModel getById(int id)
-{
-    return null;
-}
+
+    public StorageViewModel getById(int id){
+        _storageDao.openSession();
+        var model = _storageDao.get(id);
+        _storageDao.close();
+        return new StorageViewModel(model.getId(), model.getAddress(),
+                model.getStatus().getName(), model.getHeight(), model.getWidth(),
+                model.getLength(), model.getAgents().isEmpty()
+                ? "None"
+                : String.join("\n", model.getAgents().stream()
+                .map(a -> String.format("%s %s - %s", a.getFirstName(), a.getLastName(), a.getPhone()))
+                .collect(Collectors.toList())));
+    }
+
     public int getOwnerId(int id){
         _storageDao.openSession();
         var result = _storageDao.get(id).getOwner().getId();
@@ -117,7 +125,6 @@ public StorageViewModel getById(int id)
         _storageDao.close();
         _userDao.close();
         _notificationService.addNotification(agent.getId(), NotificationMessages.agentNewStorage);
-
     }
     public List<StorageViewModel> getAllByAgentId(int id)
     {

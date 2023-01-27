@@ -28,7 +28,7 @@ public abstract class CreateController {
         } catch(Exception e){
             return null;
         }
-        return parsed;
+        return (double) Math.round(parsed * 100) / 100;
     }
 
     protected Integer tryParseInt(String value){

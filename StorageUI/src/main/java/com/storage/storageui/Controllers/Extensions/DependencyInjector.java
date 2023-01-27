@@ -21,7 +21,7 @@ public class DependencyInjector {
         _storageService = new StorageService(_notificationService);
         _ownerService = new OwnerService();
         _agentService = new AgentService();
-        _rentService = new RentService(_storageService, _notificationService);
+        _rentService = new RentService(_storageService, _notificationService, _userService);
     }
 
     public AgentService agentServiceInstance() {
