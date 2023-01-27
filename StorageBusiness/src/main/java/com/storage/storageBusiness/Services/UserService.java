@@ -6,6 +6,7 @@ import com.storage.storageBusiness.Models.NotificationModel;
 import com.storage.storageBusiness.Models.ResultLoginModel;
 import com.storage.storagedb.DAO.NotificationDAO;
 import com.storage.storagedb.DAO.UserDAO;
+import com.storage.storagedb.Entity.Agent;
 import com.storage.storagedb.Entity.Notification;
 import com.storage.storagedb.Entity.User;
 
@@ -73,7 +74,23 @@ public class UserService {
         _userDao.openSession();
         var user = _userDao.getAll().filter(u -> u.getId() == id).findFirst().get();
         user.setActive(false);
-        _userDao.save(user);
+        _userDao.update(user);
+        _userDao.close();
+    }
+
+    public void decreaseRatingBy(Integer agentId, double value) {
+        _userDao.openSession();
+        var agent = (Agent) _userDao.get(agentId);
+        agent.setRating(agent.getRating() - value);
+        _userDao.update(agent);
+        _userDao.close();
+    }
+
+    public void increaseRatingBy(Integer agentId, double value) {
+        _userDao.openSession();
+        var agent = (Agent) _userDao.get(agentId);
+        agent.setRating(agent.getRating() + value);
+        _userDao.update(agent);
         _userDao.close();
     }
 }

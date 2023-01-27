@@ -1,12 +1,10 @@
 package com.storage.storageui.Controllers;
 
 import com.storage.storageBusiness.Models.RenterViewModel;
-import com.storage.storageBusiness.Models.StorageViewModel;
 import com.storage.storageBusiness.Services.*;
 import com.storage.storageui.Common.ErrorMessages;
 import com.storage.storageui.Common.RentersTable;
 import com.storage.storageui.Controllers.Contracts.CreateController;
-import com.storage.storageui.Controllers.Contracts.UserController;
 import com.storage.storageui.StorageApplication;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,6 +27,8 @@ public class CreateSaleController extends CreateController {
     @FXML
     private Button createSellButton;
     @FXML
+    private Label recommendedPrice;
+    @FXML
     private TableView tableBox;
     @FXML
     private TextField priceText;
@@ -42,11 +42,12 @@ public class CreateSaleController extends CreateController {
     private Label error;
     private UserService _userService;
     private RentService _rentService;
+    private StorageService _storageService;
     private Integer _agentId;
     private Integer _storageId;
     private Scene _scene;
 
-    public void setServices(Scene scene, UserService userService, RentService rentService, int agentId, int storageId) {
+    public void setServices(Scene scene, UserService userService, RentService rentService, StorageService storageService, int agentId, int storageId) {
 
         if(_userService == null){
             _userService = userService;
@@ -60,8 +61,17 @@ public class CreateSaleController extends CreateController {
         if (_storageId == null){
             _storageId = storageId;
         }
+        if (_storageService == null){
+            _storageService = storageService;
+        }
       this._scene=scene;
+
+        var storage = _storageService.getById(_storageId);
+        Double recPrice = (storage.getLength() * storage.getWidth() * storage.getHeight()) / 15;
+        recommendedPrice.setText(String.format("Recommended price: %.2f", recPrice));
     }
+
+
     @FXML
     public void onBack()
     {
@@ -114,7 +124,9 @@ public class CreateSaleController extends CreateController {
                 error.setText(ErrorMessages.InvalidSelection);
                 return;
             }
-            _rentService.createSale(parsedPrice, parsedMonths, _storageId, _agentId, renterId);
+            _rentService.createSale(Double.parseDouble(recommendedPrice.getText().split(" ")[2]), parsedPrice, parsedMonths, _storageId, _agentId, renterId);
         }
+
     }
+
 }
