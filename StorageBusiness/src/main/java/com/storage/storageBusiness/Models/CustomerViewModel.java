@@ -1,16 +1,15 @@
 package com.storage.storageBusiness.Models;
 
 import com.storage.storageBusiness.Models.Contracts.UserViewModel;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
-public class RenterViewModel extends UserViewModel {
+public class CustomerViewModel extends UserViewModel {
     private SimpleStringProperty firstName;
     private SimpleStringProperty lastName;
     private SimpleStringProperty phone;
 
 
-    public RenterViewModel(int id, String fName,String lname, String phone)
+    public CustomerViewModel(int id, String fName, String lname, String phone)
    {
        super(id);
        this.firstName=new SimpleStringProperty(fName);

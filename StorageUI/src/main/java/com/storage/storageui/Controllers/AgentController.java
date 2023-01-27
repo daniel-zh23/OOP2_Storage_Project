@@ -2,7 +2,6 @@ package com.storage.storageui.Controllers;
 
 import com.storage.storageBusiness.Models.StorageViewModel;
 import com.storage.storageBusiness.Services.*;
-import com.storage.storageui.Common.RentersTable;
 import com.storage.storageui.Common.SalesTable;
 import com.storage.storageui.Common.StorageTable;
 import com.storage.storageui.Controllers.Contracts.UserController;
@@ -75,7 +74,7 @@ public class AgentController extends UserController {
     }
 
     public void onClearNotifications() {
-        _notificationService.setNotificationReadStatus(_notificationService.fetchNotificationsbyUserId(_agentId,false));
+        _notificationService.setNotificationReadStatus(_notificationService.fetchNotificationsByUserId(_agentId,false));
         clearNotificationsBtn.setVisible(false);
         notificationsCombo2.setText("No notifications");
         notificationsCombo2.getItems().setAll();

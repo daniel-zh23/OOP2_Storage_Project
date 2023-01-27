@@ -1,6 +1,6 @@
 package com.storage.storageui.Controllers;
 
-import com.storage.storageBusiness.Models.RenterViewModel;
+import com.storage.storageBusiness.Models.CustomerViewModel;
 import com.storage.storageBusiness.Services.*;
 import com.storage.storageui.Common.ErrorMessages;
 import com.storage.storageui.Common.RentersTable;
@@ -89,9 +89,9 @@ public class CreateSaleController extends CreateController {
     @FXML
     public void onCreateRenter() throws Exception
     {
-        FXMLLoader fxmlLoader = new FXMLLoader(StorageApplication.class.getResource("create_renter.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(StorageApplication.class.getResource("create_customer.fxml"));
         Parent object = fxmlLoader.load();
-        var controller = fxmlLoader.<CreateRenterController>getController();
+        var controller = fxmlLoader.<CreateCustomerController>getController();
         controller.setServices(backButton.getScene(), _rentService);
         Scene scene = new Scene(object);
         Stage window = (Stage) backButton.getScene().getWindow();
@@ -120,14 +120,14 @@ public class CreateSaleController extends CreateController {
         if (isValid){
             Integer renterId = null;
             try {
-                 renterId=((RenterViewModel) tableBox.getSelectionModel().getSelectedItem()).getId();
+                 renterId=((CustomerViewModel) tableBox.getSelectionModel().getSelectedItem()).getId();
                 if(renterId==null){tableErrorLabel.setText("Select renter from table!");return;}
 
             } catch (Exception e) {
                 error.setText(ErrorMessages.InvalidSelection);
                 return;
             }
-            _rentService.createSale(Double.parseDouble(recommendedPrice.getText().split(" ")[2]),parsedPrice, parsedMonths, _storageId, _agentId, renterId);
+            _rentService.createRent(Double.parseDouble(recommendedPrice.getText().split(" ")[2]),parsedPrice, parsedMonths, _storageId, _agentId, renterId);
             onBack();
         }
     }

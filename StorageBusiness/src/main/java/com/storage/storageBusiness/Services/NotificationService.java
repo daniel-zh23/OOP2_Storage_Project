@@ -1,20 +1,24 @@
 package com.storage.storageBusiness.Services;
 
+import com.storage.storageBusiness.Common.LoggerMessages;
 import com.storage.storageBusiness.Models.NotificationModel;
 import com.storage.storagedb.DAO.NotificationDAO;
 import com.storage.storagedb.Entity.Notification;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public class NotificationService {
+    private static final Logger LOGGER = Logger.getLogger(LoggerMessages.LoggerName);
     private final NotificationDAO _notificationDao;
 
     public NotificationService() {
         _notificationDao = new NotificationDAO();
     }
 
-    public List<NotificationModel> fetchNotificationsbyUserId(int id, boolean unreadOnly)
+    public List<NotificationModel> fetchNotificationsByUserId(int id, boolean unreadOnly)
     {
         _notificationDao.openSession();
         List<NotificationModel> notifications =_notificationDao.getByUserId(id,unreadOnly).stream()
@@ -40,5 +44,7 @@ public class NotificationService {
         _notificationDao.openSession();
         _notificationDao.save(new Notification(userId,notificationBody));
         _notificationDao.close();
+
+        LOGGER.log(Level.INFO, String.format(LoggerMessages.AddNotification, userId));
     }
 }

@@ -1,5 +1,4 @@
 package com.storage.storageui.Common;
-import com.storage.storageBusiness.Models.RenterViewModel;
 import com.storage.storageBusiness.Models.SaleViewModel;
 import javafx.collections.FXCollections;
 import javafx.scene.control.TableColumn;

@@ -1,17 +1,11 @@
 package com.storage.storagedb.DAO;
 
-import com.storage.storagedb.Entity.Owner;
-import org.hibernate.query.Query;
+import com.storage.storagedb.DAO.Contracts.DAO;
 import com.storage.storagedb.Entity.Storage;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class StorageDAO extends DAO <Storage>{
+public class StorageDAO extends DAO<Storage> {
 @Override
 public Storage get(Integer id)
 {

@@ -4,6 +4,7 @@ module com.storage.storageui {
     requires com.storage.storageBusiness;
 
     requires org.controlsfx.controls;
+    requires java.logging;
 
     opens com.storage.storageui to javafx.fxml;
     exports com.storage.storageui;

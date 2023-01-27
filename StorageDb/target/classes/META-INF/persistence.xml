@@ -11,7 +11,7 @@
         <class>com.storage.storagedb.Entity.Admin</class>
         <class>com.storage.storagedb.Entity.Storage</class>
         <class>com.storage.storagedb.Entity.Notification</class>
-        <class>com.storage.storagedb.Entity.Renter</class>
+        <class>com.storage.storagedb.Entity.Customer</class>
         <class>com.storage.storagedb.Entity.Sales</class>
         <properties>
             <property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5455/postgres"/>

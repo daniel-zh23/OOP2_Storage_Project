@@ -27,7 +27,7 @@ public class Main {
         //Seed Admin
         //Pass: admin1234
         var passAdmin = "ac9689e2272427085e35b9d3e3e8bed88cb3434828b43b86fc0596cad4c6e270";
-        Admin admin = new Admin("Admin", "ADMIN", "admin", "daniel@abv.bg", "+1234", "admin");
+        Admin admin = new Admin("Admin", "ADMIN", "admin", "admin@abv.bg", "+1234", passAdmin);
         admin.setFirstLogin(false);
 
         user.save(admin);

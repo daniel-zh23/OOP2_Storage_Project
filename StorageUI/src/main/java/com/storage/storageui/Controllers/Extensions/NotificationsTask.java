@@ -2,7 +2,6 @@ package com.storage.storageui.Controllers.Extensions;
 
 import com.storage.storageBusiness.Models.NotificationModel;
 import com.storage.storageBusiness.Services.NotificationService;
-import com.storage.storageBusiness.Services.UserService;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
@@ -29,7 +28,7 @@ public class NotificationsTask extends TimerTask {
 
     @Override
     public void run() {
-        List<NotificationModel> notifications =_notificationService.fetchNotificationsbyUserId(_agentId,false);
+        List<NotificationModel> notifications =_notificationService.fetchNotificationsByUserId(_agentId,false);
         if (notifications.size() != 0){
             clearNotificationsBtn.setVisible(true);
         }

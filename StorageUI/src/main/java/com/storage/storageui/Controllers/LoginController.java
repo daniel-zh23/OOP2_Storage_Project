@@ -36,7 +36,7 @@ public class LoginController {
                     Map.entry("Agent", LoginController.class.getMethod("configureAgentController", UserController.class, int.class))
             );
         } catch(Exception e) {
-            System.out.println("Kaputna contruktora");
+            System.out.println(e.getMessage());
         }
     }
 

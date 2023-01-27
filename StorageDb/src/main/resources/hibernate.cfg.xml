@@ -20,7 +20,7 @@
       <mapping class="com.storage.storagedb.Entity.Storage"/>
       <mapping class="com.storage.storagedb.Entity.Notification"/>
       <mapping class="com.storage.storagedb.Entity.Sales"/>
-      <mapping class="com.storage.storagedb.Entity.Renter"/>
+      <mapping class="com.storage.storagedb.Entity.Customer"/>
       <mapping class="com.storage.storagedb.Entity.Status"/>
 
   </session-factory>

@@ -1,5 +1,6 @@
 package com.storage.storageBusiness.Services;
 
+import com.storage.storageBusiness.Common.LoggerMessages;
 import com.storage.storageBusiness.Common.NotificationMessages;
 import com.storage.storageBusiness.Models.AgentViewModel;
 import com.storage.storageBusiness.Models.StorageViewModel;
@@ -12,9 +13,12 @@ import com.storage.storagedb.Entity.Storage;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public class StorageService {
+    private static final Logger LOGGER = Logger.getLogger(LoggerMessages.LoggerName);
     private StorageDAO _storageDao;
     private UserDAO _userDao;
     private StatusDAO _statusDao;
@@ -27,13 +31,14 @@ public class StorageService {
         _notificationService = notificationService;
         _statusDao= new StatusDAO();
     }
-    public void changeStoragestatusById(int storageId,int statusId)
+    public void changeStorageStatusById(int storageId, int statusId)
     {
         _storageDao.openSession();
         Storage storage = _storageDao.get(storageId);
         storage.setStatusId(statusId);
         _storageDao.update(storage);
         _storageDao.close();
+        LOGGER.log(Level.INFO, String.format(LoggerMessages.ChangeStorageStatus, storageId, statusId));
     }
 
     public StorageViewModel getById(int id){
@@ -84,6 +89,7 @@ public class StorageService {
         _storageDao.openSession();
         _storageDao.save(new Storage(width, length, height, address, 1, ownerId));
         _storageDao.close();
+        LOGGER.log(Level.INFO, String.format(LoggerMessages.CreateStorage, ownerId));
     }
 
     public boolean checkId(int id){
@@ -99,6 +105,7 @@ public class StorageService {
         storage.setIsActive(false);
         _storageDao.save(storage);
         _storageDao.close();
+        LOGGER.log(Level.INFO, String.format(LoggerMessages.DisableStorage, id));
     }
     public void updateStorages(List<StorageViewModel>storages)
     {
@@ -112,6 +119,7 @@ public class StorageService {
             _storageDao.update(storage);
         }
         _storageDao.close();
+        LOGGER.log(Level.INFO, LoggerMessages.UpdateStorages);
     }
     public void assignAgentToStorage(StorageViewModel storage, AgentViewModel agent)
     {
@@ -127,6 +135,7 @@ public class StorageService {
         _storageDao.close();
         _userDao.close();
         _notificationService.addNotification(agent.getId(), NotificationMessages.agentNewStorage);
+        LOGGER.log(Level.INFO, String.format(LoggerMessages.AssignAgentToStorage, agent.getId(), storage.getId()));
     }
     public List<StorageViewModel> getAllByAgentId(int id)
     {
@@ -159,5 +168,6 @@ public class StorageService {
         storage.setAgents(new HashSet<>(Arrays.asList(agent)));
         _storageDao.update(storage);
         _storageDao.close();
+        LOGGER.log(Level.INFO, String.format(LoggerMessages.ContractToAgent, agentId));
     }
 }

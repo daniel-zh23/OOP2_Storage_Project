@@ -2,7 +2,7 @@ package com.storage.storagedb.Entity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
+
 @Entity
 @Table(name="sales")
 public class Sales {
@@ -28,11 +28,11 @@ public class Sales {
     private Agent agent;
     @Column(name = "agent_id")
     private Integer agentId;
-    @ManyToOne(fetch=FetchType.EAGER, targetEntity=Renter.class)
-    @JoinColumn(name="renter_id", nullable = false, insertable = false, updatable = false)
-    private Renter renter;
-    @Column(name = "renter_id")
-    private Integer renterId;
+    @ManyToOne(fetch=FetchType.EAGER, targetEntity= Customer.class)
+    @JoinColumn(name="customer_id", nullable = false, insertable = false, updatable = false)
+    private Customer customer;
+    @Column(name = "customer_id")
+    private Integer customerId;
 
     public Sales() {
     }
@@ -43,7 +43,7 @@ public class Sales {
         this.dateOfSale = dateOfSale;
         this.storageId = storageId;
         this.agentId = agentId;
-        this.renterId = renterId;
+        this.customerId = renterId;
     }
 
     public Integer getId() {
@@ -82,12 +82,12 @@ public class Sales {
         this.agent = agent;
     }
 
-    public Renter getRenter() {
-        return renter;
+    public Customer getRenter() {
+        return customer;
     }
 
-    public void setRenter(Renter renter) {
-        this.renter = renter;
+    public void setRenter(Customer customer) {
+        this.customer = customer;
     }
 
     public boolean isActive() {
@@ -126,11 +126,11 @@ public class Sales {
         this.agentId = agentId;
     }
 
-    public Integer getRenterId() {
-        return renterId;
+    public Integer getCustomerId() {
+        return customerId;
     }
 
-    public void setRenterId(Integer renterId) {
-        this.renterId = renterId;
+    public void setCustomerId(Integer renterId) {
+        this.customerId = renterId;
     }
 }

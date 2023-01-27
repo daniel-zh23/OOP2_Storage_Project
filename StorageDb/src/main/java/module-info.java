@@ -8,4 +8,5 @@ module com.storage.storagedb {
 
     exports com.storage.storagedb.DAO;
     exports com.storage.storagedb.Entity;
+    exports com.storage.storagedb.DAO.Contracts;
 }

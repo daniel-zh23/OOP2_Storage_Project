@@ -10,7 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class CreateRenterController extends CreateController {
+public class CreateCustomerController extends CreateController {
 
     private Scene _scene;
     private RentService _rentService;

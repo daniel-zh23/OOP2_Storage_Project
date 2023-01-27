@@ -1,8 +1,9 @@
 package com.storage.storagedb.DAO;
 import java.util.stream.Stream;
 
+import com.storage.storagedb.DAO.Contracts.DAO;
 import com.storage.storagedb.Entity.User;
-import org.hibernate.*;
+
 public class UserDAO extends DAO<User>
 {
     public UserDAO()

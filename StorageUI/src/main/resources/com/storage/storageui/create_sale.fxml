@@ -42,8 +42,8 @@
                   <Label fx:id="error" wrapText="true" />
                   <HBox prefHeight="68.0" prefWidth="155.0">
                      <children>
-                        <Button fx:id="loadRentersButton" defaultButton="true" mnemonicParsing="false" onAction="#onLoadRenters" prefHeight="49.0" prefWidth="122.0" text="Load Available Renters" textAlignment="CENTER" wrapText="true" />
-                        <Button fx:id="createRenterBUtton" mnemonicParsing="false" onAction="#onCreateRenter" prefHeight="49.0" prefWidth="98.0" text="Create New Renter" textAlignment="CENTER" wrapText="true" />
+                        <Button fx:id="loadRentersButton" defaultButton="true" mnemonicParsing="false" onAction="#onLoadRenters" prefHeight="49.0" prefWidth="122.0" text="Load Available Customers" textAlignment="CENTER" wrapText="true" />
+                        <Button fx:id="createRenterBUtton" mnemonicParsing="false" onAction="#onCreateRenter" prefHeight="49.0" prefWidth="98.0" text="Create New Customer" textAlignment="CENTER" wrapText="true" />
                      </children>
                   </HBox>
                   <Label fx:id="recommendedPrice" />
@@ -61,7 +61,7 @@
                         <Label fx:id="durationError" />
                      </children>
                   </VBox>
-                  <Button fx:id="createSellButton" mnemonicParsing="false" onAction="#onCreateSell" prefHeight="49.0" prefWidth="147.0" text="Create Sell with highlighted renter" textAlignment="CENTER" wrapText="true" />
+                  <Button fx:id="createSellButton" mnemonicParsing="false" onAction="#onCreateSell" prefHeight="49.0" prefWidth="147.0" text="Create Sell with highlighted customer" textAlignment="CENTER" wrapText="true" />
                </children>
             </VBox>
          </children>

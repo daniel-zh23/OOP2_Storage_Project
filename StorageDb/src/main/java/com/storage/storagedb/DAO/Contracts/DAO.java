@@ -1,4 +1,4 @@
-package com.storage.storagedb.DAO;
+package com.storage.storagedb.DAO.Contracts;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -25,7 +25,7 @@ public abstract class DAO<T> implements AutoCloseable{
         executeInsideTransaction(session->session.merge(t));
     }
 
-    DAO()
+    protected DAO()
     {
         this.factory = new Configuration().configure().buildSessionFactory();
     }

@@ -2,8 +2,8 @@ package com.storage.storagedb.Entity;
 
 import javax.persistence.*;
 @Entity
-@Table(name="renter")
-public class Renter {
+@Table(name="customer")
+public class Customer {
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -16,10 +16,10 @@ public class Renter {
     @Column(name="phone", nullable = false, unique = true)
     private String phone;
 
-    public Renter() {
+    public Customer() {
     }
 
-    public Renter(String firstName,String lastName, String phone)
+    public Customer(String firstName, String lastName, String phone)
     {
         this.firstName = firstName;
         this.lastName = lastName;

@@ -1,6 +1,5 @@
 package com.storage.storageui.Controllers;
 
-import com.storage.storageBusiness.Models.AgentViewModel;
 import com.storage.storageBusiness.Models.Contracts.UserViewModel;
 import com.storage.storageBusiness.Models.StorageViewModel;
 import com.storage.storageBusiness.Services.*;
@@ -9,15 +8,12 @@ import com.storage.storageui.Controllers.Contracts.UserController;
 import com.storage.storageui.Controllers.Extensions.NotificationsTask;
 import com.storage.storageui.StorageApplication;
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
@@ -128,7 +124,7 @@ public class OwnerController extends UserController {
     @FXML
     protected void onClearNotifications()
     {
-        _notificationService.setNotificationReadStatus(_notificationService.fetchNotificationsbyUserId(ownerId,false));
+        _notificationService.setNotificationReadStatus(_notificationService.fetchNotificationsByUserId(ownerId,false));
         clearNotificationsBtn.setVisible(false);
         notificationsCombo2.setText("No notifications");
         notificationsCombo2.getItems().setAll();
