@@ -82,6 +82,8 @@ public class OwnerController extends UserController {
         if (_rentService == null){
             _rentService = rentService;
         }
+
+        new Thread(new SaleCheckerTask(_notificationService)).start();
     }
 
     public void setOwnerId(int id){

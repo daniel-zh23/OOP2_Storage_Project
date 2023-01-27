@@ -47,14 +47,11 @@ public class RentService {
             _saleDao.save(new Sales(price, duration, LocalDate.now(), storageId, agentId, renterId));
             var ownerId = _storageService.getOwnerId(storageId);
             var priceDifference = (price - recommendedPrice) / 100;
-            if (priceDifference < 0){
-                _userService.decreaseRatingBy(agentId, priceDifference);
-            } else {
-                _userService.increaseRatingBy(agentId, priceDifference);
-            }
+            _userService.adjustRatingBy(agentId, priceDifference);
             _notificationService.addNotification(ownerId, NotificationMessages.ownerNewContract);
             _saleDao.close();
            _storageService.changeStoragestatusById(storageId,2);
+           _storageService.setContractAgent(storageId, agentId);
         }
         catch(Exception e)
         {

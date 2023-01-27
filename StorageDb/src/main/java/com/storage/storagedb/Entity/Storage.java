@@ -39,13 +39,6 @@ public class Storage {
     @Column(name = "owner_id")
     private Integer ownerId;
 
-    //@ManyToOne(fetch = FetchType.EAGER, targetEntity = Agent.class)
-    //@JoinColumn(name = "agent_id", insertable = false, updatable = false)
-    //private Agent agent;
-
-    //@Column(name = "agentId_id")
-    //private Integer agentId;
-
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
     @JoinTable(
             name = "agent_storage",
@@ -78,6 +71,10 @@ public class Storage {
 
     public Set<Agent> getAgents() {
         return agents;
+    }
+
+    public void setAgents(Set<Agent> agents) {
+        this.agents = agents;
     }
 
     public Integer getId() {

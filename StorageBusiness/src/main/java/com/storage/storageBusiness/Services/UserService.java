@@ -78,18 +78,12 @@ public class UserService {
         _userDao.close();
     }
 
-    public void decreaseRatingBy(Integer agentId, double value) {
-        _userDao.openSession();
-        var agent = (Agent) _userDao.get(agentId);
-        agent.setRating(agent.getRating() - value);
-        _userDao.update(agent);
-        _userDao.close();
-    }
-
-    public void increaseRatingBy(Integer agentId, double value) {
+    public void adjustRatingBy(Integer agentId, double value) {
         _userDao.openSession();
         var agent = (Agent) _userDao.get(agentId);
         agent.setRating(agent.getRating() + value);
+        if (agent.getRating() > 10) agent.setRating(10.0);
+        if (agent.getRating() < 0) agent.setRating(0.0);
         _userDao.update(agent);
         _userDao.close();
     }

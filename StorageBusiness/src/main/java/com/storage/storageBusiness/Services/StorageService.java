@@ -9,6 +9,8 @@ import com.storage.storagedb.DAO.UserDAO;
 import com.storage.storagedb.Entity.Agent;
 import com.storage.storagedb.Entity.Storage;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -146,5 +148,16 @@ public class StorageService {
                                 .collect(Collectors.toList()))))
                 .collect(Collectors.toList());
         return storages;
+    }
+
+    public void setContractAgent(Integer storageId, Integer agentId) {
+        _storageDao.openSession();
+        _userDao.openSession();
+        var agent = (Agent) _userDao.get(agentId);
+        _userDao.close();
+        var storage = _storageDao.get(storageId);
+        storage.setAgents(new HashSet<>(Arrays.asList(agent)));
+        _storageDao.update(storage);
+        _storageDao.close();
     }
 }

@@ -50,6 +50,7 @@ public class AgentController extends UserController {
     private SalesTable salesTable = new SalesTable();
     private boolean tableToggle = false; //false for storages , true for contracts
 
+
     public void setServices(UserService userService, StorageService storageService, NotificationService notificationService, RentService rentService) {
         if (_userService == null){
             _userService = userService;
@@ -63,6 +64,8 @@ public class AgentController extends UserController {
         if(_rentService==null) {
             _rentService = rentService;
         }
+
+        new Thread(new SaleCheckerTask(_notificationService)).start();
     }
 
     public void setAgentId(int id) {

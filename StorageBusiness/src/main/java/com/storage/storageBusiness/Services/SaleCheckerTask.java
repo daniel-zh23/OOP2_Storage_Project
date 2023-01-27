@@ -11,7 +11,7 @@ import com.storage.storagedb.Entity.Storage;
 import java.time.LocalDate;
 import java.util.List;
 
-public class SaleCheckerTask extends Thread{
+public class SaleCheckerTask implements Runnable{
     private NotificationService _notificationService;
     private SaleDAO _saleDao;
     private StorageDAO _storageDao;
@@ -26,14 +26,15 @@ public class SaleCheckerTask extends Thread{
     }
     public void run()
     {
+        _saleDao.openSession();
         List<Sales> activeSales = _saleDao.getAllActive();
         for (Sales s:activeSales)
         {
             LocalDate endDate = s.getDateOfSale().plusMonths(s.getDuration());
-            if(endDate.isAfter(LocalDate.now()))
+            if(endDate.isBefore(LocalDate.now()))
             {
                 s.setActive(false);
-              //  s.getStorage().setStatus(new Status("Free"));
+                _saleDao.update(s);
                 Storage storage = s.getStorage();
                 _statusDao.openSession();
                 storage.setStatusId(1);
@@ -45,5 +46,6 @@ public class SaleCheckerTask extends Thread{
                 _notificationService.addNotification(s.getStorage().getOwner().getId(),NotificationMessages.contractExpired);
             }
         }
+        _saleDao.close();
     }
 }

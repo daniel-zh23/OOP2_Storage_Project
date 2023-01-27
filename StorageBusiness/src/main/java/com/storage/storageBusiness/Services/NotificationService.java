@@ -41,5 +41,4 @@ public class NotificationService {
         _notificationDao.save(new Notification(userId,notificationBody));
         _notificationDao.close();
     }
-
 }

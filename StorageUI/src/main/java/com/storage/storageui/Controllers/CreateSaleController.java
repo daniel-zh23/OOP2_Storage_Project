@@ -127,7 +127,7 @@ public class CreateSaleController extends CreateController {
                 error.setText(ErrorMessages.InvalidSelection);
                 return;
             }
-            _rentService.createSale(parsedPrice, parsedMonths, _storageId, _agentId, renterId);
+            _rentService.createSale(Double.parseDouble(recommendedPrice.getText().split(" ")[2]),parsedPrice, parsedMonths, _storageId, _agentId, renterId);
             onBack();
         }
     }
