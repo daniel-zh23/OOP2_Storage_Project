@@ -1,5 +1,6 @@
 package com.storage.storageBusiness.Services;
 
+import com.storage.storageBusiness.Common.NotificationMessages;
 import com.storage.storageBusiness.Models.RenterViewModel;
 import com.storage.storageBusiness.Models.SaleViewModel;
 import com.storage.storagedb.DAO.*;
@@ -16,15 +17,15 @@ public class RentService {
     private final RenterDAO _renterDao;
     private final SaleDAO _saleDao;
     private final UserDAO _userDao;
-    private final StorageDAO _storageDao;
-    private StatusDAO _statusDao;
-    public RentService()
+    private StorageService _storageService;
+    private NotificationService _notificationService;
+    public RentService(StorageService storageService, NotificationService notificationService)
     {
         _renterDao= new RenterDAO();
         _saleDao=new SaleDAO();
         _userDao = new UserDAO();
-        _storageDao = new StorageDAO();
-        _statusDao = new StatusDAO();
+        _storageService = storageService;
+        _notificationService = notificationService;
     }
     public List<RenterViewModel> getAllRenters()
     {
@@ -44,6 +45,8 @@ public class RentService {
         try {
             _saleDao.openSession();
             _saleDao.save(new Sales(price, duration, LocalDate.now(), storageId, agentId, renterId));
+            var ownerId = _storageService.getOwnerId(storageId);
+            _notificationService.addNotification(ownerId, NotificationMessages.ownerNewContract);
             _saleDao.close();
             _storageDao.openSession();
             Storage storage = _storageDao.get(storageId);

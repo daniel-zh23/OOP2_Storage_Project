@@ -36,44 +36,44 @@ public class Main {
         Admin admin = new Admin("Daniel", "Zhekov", "admin", "daniel@abv.bg", "+1234", "admin");
         admin.setFirstLogin(false);
 
-//        //Seed Agent
-//        //Pass: agent1234
-//        var passAgent = "6fd42aa949e5c54374638dd066e2017bb594b6d4899bbaeecf9dfbd0ceaa514f";
-//        Agent agent = new Agent("Kris", "Mihalev", "mihalev64", "kris@abv.bg", "+1234", 255d, "Google", "agent1234");
-//        agent.setFirstLogin(false);
-//
-//        var passAgent2 = "6fd42aa949e5c54374638dd066e2017bb594b6d4899bbaeecf9dfbd0ceaa514f";
-//        Agent agent2 = new Agent("Strahil", "Strahilov", "strahcho24", "strahil@abv.bg", "+1234", 255d, "Oracle", "agent1234");
-//        agent2.setFirstLogin(false);
-//
-//        //Seed Owner
-//        //Pass: Ivan+1234
-//        Owner owner = new Owner("Ivan", "Ivanov", "ivanov25", "kris@abv.bg", "+1234", "owner1234");
-//        owner.setFirstLogin(false);
-//
-//        Notification n = new Notification(6,"NotificationTest1");
-//        Notification n2 = new Notification(6,"NotificationTest2");
-//        Notification n3 = new Notification(4,"NotificationTest1");
-//
-//        Storage storage1 = new Storage(25.5, 25.5, 25.5, "Kur", 1, 4);
-//        Storage storage2 = new Storage(25.5, 25.5, 25.5, "Kur", 1, 4);
-//
-//
-//
-//        user.save(owner);
-      //  user.save(admin);
-//        user.save(agent);
-//        storage.save(storage1);
-//        storage.save(storage2);
-//        storage1.getAgents().add(agent);
-//        storage1.getAgents().add(agent2);
-//
-//        storage.update(storage1);
-//
-//        notifications.save(n);
-//        notifications.save(n2);
-//        notifications.save(n3);
-//        notifications.close();
+        //Seed Agent
+        //Pass: agent1234
+        var passAgent = "6fd42aa949e5c54374638dd066e2017bb594b6d4899bbaeecf9dfbd0ceaa514f";
+        Agent agent = new Agent("Kris", "Mihalev", "mihalev64", "kris@abv.bg", "+1234", 255d, "Google", "agent1234");
+        agent.setFirstLogin(false);
+
+        var passAgent2 = "6fd42aa949e5c54374638dd066e2017bb594b6d4899bbaeecf9dfbd0ceaa514f";
+        Agent agent2 = new Agent("Strahil", "Strahilov", "strahcho24", "strahil@abv.bg", "+1234", 255d, "Oracle", "agent1234");
+        agent2.setFirstLogin(false);
+
+        //Seed Owner
+        //Pass: Ivan+1234
+        Owner owner = new Owner("Ivan", "Ivanov", "ivanov25", "kris@abv.bg", "+1234", "owner1234");
+        owner.setFirstLogin(false);
+
+        Notification n = new Notification(6,"NotificationTest1");
+        Notification n2 = new Notification(6,"NotificationTest2");
+        Notification n3 = new Notification(4,"NotificationTest1");
+
+        Storage storage1 = new Storage(25.5, 25.5, 25.5, "Kur", 1, 4);
+        Storage storage2 = new Storage(25.5, 25.5, 25.5, "Kur2", 1, 4);
+
+
+
+        user.save(owner);
+        user.save(admin);
+        user.save(agent);
+        storage.save(storage1);
+        storage.save(storage2);
+        storage1.getAgents().add(agent);
+        storage1.getAgents().add(agent2);
+
+        storage.update(storage1);
+
+        notifications.save(n);
+        notifications.save(n2);
+        notifications.save(n3);
+        notifications.close();
         user.close();
 //        storage.close();
       status.close();
