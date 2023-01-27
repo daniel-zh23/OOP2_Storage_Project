@@ -63,17 +63,17 @@ public class Main {
         user.save(owner);
         user.save(admin);
         user.save(agent);
-        storage.save(storage1);
-        storage.save(storage2);
-        storage1.getAgents().add(agent);
-        storage1.getAgents().add(agent2);
-
-        storage.update(storage1);
-
-        notifications.save(n);
-        notifications.save(n2);
-        notifications.save(n3);
-        notifications.close();
+//        storage.save(storage1);
+//        storage.save(storage2);
+//        storage1.getAgents().add(agent);
+//        storage1.getAgents().add(agent2);
+//
+//        storage.update(storage1);
+//
+//        notifications.save(n);
+//        notifications.save(n2);
+//        notifications.save(n3);
+//        notifications.close();
         user.close();
 //        storage.close();
       status.close();

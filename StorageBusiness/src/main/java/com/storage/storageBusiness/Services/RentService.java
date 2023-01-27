@@ -48,13 +48,7 @@ public class RentService {
             var ownerId = _storageService.getOwnerId(storageId);
             _notificationService.addNotification(ownerId, NotificationMessages.ownerNewContract);
             _saleDao.close();
-            _storageDao.openSession();
-            Storage storage = _storageDao.get(storageId);
-            _statusDao.openSession();
-            storage.setStatusId(2);
-            _statusDao.close();
-            _storageDao.update(storage);
-            _storageDao.close();
+           _storageService.changeStoragestatusById(storageId,2);
         }
         catch(Exception e)
         {

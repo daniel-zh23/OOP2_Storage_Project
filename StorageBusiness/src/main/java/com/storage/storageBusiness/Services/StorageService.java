@@ -17,17 +17,28 @@ import java.util.stream.Collectors;
 public class StorageService {
     private StorageDAO _storageDao;
     private UserDAO _userDao;
+    private StatusDAO _statusDao;
 
     private NotificationService _notificationService;
-    private StatusDAO _statusDao;
 
     public StorageService(NotificationService notificationService) {
         _storageDao = new StorageDAO();
         _userDao = new UserDAO();
         _notificationService = notificationService;
-        _statusDao = new StatusDAO();
+        _statusDao= new StatusDAO();
     }
-
+    public void changeStoragestatusById(int storageId,int statusId)
+    {
+        _storageDao.openSession();
+        Storage storage = _storageDao.get(storageId);
+        storage.setStatusId(statusId);
+        _storageDao.update(storage);
+        _storageDao.close();
+    }
+public StorageViewModel getById(int id)
+{
+    return null;
+}
     public int getOwnerId(int id){
         _storageDao.openSession();
         var result = _storageDao.get(id).getOwner().getId();
@@ -113,7 +124,7 @@ public class StorageService {
         _userDao.openSession();
        Agent agent = (Agent)_userDao.get(id);
        _userDao.close();
-        List<StorageViewModel> storages = agent.getStorages().stream()
+        List<StorageViewModel> storages = agent.getStorages().stream().filter(a->a.getIsActive())
                 .map(ss -> new StorageViewModel(
                         ss.getId(),
                         ss.getAddress(),
