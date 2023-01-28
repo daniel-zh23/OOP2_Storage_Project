@@ -76,21 +76,6 @@ public class RentService {
         _rentDao.close();
         return sales;
     }
-    public List<SaleViewModel> fetchByStorageId(int id)
-    {
-        _rentDao.openSession();
-        List<SaleViewModel> sales= _rentDao.getAll()
-                .filter(s->s.getStorageId()==id)
-                .map(s->new SaleViewModel(s.getId(),s.getPrice(),s.getDuration(),s.getDateOfSale(),
-                        s.getStorageId(),s.getAgentId(),s.getCustomerId(),
-                        String.format("Address: %s",s.getStorage().getAddress()),
-                        String.format("Name: %s %s",s.getAgent().getFirstName(),s.getAgent().getLastName()),
-                        String.format("Name: %s %s",s.getRenter().getFirstName(),s.getRenter().getLastName()))
-                )
-                .toList();
-        _rentDao.close();
-        return sales;
-    }
 
 
     public boolean checkPhone(String phone) {

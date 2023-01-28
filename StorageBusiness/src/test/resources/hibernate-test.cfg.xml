@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.connection.driver_class">org.hsqldb.jdbc.JDBCDriver</property>
+    <property name="hibernate.connection.url">jdbc:hsqldb:mem:test</property>
+    <property name="hibernate.dialect">org.hibernate.dialect.HSQLDialect</property>
+    <property name="hibernate.show_sql">true</property>
+    <property name="hibernate.format_sql">true</property>
+    <property name="hibernate.hbm2ddl.auto">create-drop</property>
+    <property name="hibernate.current_session_context_class">thread</property>
+
+    <!-- DB schema will be updated if needed -->
+      <mapping class="com.storage.storagedb.Entity.User"/>
+      <mapping class="com.storage.storagedb.Entity.Owner"/>
+      <mapping class="com.storage.storagedb.Entity.Agent"/>
+      <mapping class="com.storage.storagedb.Entity.Admin"/>
+      <mapping class="com.storage.storagedb.Entity.Notification"/>
+      <mapping class="com.storage.storagedb.Entity.Storage"/>
+      <mapping class="com.storage.storagedb.Entity.Sales"/>
+      <mapping class="com.storage.storagedb.Entity.Customer"/>
+      <mapping class="com.storage.storagedb.Entity.Status"/>
+
+  </session-factory>
+</hibernate-configuration>

@@ -25,6 +25,9 @@ public class UserService {
     public UserService(){
         _userDao = new UserDAO();
     }
+    public UserService(UserDAO dao){
+        _userDao = dao;
+    }
 
 
     public ResultLoginModel login(String username, String password){
@@ -75,13 +78,17 @@ public class UserService {
     }
 
     public boolean deleteById(int id){
-        _userDao.openSession();
-        var user = _userDao.getAll().filter(u -> u.getId() == id).findFirst().get();
-        user.setActive(false);
-        _userDao.update(user);
-        _userDao.close();
-        LOGGER.log(Level.INFO, String.format(LoggerMessages.DisableUser, id));
-        return true;
+        try{
+            _userDao.openSession();
+            var user = _userDao.getAll().filter(u -> u.getId() == id).findFirst().get();
+            user.setActive(false);
+            _userDao.update(user);
+            _userDao.close();
+            LOGGER.log(Level.INFO, String.format(LoggerMessages.DisableUser, id));
+            return true;
+        } catch (Exception e){
+            return false;
+        }
     }
 
     public void adjustRatingBy(Integer agentId, double value) {

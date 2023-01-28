@@ -5,7 +5,6 @@ import com.storage.storageBusiness.Common.LoggerMessages;
 import com.storage.storageBusiness.Models.AgentViewModel;
 import com.storage.storagedb.DAO.UserDAO;
 import com.storage.storagedb.Entity.Agent;
-import com.storage.storagedb.Entity.User;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Comparator;
