@@ -7,8 +7,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="StorageUI" />
-        <module name="StorageDb" />
         <module name="StorageBusiness" />
+        <module name="StorageDb" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

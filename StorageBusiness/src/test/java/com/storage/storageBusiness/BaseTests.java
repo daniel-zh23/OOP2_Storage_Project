@@ -83,7 +83,7 @@ public abstract class BaseTests {
             Object ownerServiceObject = ownerServiceClass.getDeclaredConstructor().newInstance();
             Field f5 = ownerServiceObject.getClass().getDeclaredField("_userDao");
             f5.setAccessible(true);
-            f4.set(ownerServiceObject, _userDao);
+            f5.set(ownerServiceObject, _userDao);
 
             //Seeding test data
             _userDao.openSession();
@@ -94,6 +94,10 @@ public abstract class BaseTests {
             agent.setActive(false);
             _userDao.save(agent);
             _userDao.save(new Owner("test", "TEST", "test4", "owner1@abv.bg", "+1234","pass"));
+            _userDao.save(new Owner("test", "TEST", "test5", "owner2@abv.bg", "+1234","pass"));
+            Owner owner = new Owner("test", "TEST", "test6", "owner3@abv.bg", "+1234","pass");
+            owner.setActive(false);
+            _userDao.save(owner);
             _notificationDao.save(new Notification(1, "Notification1"));
             _notificationDao.save(new Notification(1, "Notification2"));
             var notification = new Notification(1, "Notification3");

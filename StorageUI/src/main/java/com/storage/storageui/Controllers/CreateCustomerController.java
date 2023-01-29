@@ -57,7 +57,7 @@ public class CreateCustomerController extends CreateController {
         }
 
         if (isValid){
-            _rentService.createRenter(fName.getText(), lName.getText(), phone.getText());
+            _rentService.createCustomer(fName.getText(), lName.getText(), phone.getText());
             onBack();
         }
     }

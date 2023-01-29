@@ -34,7 +34,7 @@ public class RentService {
         _customerDao.close();
         return renters;
     }
-    public void createRenter(String fName, String lName, String phone)
+    public void createCustomer(String fName, String lName, String phone)
     {
         _customerDao.openSession();
         _customerDao.save(new Customer(fName, lName, phone));

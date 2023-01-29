@@ -38,7 +38,7 @@ public class AgentServiceTests extends BaseTests {
         _agentService.createAgent("test", "TEST", "test10", "test@abv.bg", "+1234","Google", 123.5);
 
         _userDao.openSession();
-        Assertions.assertEquals(5, _userDao.getAll().count());
+        Assertions.assertEquals(3, _agentService.getAgents().size());
     }
 
     @Test
