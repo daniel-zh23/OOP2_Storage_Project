@@ -1,28 +1,20 @@
 package com.storage.storageui.Controllers;
 
-import com.storage.storageBusiness.Models.AgentViewModel;
 import com.storage.storageBusiness.Models.Contracts.UserViewModel;
-import com.storage.storageBusiness.Models.OwnerViewModel;
 import com.storage.storageBusiness.Services.AgentService;
 import com.storage.storageBusiness.Services.OwnerService;
-import com.storage.storageBusiness.Services.RentService;
 import com.storage.storageBusiness.Services.UserService;
 import com.storage.storageui.Common.AgentTableBuilder;
 import com.storage.storageui.Common.OwnerTable;
 import com.storage.storageui.Controllers.Contracts.UserController;
 import com.storage.storageui.StorageApplication;
-import javafx.collections.FXCollections;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 
 public class AdminController extends UserController {
     private AgentService _agentService;
